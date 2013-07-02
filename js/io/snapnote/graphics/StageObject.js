@@ -4,5 +4,7 @@ define(['Easel'],
     }
 
     StageObject.prototype = Easel.Container();
+
+    return StageObject;
   }
 );

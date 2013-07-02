@@ -9,13 +9,15 @@ require.config({
   }
 });
 
-require(['jquery', 'Easel', 'Square'],
+require(['jquery', 'Easel', 'io/snapnote/graphics/tools/Square'],
   function($, Easel, Square) {
 
     var stage = new Easel.Stage('canvas');
 
     var square = new Square();
     stage.addChild(square);
+
+
     stage.update();
   }
 );
