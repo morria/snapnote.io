@@ -50,6 +50,14 @@ define([
 
             this.square = new Easel.Shape();
 
+            if (this._width < 0) {
+                this._width = 0;
+            }
+
+            if (this._height < 0) {
+                this._height = 0;
+            }
+
             // Border
             this.square.graphics
                 .setStrokeStyle(STROKE_WIDTH)

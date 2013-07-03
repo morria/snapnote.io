@@ -38,6 +38,11 @@ define(['Underscore', 'Easel'],
                     }
                 }, this);
                 event.target.getStage().update();
+
+                offset = {
+                    x: event.target.x - event.stageX,
+                    y: event.target.y - event.stageY
+                };
             }, this));
         }, this));
     }

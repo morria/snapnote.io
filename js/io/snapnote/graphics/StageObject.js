@@ -9,6 +9,7 @@ define([
         /**
          * Handle Dragging
          */
+        /*
         this.addEventListener('mousedown', _.bind(function(event) {
             var offset = {
                 x: event.target.x - event.stageX,
@@ -21,6 +22,7 @@ define([
                 event.target.getStage().update();
             }, this));
         }, this));
+        */
     }
 
     StageObject.prototype = _.extend(new Easel.Container(), {

@@ -12,16 +12,31 @@ define([
         var swHandle = new Handle();
         var seHandle = new Handle();
 
-        seHandle.addEventListener('move', _.bind(function(event) {
+        // On drag the north-west handle, resize the box
+        nwHandle.addEventListener('move', _.bind(function(event) {
+            this.parent.x += event.delta.x;
+            this.parent.setWidth(this.parent.getWidth() - event.delta.x);
+            this.parent.y += event.delta.y;
+            this.parent.setHeight(this.parent.getHeight() - event.delta.y);
+        }, this));
+
+        // On drag the north-east handle, resize the box
+        neHandle.addEventListener('move', _.bind(function(event) {
             this.parent.setWidth(this.parent.getWidth() + event.delta.x);
+            this.parent.y += event.delta.y;
+            this.parent.setHeight(this.parent.getHeight() - event.delta.y);
+        }, this));
+
+        // On drag the south-west handle, resize the box
+        swHandle.addEventListener('move', _.bind(function(event) {
+            this.parent.x += event.delta.x;
+            this.parent.setWidth(this.parent.getWidth() - event.delta.x);
             this.parent.setHeight(this.parent.getHeight() + event.delta.y);
         }, this));
 
-        swHandle.addEventListener('move', _.bind(function(event) {
-            console.log(event.delta.x + "\t" + event.delta.y);
-            this.parent.x += event.delta.x;
-            // this.parent.setWidth(this.parent.getWidth() + event.delta.x);
-
+        // On drag the south-east handle, resize the box
+        seHandle.addEventListener('move', _.bind(function(event) {
+            this.parent.setWidth(this.parent.getWidth() + event.delta.x);
             this.parent.setHeight(this.parent.getHeight() + event.delta.y);
         }, this));
 
