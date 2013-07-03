@@ -2,21 +2,27 @@ require.config({
   shim: {
     Easel: {
       exports: 'createjs'
+    },
+    Underscore: {
+      exports: '_'
     }
   },
   paths: {
     Easel: 'vendor/easeljs-0.6.1.min',
+    Underscore: 'vendor/underscore-min'
   }
 });
 
-require(['jquery', 'Easel', 'io/snapnote/graphics/tools/Square'],
-  function($, Easel, Square) {
+require([
+    'jquery',
+    'io/snapnote/graphics/Stage',
+    'io/snapnote/graphics/tools/Square'],
+  function($, Stage, Square) {
 
-    var stage = new Easel.Stage('canvas');
+    var stage = new Stage();
 
-    var square = new Square();
-    stage.addChild(square);
-
+    // stage.addChild(new Square(30, 30));
+    stage.addChild(new Square(100, 100));
 
     stage.update();
   }
