@@ -18,16 +18,25 @@ require([
     'Easel',
     'io/snapnote/graphics/Stage',
     'io/snapnote/graphics/StageObject',
-    'io/snapnote/graphics/tools/Rectangle'],
-  function($, Easel, Stage, StageObject, Rectangle) {
+    'io/snapnote/graphics/tools/Rectangle',
+    'io/snapnote/graphics/tools/Arrow'],
+  function($, Easel, Stage, StageObject, Rectangle, Arrow) {
 
     $('#stage').on('selectstart', false);
 
     var stage = new Stage(600, 300);
 
-    _.each(_.range(Math.random()*5), function() {
+    _.each(_.range(Math.random()*3), function() {
         stage.addStageObject(
           _.extend(new Rectangle(30 + Math.random() * 50, 30 + Math.random() * 50), {
+            x: Math.random() * 550,
+            y: Math.random() * 250
+          }));
+    });
+
+    _.each(_.range(Math.random()*3), function() {
+        stage.addStageObject(
+          _.extend(new Arrow(60, 60), {
             x: Math.random() * 550,
             y: Math.random() * 250
           }));

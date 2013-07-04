@@ -3,7 +3,7 @@ define([
     'Easel',
     'io/snapnote/graphics/StageObject',
     'io/snapnote/graphics/tools/rectangle/Handles'],
-  function(_, Easel, StageObject, Handles, Handle) {
+  function(_, Easel, StageObject, Handles) {
 
     var RADIUS = 2;
     var STROKE_WIDTH = 2;
@@ -48,7 +48,7 @@ define([
 
             // Border
             this.rectangle.graphics
-                .setStrokeStyle(STROKE_WIDTH)
+                .setStrokeStyle(STROKE_WIDTH, 1, 'round')
                 .beginStroke('rgba(180, 180, 180, 0.8)')
                 .drawRoundRect(0, 0, this._width, this._height, RADIUS)
                 .endStroke();
