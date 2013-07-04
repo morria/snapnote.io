@@ -21,7 +21,7 @@ require([
 
     var stage = new Stage();
 
-    // stage.addChild(new Square(30, 30));
+    stage.addChild(new Square(30, 30));
     stage.addChild(new Square(100, 100));
 
     stage.update();

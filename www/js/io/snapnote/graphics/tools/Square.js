@@ -44,7 +44,7 @@ define([
 
         redraw: function() {
             if (this.square) {
-                this.removeChild(this.square);
+                this.removeChildAt(0);
             }
 
             this.square = new Easel.Shape();
@@ -69,7 +69,7 @@ define([
                 .beginFill('rgba(255, 255, 255, 0.01)')
                 .drawRoundRect(0, 0, this._width, this._height, RADIUS);
 
-            this.addChild(this.square);
+            this.addChildAt(this.square, 0);
         }
 
     });
