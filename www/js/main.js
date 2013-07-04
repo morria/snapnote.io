@@ -16,13 +16,13 @@ require.config({
 require([
     'jquery',
     'io/snapnote/graphics/Stage',
-    'io/snapnote/graphics/tools/Square'],
-  function($, Stage, Square) {
+    'io/snapnote/graphics/tools/Rectangle'],
+  function($, Stage, Rectangle) {
 
     var stage = new Stage();
 
-    stage.addChild(new Square(30, 30));
-    stage.addChild(new Square(100, 100));
+    stage.addChild(new Rectangle(30, 30));
+    stage.addChild(new Rectangle(100, 100));
 
     stage.update();
   }

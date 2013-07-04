@@ -8,7 +8,7 @@ define([
     var RADIUS = 4;
     var STROKE_WIDTH = 2;
 
-    var Square = function(width, height) {
+    var Rectangle = function(width, height) {
         this.initialize();
 
         // Initialize the graphic and its dimensions
@@ -23,7 +23,7 @@ define([
         this.addChild(new Handles());
     }
 
-    Square.prototype = _.extend(new StageObject('Square'), {
+    Rectangle.prototype = _.extend(new StageObject('Rectangle'), {
         getWidth: function() {
             return this._width;
         },
@@ -74,6 +74,6 @@ define([
 
     });
 
-    return Square;
+    return Rectangle;
   }
 );

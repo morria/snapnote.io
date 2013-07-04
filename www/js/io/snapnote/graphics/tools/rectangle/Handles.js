@@ -4,7 +4,7 @@ define([
     'io/snapnote/graphics/elements/Handle',
     'io/snapnote/graphics/elements/Handles'],
   function(_, Easel, Handle, Handles) {
-    var SquareHandles = function() {
+    var RectangleHandles = function() {
         this.initialize();
 
         var nwHandle = new Handle();
@@ -58,9 +58,9 @@ define([
         this.addChild(nwHandle, neHandle, swHandle, seHandle);
     }
 
-    SquareHandles.prototype = _.extend(new Handles('square.Handles'), {
+    RectangleHandles.prototype = _.extend(new Handles('square.Handles'), {
     });
 
-    return SquareHandles;
+    return RectangleHandles;
   }
 );

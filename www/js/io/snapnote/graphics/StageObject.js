@@ -11,8 +11,7 @@ define([
             this.canvas.style.cursor = 'pointer';
         }, this));
 
-/*
-        this.content.addEventListener('mousedown', _.bind(function(event) {
+        this.addEventListener('mousedown', _.bind(function(event) {
             var offset = {
                 x: event.target.x - event.stageX,
                 y: event.target.y - event.stageY
@@ -24,7 +23,6 @@ define([
                 event.target.getStage().update();
             }, this));
         }, this));
-*/
 
     }
 
