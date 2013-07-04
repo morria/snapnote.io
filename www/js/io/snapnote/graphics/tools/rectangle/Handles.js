@@ -6,6 +6,16 @@ define([
   function(_, Easel, Handle, Handles) {
     var RectangleHandles = function() {
         this.initialize();
+    }
+
+    RectangleHandles.prototype = _.extend(new Handles('rectangle.Handles'), {
+    });
+
+    var initialize =
+      RectangleHandles.prototype.initialize;
+
+    RectangleHandles.prototype.initialize = function() {
+        initialize.call(this);
 
         var nwHandle = new Handle();
         var neHandle = new Handle();
@@ -13,7 +23,7 @@ define([
         var seHandle = new Handle();
 
         var rectangle = _.bind(function() {
-            return this.parent;
+            return this.parent.parent;
         }, this);
 
         // On drag the north-west handle, resize the box
@@ -60,9 +70,6 @@ define([
 
         this.addChild(nwHandle, neHandle, swHandle, seHandle);
     }
-
-    RectangleHandles.prototype = _.extend(new Handles('square.Handles'), {
-    });
 
     return RectangleHandles;
   }

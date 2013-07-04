@@ -3,7 +3,17 @@ define([
     'Easel'],
   function(_, Easel) {
     var StageObject = function(name) {
-        this.initialize();
+        this.initialize(name);
+    }
+
+    StageObject.prototype = _.extend(new Easel.Container(), {
+    });
+
+    var initialize =
+        StageObject.prototype.initialize;
+
+    StageObject.prototype.initialize = function(name) {
+        initialize.call(this);
         this.name = name;
 
         this.content = new Easel.Container();
@@ -13,21 +23,20 @@ define([
         this.addChild(this.handles);
 
         this.content.addEventListener('mousedown', _.bind(function(event) {
+            var target = event.target.parent;
+
             var offset = {
-                x: event.target.x - event.stageX,
-                y: event.target.y - event.stageY
+                x: target.x - event.stageX,
+                y: target.y - event.stageY
             };
 
             event.addEventListener('mousemove', _.bind(function(event) {
-                event.target.x = event.stageX + offset.x;
-                event.target.y = event.stageY + offset.y;
-                event.target.getStage().update();
+                target.x = event.stageX + offset.x;
+                target.y = event.stageY + offset.y;
+                target.getStage().update();
             }, this));
         }, this));
     }
-
-    StageObject.prototype = _.extend(new Easel.Container(), {
-    });
 
     return StageObject;
   }

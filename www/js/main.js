@@ -24,8 +24,8 @@ require([
     var stage = new Stage();
 
     var rectangle_a = new Rectangle(30, 30);
-    rectangle_a.x = 50;
-    rectangle_a.y = 50;
+    rectangle_a.x = 200;
+    rectangle_a.y = 100;
     stage.addChild(rectangle_a);
 
     stage.addChild(new Rectangle(100, 100));

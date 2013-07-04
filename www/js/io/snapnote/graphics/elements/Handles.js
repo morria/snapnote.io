@@ -1,16 +1,22 @@
 define([
     'Underscore',
-    'Easel',
-    'io/snapnote/graphics/elements/Handle'],
-  function(_, Easel, Handle) {
+    'Easel'],
+  function(_, Easel) {
 
     var Handles = function(name) {
-        this.initialize();
-        this.name = name;
+        this.initialize(name);
     }
 
     Handles.prototype = _.extend(new Easel.Container(), {
     });
+
+    var initialize =
+      Handles.prototype.initialize;
+
+    Handles.prototype.initialize = function(name) {
+        initialize.call(this);
+        this.name = name;
+    }
 
     return Handles;
   }

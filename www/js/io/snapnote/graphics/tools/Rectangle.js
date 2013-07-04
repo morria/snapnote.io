@@ -9,16 +9,7 @@ define([
     var STROKE_WIDTH = 2;
 
     var Rectangle = function(width, height) {
-        // Initialize the graphic and its dimensions
-        this.rectangle = null;
-        this.setWidth(width);
-        this.setHeight(height);
-
-        // Draw the rectangle
-        this.redraw();
-
-        // Draw handles on top of the rectangle
-        this.addChild(new Handles());
+        this.initialize(width, height);
     }
 
     Rectangle.prototype = _.extend(new StageObject('Rectangle'), {
@@ -41,7 +32,6 @@ define([
         },
 
         redraw: function() {
-            return;
             if (this.rectangle) {
                 this.content.removeChildAt(0);
             }
@@ -70,8 +60,25 @@ define([
 
             this.content.addChildAt(this.rectangle, 0);
         }
-
     });
+
+    var initialize =
+        Rectangle.prototype.initialize;
+
+    Rectangle.prototype.initialize = function(width, height) {
+        initialize.call(this);
+
+        // Initialize the graphic and its dimensions
+        this.rectangle = null;
+        this.setWidth(width);
+        this.setHeight(height);
+
+        // Draw the rectangle
+        this.redraw();
+
+        // Draw handles on top of the rectangle
+        this.handles.addChild(new Handles());
+    }
 
     return Rectangle;
   }
