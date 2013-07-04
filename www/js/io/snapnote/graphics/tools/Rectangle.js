@@ -2,24 +2,22 @@ define([
     'Underscore',
     'Easel',
     'io/snapnote/graphics/StageObject',
-    'io/snapnote/graphics/tools/square/Handles'],
+    'io/snapnote/graphics/tools/rectangle/Handles'],
   function(_, Easel, StageObject, Handles, Handle) {
 
     var RADIUS = 4;
     var STROKE_WIDTH = 2;
 
     var Rectangle = function(width, height) {
-        this.initialize();
-
         // Initialize the graphic and its dimensions
-        this.square = null;
+        this.rectangle = null;
         this.setWidth(width);
         this.setHeight(height);
 
-        // Draw the square
+        // Draw the rectangle
         this.redraw();
 
-        // Draw handles on top of the square
+        // Draw handles on top of the rectangle
         this.addChild(new Handles());
     }
 
@@ -43,11 +41,12 @@ define([
         },
 
         redraw: function() {
-            if (this.square) {
-                this.removeChildAt(0);
+            return;
+            if (this.rectangle) {
+                this.content.removeChildAt(0);
             }
 
-            this.square = new Easel.Shape();
+            this.rectangle = new Easel.Shape();
 
             if (this._width < 0) {
                 this._width = 0;
@@ -58,18 +57,18 @@ define([
             }
 
             // Border
-            this.square.graphics
+            this.rectangle.graphics
                 .setStrokeStyle(STROKE_WIDTH)
                 .beginStroke('rgba(160, 160, 160, 0.9)')
                 .drawRoundRect(0, 0, this._width, this._height, RADIUS)
                 .endStroke();
 
             // Body
-            this.square.graphics
+            this.rectangle.graphics
                 .beginFill('rgba(255, 255, 255, 0.01)')
                 .drawRoundRect(0, 0, this._width, this._height, RADIUS);
 
-            this.addChildAt(this.square, 0);
+            this.content.addChildAt(this.rectangle, 0);
         }
 
     });
