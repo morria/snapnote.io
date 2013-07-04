@@ -34,9 +34,9 @@ require([
           }));
     });
 
-    _.each(_.range(Math.random()*3), function() {
+    _.each(_.range(Math.random()*5), function() {
         stage.addStageObject(
-          _.extend(new Arrow(60, 60), {
+          _.extend(new Arrow(-100 + Math.random() * 200, -100 + Math.random() * 200), {
             x: Math.random() * 550,
             y: Math.random() * 250
           }));

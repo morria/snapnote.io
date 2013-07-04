@@ -6,7 +6,7 @@ define([
   function(_, Easel, StageObject, Handles) {
 
     var RADIUS = 2;
-    var STROKE_WIDTH = 20;
+    var STROKE_WIDTH = 15;
 
     var Arrow = function(dx, dy) {
         this.initialize(dx, dy);
@@ -52,7 +52,7 @@ define([
             // Draw the arrow
             this.arrow.graphics
                 .setStrokeStyle(STROKE_WIDTH, 1, 'round')
-                .beginStroke('rgba(0, 0, 0, 0.8)')
+                .beginStroke('rgba(100, 100, 100, 1.0)')
                 .moveTo(0, 0).lineTo(this._dx, this._dy)
                 .moveTo(0, 0).lineTo(Math.cos(a1)*30, Math.sin(a1)*30)
                 .moveTo(0, 0).lineTo(Math.cos(a2)*30, Math.sin(a2)*30)
