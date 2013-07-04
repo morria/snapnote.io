@@ -21,7 +21,6 @@ define([
 
         // Draw handles on top of the square
         this.addChild(new Handles());
-
     }
 
     Square.prototype = _.extend(new StageObject('Square'), {

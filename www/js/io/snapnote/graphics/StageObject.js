@@ -6,11 +6,13 @@ define([
         this.initialize();
         this.name = name;
 
-        /**
-         * Handle Dragging
-         */
-        /*
-        this.addEventListener('mousedown', _.bind(function(event) {
+        this.addEventListener('mouseover', _.bind(function() {
+            console.log('here');
+            this.canvas.style.cursor = 'pointer';
+        }, this));
+
+/*
+        this.content.addEventListener('mousedown', _.bind(function(event) {
             var offset = {
                 x: event.target.x - event.stageX,
                 y: event.target.y - event.stageY
@@ -22,7 +24,8 @@ define([
                 event.target.getStage().update();
             }, this));
         }, this));
-        */
+*/
+
     }
 
     StageObject.prototype = _.extend(new Easel.Container(), {

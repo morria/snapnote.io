@@ -9,6 +9,10 @@ define(['Underscore', 'Easel'],
         this.initialize();
         this.name = 'Handle';
 
+        this.enableMouseOver = true;
+        this.cursor = 'help';
+
+
         // Build the Border
         this.graphics
           .beginStroke('#aaa')
