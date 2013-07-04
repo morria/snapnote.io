@@ -5,7 +5,7 @@ define([
     'io/snapnote/graphics/tools/rectangle/Handles'],
   function(_, Easel, StageObject, Handles, Handle) {
 
-    var RADIUS = 4;
+    var RADIUS = 2;
     var STROKE_WIDTH = 2;
 
     var Rectangle = function(width, height) {
@@ -49,13 +49,13 @@ define([
             // Border
             this.rectangle.graphics
                 .setStrokeStyle(STROKE_WIDTH)
-                .beginStroke('rgba(160, 160, 160, 0.9)')
+                .beginStroke('rgba(180, 180, 180, 0.8)')
                 .drawRoundRect(0, 0, this._width, this._height, RADIUS)
                 .endStroke();
 
             // Body
             this.rectangle.graphics
-                .beginFill('rgba(255, 255, 255, 0.01)')
+                .beginFill('rgba(255, 255, 255, 0.5)')
                 .drawRoundRect(0, 0, this._width, this._height, RADIUS);
 
             this.content.addChildAt(this.rectangle, 0);

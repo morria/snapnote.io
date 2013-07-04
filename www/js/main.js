@@ -21,14 +21,17 @@ require([
     'io/snapnote/graphics/tools/Rectangle'],
   function($, Easel, Stage, StageObject, Rectangle) {
 
-    var stage = new Stage();
+    $('#stage').on('selectstart', false);
 
-    var rectangle_a = new Rectangle(30, 30);
-    rectangle_a.x = 200;
-    rectangle_a.y = 100;
-    stage.addChild(rectangle_a);
+    var stage = new Stage(600, 300);
 
-    stage.addChild(new Rectangle(100, 100));
+    _.each(_.range(Math.random()*5), function() {
+        stage.addStageObject(
+          _.extend(new Rectangle(30 + Math.random() * 50, 30 + Math.random() * 50), {
+            x: Math.random() * 550,
+            y: Math.random() * 250
+          }));
+    });
 
     stage.update();
   }

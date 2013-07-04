@@ -24,7 +24,7 @@ define(['Underscore', 'Easel'],
           .drawRoundRect(0, 0, WIDTH, HEIGHT, RADIUS);
 
         // A lil' shadow
-        this.shadow = new Easel.Shadow('#aaa', 0, 0, 1);
+        this.shadow = new Easel.Shadow('#ccc', 0, 0, 1);
 
         /**
          * Handle Dragging
