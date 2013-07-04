@@ -38,16 +38,24 @@ define([
 
             this.arrow = new Easel.Shape();
 
-            // Shaft
+            // The angle of an arrow head
+            var a1 =
+              Math.atan(Math.abs((this._dx / this._dy)))
+              * ((this._dx < 0) ? -1 : 1)
+              * ((this._dy > 0) ? -1 : 1)
+              + ((this._dy > 0) ? 0 : Math.PI)
+              + (Math.PI/4);
+
+            // The angle of the other arrow head
+            var a2 = a1 + (Math.PI/2);
+
+            // Draw the arrow
             this.arrow.graphics
                 .setStrokeStyle(STROKE_WIDTH, 1, 'round')
                 .beginStroke('rgba(0, 0, 0, 0.8)')
-                .moveTo(0, 0)
-                .lineTo(this._dx, this._dy)
-                .moveTo(0, 0)
-                .lineTo(0, 30)
-                .moveTo(0, 0)
-                .lineTo(30, 0)
+                .moveTo(0, 0).lineTo(this._dx, this._dy)
+                .moveTo(0, 0).lineTo(Math.cos(a1)*30, Math.sin(a1)*30)
+                .moveTo(0, 0).lineTo(Math.cos(a2)*30, Math.sin(a2)*30)
                 .endStroke();
 
             this.content.addChildAt(this.arrow, 0);
