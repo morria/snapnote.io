@@ -28,10 +28,22 @@ define([
         nwHandle.addEventListener('move', _.bind(function(event) {
             parent().x += event.delta.x;
             parent().y += event.delta.y;
+
+            // Scale in the X dimension
+            var width = parent().textBox.getMeasuredWidth()
+              * parent().textBox.scaleX;
+            var scaleX = (width - event.delta.x)/(width);
+
+            // Lets preserve the aspect ratio
+            parent().textBox.scaleX *= scaleX;
+            parent().textBox.scaleY *= scaleX;
+
         }, this));
 
         // On drag the south-east handle, resize the box
         seHandle.addEventListener('move', _.bind(function(event) {
+            parent().y += event.delta.y;
+
             // Scale in the X dimension
             var width = parent().textBox.getMeasuredWidth()
               * parent().textBox.scaleX;
@@ -49,8 +61,8 @@ define([
         }, this));
 
         this.addEventListener('tick', _.bind(function(event) {
-            nwHandle.x = -Math.round(nwHandle.width/2);
-            nwHandle.y = -Math.round(nwHandle.height/2);
+            nwHandle.x = -Math.round(nwHandle.width);
+            nwHandle.y = -Math.round(nwHandle.height);
 
             var width = parent().textBox.getMeasuredWidth() *
               parent().textBox.scaleX;
@@ -58,8 +70,8 @@ define([
             var height = parent().textBox.getMeasuredHeight() *
               parent().textBox.scaleY;
 
-            seHandle.x = width - Math.round(seHandle.width/2);
-            seHandle.y = height - Math.round(seHandle.height/2);
+            seHandle.x = width - 0 * Math.round(seHandle.width/2);
+            seHandle.y = height - 0 * Math.round(seHandle.height/2);
         }, this));
 
         this.addChild(nwHandle, seHandle);
