@@ -5,7 +5,6 @@ define([
     'io/snapnote/graphics/tools/arrow/Handles'],
   function(_, Easel, StageObject, Handles) {
 
-    var RADIUS = 2;
     var STROKE_WIDTH = 15;
 
     var Arrow = function(dx, dy) {
@@ -73,7 +72,7 @@ define([
         this.setDx(dy);
         this.setDy(dy);
 
-        // Draw the rectangle
+        // Draw the arrow
         this.redraw();
 
         // Draw handles on top of the rectangle

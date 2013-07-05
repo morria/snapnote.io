@@ -6,7 +6,7 @@ define([
   function(_, Easel, StageObject, Handles) {
 
     var RADIUS = 2;
-    var STROKE_WIDTH = 2;
+    var STROKE_WIDTH = 8;
 
     var Rectangle = function(width, height) {
         this.initialize(width, height);
@@ -49,13 +49,13 @@ define([
             // Border
             this.rectangle.graphics
                 .setStrokeStyle(STROKE_WIDTH, 1, 'round')
-                .beginStroke('rgba(180, 180, 180, 0.8)')
+                .beginStroke('rgba(100, 100, 100, 1.0)')
                 .drawRoundRect(0, 0, this._width, this._height, RADIUS)
                 .endStroke();
 
             // Body
             this.rectangle.graphics
-                .beginFill('rgba(255, 255, 255, 0.5)')
+                .beginFill('rgba(255, 255, 255, 0.01)')
                 .drawRoundRect(0, 0, this._width, this._height, RADIUS);
 
             this.content.addChildAt(this.rectangle, 0);
