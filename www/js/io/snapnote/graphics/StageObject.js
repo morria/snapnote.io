@@ -12,12 +12,22 @@ define([
             this._selected = true;
             this.handles.visible = true;
             this.getStage().update();
+            this.onSelectHook();
+        },
+
+        onSelectHook: function() {
+            // To be overridden
         },
 
         deselect: function() {
             this._selected = false;
             this.handles.visible = false;
             this.getStage().update();
+            this.onDeselectHook();
+        },
+
+        onDeselectHook: function() {
+            // To be overridden
         },
 
         isSelected: function() {

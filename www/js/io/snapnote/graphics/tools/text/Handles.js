@@ -24,6 +24,13 @@ define([
             return this.parent.parent;
         }, this);
 
+        function setParentScale(scale) {
+            parent().textBox.scaleX *= scale;
+            parent().textBox.scaleY *= Math.abs(scale);
+            parent().background.scaleX *= scale;
+            parent().background.scaleY *= Math.abs(scale);
+        }
+
         // On drag the north-west handle, resize the box
         nwHandle.addEventListener('move', _.bind(function(event) {
             parent().x += event.delta.x;
@@ -35,9 +42,7 @@ define([
             var scaleX = (width - event.delta.x)/(width);
 
             // Lets preserve the aspect ratio
-            parent().textBox.scaleX *= scaleX;
-            parent().textBox.scaleY *= scaleX;
-
+            setParentScale(scaleX);
         }, this));
 
         // On drag the south-east handle, resize the box
@@ -49,15 +54,8 @@ define([
               * parent().textBox.scaleX;
             var scaleX = (width + event.delta.x)/(width);
 
-            // Scale in the Y dimension
-            var height = parent().textBox.getMeasuredHeight()
-              * parent().textBox.scaleY;
-            var scaleY = (height + event.delta.y)/(height);
-
             // Lets preserve the aspect ratio
-            parent().textBox.scaleX *= scaleX;
-            parent().textBox.scaleY *= scaleX;
-
+            setParentScale(scaleX);
         }, this));
 
         this.addEventListener('tick', _.bind(function(event) {

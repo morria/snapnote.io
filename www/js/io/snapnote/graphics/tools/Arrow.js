@@ -69,7 +69,7 @@ define([
 
         // Initialize the graphic and its dimensions
         this.arrow = null;
-        this.setDx(dy);
+        this.setDx(dx);
         this.setDy(dy);
 
         // Draw the arrow
