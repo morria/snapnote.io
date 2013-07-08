@@ -33,9 +33,6 @@ define([
 
         // On drag the north-west handle, resize the box
         nwHandle.addEventListener('move', _.bind(function(event) {
-            parent().x += event.delta.x;
-            parent().y += event.delta.y;
-
             // Scale in the X dimension
             var width = parent().textBox.getMeasuredWidth()
               * parent().textBox.scaleX;
@@ -43,12 +40,13 @@ define([
 
             // Lets preserve the aspect ratio
             setParentScale(scaleX);
+
+            parent().x += event.delta.x;
+            parent().y += (event.delta.y * scaleX);
         }, this));
 
         // On drag the south-east handle, resize the box
         seHandle.addEventListener('move', _.bind(function(event) {
-            parent().y += event.delta.y;
-
             // Scale in the X dimension
             var width = parent().textBox.getMeasuredWidth()
               * parent().textBox.scaleX;
@@ -56,6 +54,11 @@ define([
 
             // Lets preserve the aspect ratio
             setParentScale(scaleX);
+
+            var height = parent().textBox.getMeasuredHeight();
+
+            parent().y += event.delta.y +
+                (height - (height * scaleX));
         }, this));
 
         this.addEventListener('tick', _.bind(function(event) {
