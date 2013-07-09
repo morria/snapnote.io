@@ -25,19 +25,14 @@ define([
         }, this);
 
         function setParentScale(scale) {
-            parent().textBox.scaleX *= scale;
-            parent().textBox.scaleY *= Math.abs(scale);
-            parent().background.scaleX *= scale;
-            parent().background.scaleY *= Math.abs(scale);
-
-            parent().highlight.scaleX *= scale;
-            parent().highlight.scaleY *= Math.abs(scale);
+            parent().content.scaleX *= scale;
+            parent().content.scaleY *= Math.abs(scale);
         }
 
         // On drag the north-west handle, resize the box
         nwHandle.addEventListener('move', _.bind(function(event) {
             // Scale in the X dimension
-            var width = parent().width() * parent().textBox.scaleX;
+            var width = parent().width() * parent().content.scaleX;
             var scaleX = (width - event.delta.x)/(width);
 
             // Lets preserve the aspect ratio
@@ -50,10 +45,10 @@ define([
         // On drag the south-east handle, resize the box
         seHandle.addEventListener('move', _.bind(function(event) {
             // Scale in the X dimension
-            var width = parent().width() * parent().textBox.scaleX;
+            var width = parent().width() * parent().content.scaleX;
             var scaleX = (width + event.delta.x)/(width);
 
-            var height = parent().height() * parent().textBox.scaleX;
+            var height = parent().height() * parent().content.scaleX;
 
             // Lets preserve the aspect ratio
             setParentScale(scaleX);
@@ -65,9 +60,9 @@ define([
             nwHandle.x = -Math.round(nwHandle.width);
             nwHandle.y = -Math.round(nwHandle.height);
 
-            var width = parent().width() * parent().textBox.scaleX;
+            var width = parent().width() * parent().content.scaleX;
 
-            var height = parent().height() * parent().textBox.scaleY;
+            var height = parent().height() * parent().content.scaleY;
 
             seHandle.x = width - 0 * Math.round(seHandle.width/2);
             seHandle.y = height - 0 * Math.round(seHandle.height/2);
