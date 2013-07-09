@@ -34,8 +34,8 @@ require([
 
     var stage = new Stage(width, height);
 
+/*
     // A few Rectangles
-    /*
     _.each(_.range(Math.random()*6), function() {
         stage.addStageObject(
           _.extend(new Rectangle(30 + Math.random() * 50, 30 + Math.random() * 50), {
@@ -43,11 +43,9 @@ require([
             y: Math.random() * height
           }));
     });
-    */
 
     // A few arrows
-    /*
-    _.each(_.range(Math.random()*20), function() {
+    _.each(_.range(Math.random()*8), function() {
         var dx = ((Math.random()>0.5)?-1:1)*(30 + Math.random()*100);
         var dy = ((Math.random()>0.5)?-1:1)*(30 + Math.random()*100);
         stage.addStageObject(
@@ -56,16 +54,23 @@ require([
             y: Math.random() * height
           }));
     });
-    */
+
 
     // A few text boxes
-    _.each(_.range(Math.random()*6), function() {
+    _.each(_.range(Math.random()*4), function() {
         stage.addStageObject(
           _.extend(new Text("The quick brown fox. And fancy wizards."), {
             x: Math.random() * width,
             y: Math.random() * height
           }));
     });
+*/
+
+    stage.addStageObject(
+        _.extend(new Text("The quick brown fox.\nAnd fancy wizards."), {
+        x: width * 0.3,
+        y: 100
+    }));
 
     // Draw it for the first time
     stage.update();

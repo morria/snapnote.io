@@ -29,47 +29,45 @@ define([
             parent().textBox.scaleY *= Math.abs(scale);
             parent().background.scaleX *= scale;
             parent().background.scaleY *= Math.abs(scale);
+
+            parent().highlight.scaleX *= scale;
+            parent().highlight.scaleY *= Math.abs(scale);
         }
 
         // On drag the north-west handle, resize the box
         nwHandle.addEventListener('move', _.bind(function(event) {
             // Scale in the X dimension
-            var width = parent().textBox.getMeasuredWidth()
-              * parent().textBox.scaleX;
+            var width = parent().width() * parent().textBox.scaleX;
             var scaleX = (width - event.delta.x)/(width);
 
             // Lets preserve the aspect ratio
             setParentScale(scaleX);
 
             parent().x += event.delta.x;
-            parent().y += (event.delta.y * scaleX);
+            parent().y += event.delta.y;
         }, this));
 
         // On drag the south-east handle, resize the box
         seHandle.addEventListener('move', _.bind(function(event) {
             // Scale in the X dimension
-            var width = parent().textBox.getMeasuredWidth()
-              * parent().textBox.scaleX;
+            var width = parent().width() * parent().textBox.scaleX;
             var scaleX = (width + event.delta.x)/(width);
+
+            var height = parent().height() * parent().textBox.scaleX;
 
             // Lets preserve the aspect ratio
             setParentScale(scaleX);
 
-            var height = parent().textBox.getMeasuredHeight();
-
-            parent().y += event.delta.y +
-                (height - (height * scaleX));
+            parent().y += event.delta.y + (height - (height * scaleX));
         }, this));
 
         this.addEventListener('tick', _.bind(function(event) {
             nwHandle.x = -Math.round(nwHandle.width);
             nwHandle.y = -Math.round(nwHandle.height);
 
-            var width = parent().textBox.getMeasuredWidth() *
-              parent().textBox.scaleX;
+            var width = parent().width() * parent().textBox.scaleX;
 
-            var height = parent().textBox.getMeasuredHeight() *
-              parent().textBox.scaleY;
+            var height = parent().height() * parent().textBox.scaleY;
 
             seHandle.x = width - 0 * Math.round(seHandle.width/2);
             seHandle.y = height - 0 * Math.round(seHandle.height/2);
