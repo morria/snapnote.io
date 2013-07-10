@@ -11,23 +11,23 @@ define([
             this.getStage().deselectAllChildren();
             this._selected = true;
             this.handles.visible = true;
-            this.getStage().update();
-            this.onSelectHook();
-        },
 
-        onSelectHook: function() {
-            // To be overridden
+            this.dispatchEvent({
+              type: 'select'
+            }, this);
+
+            this.getStage().update();
         },
 
         deselect: function() {
             this._selected = false;
             this.handles.visible = false;
-            this.getStage().update();
-            this.onDeselectHook();
-        },
 
-        onDeselectHook: function() {
-            // To be overridden
+            this.dispatchEvent({
+              type: 'deselect'
+            }, this);
+
+            this.getStage().update();
         },
 
         isSelected: function() {

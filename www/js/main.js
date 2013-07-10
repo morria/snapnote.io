@@ -55,7 +55,6 @@ require([
           }));
     });
 
-
     // A few text boxes
     _.each(_.range(Math.random()*4), function() {
         stage.addStageObject(
@@ -67,7 +66,7 @@ require([
 */
 
     stage.addStageObject(
-        _.extend(new Text("The quick brown fox.\nAnd fancy wizards."), {
+        _.extend(new Text("A"), {
         x: width * 0.3,
         y: 100
     }));

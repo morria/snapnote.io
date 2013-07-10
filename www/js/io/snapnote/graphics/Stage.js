@@ -19,7 +19,15 @@ define(['Underscore', 'Easel'],
             for (var i=0; i < this.stageObjectChildren.getNumChildren(); i++) {
                 var stageObject =
                   this.stageObjectChildren.getChildAt(i);
+
                 if (stageObject.isSelected()) {
+                    // Let the stage object know that it is
+                    // being removed from the stage
+                    stageObject.dispatchEvent({
+                      type: 'remove'
+                    }, stageObject);
+
+                    // remove it from the stage
                     this.stageObjectChildren.removeChild(stageObject);
                     this.update();
                     return;
