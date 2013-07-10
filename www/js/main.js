@@ -20,9 +20,10 @@ require([
     'io/snapnote/graphics/StageObject',
     'io/snapnote/graphics/tools/Rectangle',
     'io/snapnote/graphics/tools/Arrow',
-    'io/snapnote/graphics/tools/Text'
+    'io/snapnote/graphics/tools/Text',
+    'io/snapnote/graphics/tools/Image'
     ],
-  function($, Easel, Stage, StageObject, Rectangle, Arrow, Text) {
+  function($, Easel, Stage, StageObject, Rectangle, Arrow, Text, Image) {
 
     $('#stage').on('selectstart', false);
 
@@ -34,6 +35,7 @@ require([
 
     var stage = new Stage(width, height);
 
+/*
     // A few Rectangles
     _.each(_.range(Math.random()*6), function() {
         stage.addStageObject(
@@ -43,6 +45,7 @@ require([
           }));
     });
 
+*/
     // A few arrows
     _.each(_.range(Math.random()*8), function() {
         var dx = ((Math.random()>0.5)?-1:1)*(30 + Math.random()*100);
@@ -53,6 +56,7 @@ require([
             y: Math.random() * height
           }));
     });
+    /*
 
     // A few text boxes
     _.each(_.range(Math.random()*4), function() {
@@ -63,7 +67,6 @@ require([
           }));
     });
 
-    /*
     stage.addStageObject(
         _.extend(new Text("Hello\nHello\nHello"), {
         x: width * 0.3,
@@ -71,13 +74,11 @@ require([
     }));
     */
 
-/*
     stage.addStageObject(
-        _.extend(new Image('http://i.imgur.com/h1I0xdf.jpg'), {
+        _.extend(new Image('/img/beautiful/lazyButAlive.jpg'), {
         x: width * 0.3,
-        y: 100
+        y: 20
     }));
-    */
 
     // Draw it for the first time
     stage.update();

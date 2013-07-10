@@ -9,45 +9,45 @@ define([
     var STROKE_WIDTH = 8;
 
     var Rectangle = function(width, height) {
-        this.initialize(width, height);
+      this.initialize(width, height);
     }
 
     Rectangle.prototype = _.extend(new StageObject('Rectangle'), {
 
-        /**
-         * @property width
-         * @type Number
-         */
-        getWidth: function() { return this._width; },
-        setWidth: function(width) {
-          this._width = Math.max(width, 0);
-          this._update();
-        },
+      /**
+        * @property width
+        * @type Number
+        */
+      getWidth: function() { return this._width; },
+      setWidth: function(width) {
+        this._width = Math.max(width, 0);
+        this._update();
+      },
 
-        /**
-         * @property height
-         * @type Number
-         */
-        getHeight: function() { return this._height; },
-        setHeight: function(height) {
-          this._height = Math.max(height, 0);
-          this._update();
-        },
+      /**
+        * @property height
+        * @type Number
+        */
+      getHeight: function() { return this._height; },
+      setHeight: function(height) {
+        this._height = Math.max(height, 0);
+        this._update();
+      },
 
-        /**
-         * Redraw the rectangle with current
-         * parameters
-         */
-        _update: function() {
-          this._rectangle.graphics
-            .clear()
-            .setStrokeStyle(STROKE_WIDTH, 1, 'round')
-            .beginStroke('rgba(100, 100, 100, 1.0)')
-            .drawRoundRect(0, 0, this._width, this._height, RADIUS)
-            .endStroke()
-            .beginFill('rgba(255, 255, 255, 0.01)')
-            .drawRoundRect(0, 0, this._width, this._height, RADIUS);
-        }
+      /**
+        * Redraw the rectangle with current
+        * parameters
+        */
+      _update: function() {
+        this._rectangle.graphics
+          .clear()
+          .setStrokeStyle(STROKE_WIDTH, 1, 'round')
+          .beginStroke('rgba(100, 100, 100, 1.0)')
+          .drawRoundRect(0, 0, this._width, this._height, RADIUS)
+          .endStroke()
+          .beginFill('rgba(255, 255, 255, 0.01)')
+          .drawRoundRect(0, 0, this._width, this._height, RADIUS);
+      }
     });
 
     var initialize =
