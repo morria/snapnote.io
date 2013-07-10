@@ -11,6 +11,10 @@ define(['Underscore', 'Easel'],
             }
         },
 
+        getNumChildren: function() {
+          return this.stageObjectChildren.getNumChildren();
+        },
+
         addStageObject: function(stageObject) {
             this.stageObjectChildren.addChild(stageObject);
         },

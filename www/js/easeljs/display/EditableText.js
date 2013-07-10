@@ -105,8 +105,7 @@ define([
 
       if (!this._coordinates.hasOwnProperty(position)) {
         this._position = 0;
-        this._cursor.x = 0;
-        this._cursor.y = 0;
+        this._cursor.set({ x: 0, y: 0 });
         return;
       }
 

@@ -34,7 +34,6 @@ require([
 
     var stage = new Stage(width, height);
 
-/*
     // A few Rectangles
     _.each(_.range(Math.random()*6), function() {
         stage.addStageObject(
@@ -58,18 +57,19 @@ require([
     // A few text boxes
     _.each(_.range(Math.random()*4), function() {
         stage.addStageObject(
-          _.extend(new Text("The quick brown fox. And fancy wizards."), {
+          _.extend(new Text("Sample\nText"), {
             x: Math.random() * width,
             y: Math.random() * height
           }));
     });
-*/
 
+    /*
     stage.addStageObject(
         _.extend(new Text("Hello\nHello\nHello"), {
         x: width * 0.3,
         y: 100
     }));
+    */
 
     // Draw it for the first time
     stage.update();

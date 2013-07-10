@@ -12,6 +12,12 @@ define([
             this._selected = true;
             this.handles.visible = true;
 
+            // Move the selected element to the top in order to
+            // minimize surprise on future grabs
+            this.getStage().stageObjectChildren.swapChildren(this,
+              this.getStage().stageObjectChildren.getChildAt(
+              this.getStage().stageObjectChildren.getNumChildren() - 1));
+
             this.dispatchEvent({
               type: 'select'
             }, this);
