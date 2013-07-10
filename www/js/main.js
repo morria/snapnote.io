@@ -71,6 +71,14 @@ require([
     }));
     */
 
+/*
+    stage.addStageObject(
+        _.extend(new Image('http://i.imgur.com/h1I0xdf.jpg'), {
+        x: width * 0.3,
+        y: 100
+    }));
+    */
+
     // Draw it for the first time
     stage.update();
   }

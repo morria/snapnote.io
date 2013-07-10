@@ -36,7 +36,12 @@ define([
 
             // Redraw with my handles on and everyone else's
             // handles off
-            this.getStage().update();
+            try {
+              this.getStage().update();
+            } catch (exception) {
+              console.error(this);
+              throw exception;
+            }
         },
 
         /**
