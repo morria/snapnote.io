@@ -7,9 +7,20 @@ define([
     }
 
     StageObject.prototype = _.extend(new Easel.Container(), {
+        /**
+         * Select this object, deselecting all others
+         *
+         * @return void
+         */
         select: function() {
+
+            // Deselect everyone else
             this.getStage().deselectAllChildren();
+
+            // Mark this as selected
             this._selected = true;
+
+            // Turn the handles on
             this.handles.visible = true;
 
             // Move the selected element to the top in order to
@@ -18,21 +29,32 @@ define([
               this.getStage().stageObjectChildren.getChildAt(
               this.getStage().stageObjectChildren.getNumChildren() - 1));
 
+            // Let the world know I'm selected
             this.dispatchEvent({
               type: 'select'
             }, this);
 
+            // Redraw with my handles on and everyone else's
+            // handles off
             this.getStage().update();
         },
 
+        /**
+         * Deselect this element
+         *
+         * @return void
+         */
         deselect: function() {
             this._selected = false;
             this.handles.visible = false;
 
+            // Let the world know I'm no longer
+            // selected
             this.dispatchEvent({
               type: 'deselect'
             }, this);
 
+            // Redraw the stage with my handles gone
             this.getStage().update();
         },
 

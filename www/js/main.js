@@ -57,7 +57,7 @@ require([
     // A few text boxes
     _.each(_.range(Math.random()*4), function() {
         stage.addStageObject(
-          _.extend(new Text("Sample\nText"), {
+          _.extend(new Text("Lorem Ipsum\ndolor sit amet"), {
             x: Math.random() * width,
             y: Math.random() * height
           }));
