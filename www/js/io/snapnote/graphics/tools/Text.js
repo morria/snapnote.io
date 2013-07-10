@@ -89,7 +89,7 @@ define([
         this.__defineGetter__('height', _.bind(this.getHeight, this));
 
         // Draw the editable text box
-        this._editableText = new EditableText('', '22px Helvetica,Arial', '#000');
+        this._editableText = new EditableText('', '42px Helvetica,Arial', '#555');
         this._editableText.editable = false;
         this.content.addChild(this._editableText);
 

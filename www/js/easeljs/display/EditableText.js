@@ -7,7 +7,10 @@ define([
 
   // The number of pixels from the right of a
   // character that the cursor should appear
-  var CURSOR_NUDGE = 1;
+  var CURSOR_NUDGE = 0.5;
+
+  // The width of the cursor
+  var CURSOR_STROKE_WIDTH = 1;
 
 
   var EditableText = function(text, font, color) {
@@ -193,12 +196,15 @@ define([
           keys.alterByEvent(
             this.text, this.position, event);
 
-        // Update our representation of both
-        this.text = altered.text;
-        this.position = altered.position;
+        if (this.text !== altered.text ||
+            this.position !== altered.position) {
+          // Update our representation of both
+          this.text = altered.text;
+          this.position = altered.position;
 
-        // Update the stage
-        this.getStage().update();
+          // Update the stage
+          this.getStage().update();
+        }
       }, this));
     },
 
@@ -226,11 +232,12 @@ define([
      * @return void
      */
     _remeasureText: function() {
-
+      // Reset all glyph coordinates
       this._coordinates = [];
 
       // Get the canvas context with the state of
-      // the Text DisplayObject
+      // the Text DisplayObject. This lets us measure glyph
+      // sizes
       var context =
         this._textDisplayObject._getWorkingContext();
 
@@ -238,17 +245,36 @@ define([
       this._lineHeight =
         this._textDisplayObject.getMeasuredLineHeight();
 
-      var width = 0;
+      // Reset some values so we can calculate new maxes
+      this._width = 0;
+      this._height = this._lineHeight;
+
+      // The offset from the beginning of the line, kept up
+      // to date as we encounter newline characters
       var dx = 0;
+
+      // The offset from the top of the EditableText, kept
+      // up to date as we encounter newline characters
       var dy = 0;
 
-      // As we measure, save the dimensions of each
-      // glyph
-      var appendCoordinate = _.bind(function(previousWidth, currentWidth) {
+      var previousWidth = 0;
+      for(var spanLength = 1; spanLength <= this._text.length; spanLength++) {
+        // Get a subset of the characters
+        var slice = this._text.slice(0, spanLength);
+
+        // Measure the dimensions of the text for each
+        // successive sub-string so that we can get sizes
+        // for each individual glyph
+        var currentWidth =
+          context.measureText(slice).width;
+
+        var character = this._text[spanLength - 1];
+
+        // Push new coordinates for a seen character
         this._coordinates.push({
-          x: width - dx,
+          x: previousWidth - dx,
           y: dy,
-          dx: previousWidth - currentWidth,
+          dx: currentWidth - previousWidth,
           dy: this._lineHeight
         });
 
@@ -258,30 +284,14 @@ define([
         // Save the height of the text box as we draw
         // each character
         this._height = dy + this._lineHeight;
-      }, this);
 
-      for(var i = 0; i <= this._text.length; i++) {
-        // Measure the dimensions of the text for each
-        // successive sub-string so that we can get sizes
-        // for each individual glyph
-        var metrics =
-          context.measureText(this._text.slice(0, i));
-
-        if (width) {
-          appendCoordinate(width, metrics.width);
-        }
-
-        // Manually account for newlines
-        if (this._text[i] == "\n") {
+        // Account for newlines
+        if ("\n" == character || "\r" == character) {
           dy += this._lineHeight;
-          dx = context.measureText(this._text.slice(0, i+1)).width;
+          dx = currentWidth;
         }
 
-        width = metrics.width;
-      }
-
-      if(width) {
-        appendCoordinate(width, metrics.width);
+        previousWidth = currentWidth;
       }
     }
   });
@@ -306,7 +316,7 @@ define([
     this.addChild(this._background);
 
     // Add a flashing cursor
-    this._cursor = new Cursor(this.lineHeight, 2, color);
+    this._cursor = new Cursor(this.lineHeight, CURSOR_STROKE_WIDTH, color);
     this.addChild(this._cursor);
 
     // Add a text box in front of the cursor

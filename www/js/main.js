@@ -66,7 +66,7 @@ require([
 */
 
     stage.addStageObject(
-        _.extend(new Text("A"), {
+        _.extend(new Text("Hello\nHello\nHello"), {
         x: width * 0.3,
         y: 100
     }));
