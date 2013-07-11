@@ -102,7 +102,7 @@ define([
 
         // Draw the editable text box
         this._editableText = new EditableText('', '42px Helvetica,Arial', '#555');
-        this._editableText.editable = false;
+        // this._editableText.editable = false;
         this.content.addChild(this._editableText);
 
         // Update our internal dimensions and state when

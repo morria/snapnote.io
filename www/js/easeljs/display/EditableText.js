@@ -176,16 +176,12 @@ define([
     _enableEditing: function() {
       this._cursor.visible = true;
 
-      // Store and disable window keydown listeners
-      var events = $(window).data('events');
-      if (events && events.hasOwnProperty('keydown')) {
-        this._storedKeydownListeners = events['keydown'];
-        $(window).unbind('keydown');
-      }
-
-      // Listen for keydown events
+      // Listen for keydown events on document, catching
+      // the event before it bubbles to 'window', the
+      // stage listener
       var keys = new Keys();
-      $(window).keydown(_.bind(function(event) {
+      $(document).unbind('keydown')
+        .keydown(_.bind(function(event) {
         event.preventDefault();
         event.stopPropagation();
 
@@ -214,15 +210,7 @@ define([
      */
     _disableEditing: function() {
       this._cursor.visible = false;
-
-      // Remove keydown listener
-      $(window).unbind('keydown');
-
-      // Reestablish previous keydown listeners
-      if (this.hasOwnProperty('_storedKeydownListeners')) {
-        $(window).bind('keydown', this._storedKeydownListeners);
-        delete this._storedKeydownListeners;
-      }
+      $(document).unbind('keydown');
     },
 
     /**
@@ -301,7 +289,7 @@ define([
     this.name = 'EditableText';
 
     this._text = '';
-    this._editable = true;
+    this._editable = false;
     this._position = 0;
     this._width = 0;
     this._height = 0;
@@ -316,6 +304,7 @@ define([
 
     // Add a flashing cursor
     this._cursor = new Cursor(this.lineHeight, CURSOR_STROKE_WIDTH, color);
+    this._cursor.visible = false;
     this.addChild(this._cursor);
 
     // Add a text box in front of the cursor

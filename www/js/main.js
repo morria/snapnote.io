@@ -25,13 +25,13 @@ require([
     ],
   function($, Easel, Stage, StageObject, Rectangle, Arrow, Text, Image) {
 
-    $('#stage').on('selectstart', false);
-
     var width = $(document).width();
     var height = $(document).height();
 
-    $('#stage').attr('width', width)
-    $('#stage').attr('height', width)
+    $('#stage')
+      .on('selectstart', false)
+      .attr('width', width)
+      .attr('height', width)
 
     var stage = new Stage(width, height);
 
