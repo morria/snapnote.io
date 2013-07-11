@@ -26,7 +26,7 @@ define([
 
       var nwHandle = new Handle();
       nwHandle.addEventListener('move', _.bind(function(event) {
-        var width = this.target.width * this.target.content.scaleX;
+        var width = this.target.width * this.target.scale;
         var scale = (width - event.delta.x)/(width);
 
         this.target.scale = scale;

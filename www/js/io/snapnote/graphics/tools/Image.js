@@ -21,7 +21,7 @@ define([
         * @type Number
         */
       getWidth: function() {
-        return this._bitmap.image.width * this.content.scaleX;
+        return this._bitmap.image.width;
       },
 
       setWidth: function(width) {
@@ -33,7 +33,7 @@ define([
         * @type Number
         */
       getHeight: function() {
-        return this._bitmap.image.height * this.content.scaleX;
+        return this._bitmap.image.height;
       },
       setHeight: function(height) {
         this._bitmap.image.height = Math.max(height, 0);
@@ -43,7 +43,7 @@ define([
         * @property scale
         * @type Number
         */
-      getScale: function() { return this._bitmap.scaleX; },
+      getScale: function() { return this.content.scaleX; },
       setScale: function(scale) {
         this.content.scaleX = Math.max(scale, 0);
         this.content.scaleY = Math.max(scale, 0);

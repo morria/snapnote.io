@@ -56,7 +56,6 @@ require([
           }));
     });
 
-*/
     // A few text boxes
     _.each(_.range(Math.random()*4), function() {
         stage.addStageObject(
@@ -65,7 +64,6 @@ require([
             y: Math.random() * height
           }));
     });
-/*
 
     stage.addStageObject(
         _.extend(new Text("Hello\nHello\nHello"), {
