@@ -32,9 +32,7 @@ define([
         * @property height
         * @type Number
         */
-      getHeight: function() {
-        return this._bitmap.image.height;
-      },
+      getHeight: function() { return this._bitmap.image.height; },
       setHeight: function(height) {
         this._bitmap.image.height = Math.max(height, 0);
       },

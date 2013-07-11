@@ -35,7 +35,6 @@ require([
 
     var stage = new Stage(width, height);
 
-/*
     // A few Rectangles
     _.each(_.range(Math.random()*6), function() {
         stage.addStageObject(
@@ -65,18 +64,23 @@ require([
           }));
     });
 
+    // A few images
+    _.each(_.range(Math.random()*4), function() {
+        stage.addStageObject(
+            _.extend(new Image('/img/beautiful/lazyButAlive.jpg'), {
+            x: Math.random() * width,
+            y: Math.random() * height,
+            scale: 0.5
+        }));
+    });
+
+/*
     stage.addStageObject(
         _.extend(new Text("Hello\nHello\nHello"), {
         x: width * 0.3,
         y: 100
     }));
-    */
-
-    stage.addStageObject(
-        _.extend(new Image('/img/beautiful/lazyButAlive.jpg'), {
-        x: width * 0.3,
-        y: 20
-    }));
+*/
 
     // Draw it for the first time
     stage.update();
