@@ -9,20 +9,11 @@ define([
     }
 
     TextHandles.prototype = _.extend(new Handles('rectangle.Handles'), {
-      /**
-       * @property this.target
-       * @type StageObject
-       */
-      getTarget: function() {
-        return this.parent.parent;
-      }
     });
 
     var initialize = TextHandles.prototype.initialize;
     TextHandles.prototype.initialize = function() {
       initialize.call(this);
-
-      this.__defineGetter__('target', _.bind(this.getTarget, this));
 
       var nwHandle = new Handle();
       nwHandle.addEventListener('move', _.bind(function(event) {

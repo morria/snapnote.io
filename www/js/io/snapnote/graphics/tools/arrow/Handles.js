@@ -9,20 +9,11 @@ define([
     }
 
     ArrowHandles.prototype = _.extend(new Handles('arrow.Handles'), {
-      /**
-       * @property this.target
-       * @type StageObject
-       */
-      getTarget: function() {
-        return this.parent.parent;
-      }
     });
 
     var initialize = ArrowHandles.prototype.initialize;
     ArrowHandles.prototype.initialize = function() {
       initialize.call(this);
-
-      this.__defineGetter__('target', _.bind(this.getTarget, this));
 
       var headHandle = new Handle();
       headHandle.addEventListener('move', _.bind(function(event) {
