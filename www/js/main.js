@@ -45,7 +45,6 @@ require([
           }));
     });
 
-*/
     // A few arrows
     _.each(_.range(Math.random()*8), function() {
         var dx = ((Math.random()>0.5)?-1:1)*(30 + Math.random()*100);
@@ -56,8 +55,8 @@ require([
             y: Math.random() * height
           }));
     });
-    /*
 
+*/
     // A few text boxes
     _.each(_.range(Math.random()*4), function() {
         stage.addStageObject(
@@ -66,6 +65,7 @@ require([
             y: Math.random() * height
           }));
     });
+/*
 
     stage.addStageObject(
         _.extend(new Text("Hello\nHello\nHello"), {

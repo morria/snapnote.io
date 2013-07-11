@@ -9,66 +9,54 @@ define([
     }
 
     TextHandles.prototype = _.extend(new Handles('rectangle.Handles'), {
+      /**
+       * @property this.target
+       * @type StageObject
+       */
+      getTarget: function() {
+        return this.parent.parent;
+      }
     });
 
-    var initialize =
-      TextHandles.prototype.initialize;
-
+    var initialize = TextHandles.prototype.initialize;
     TextHandles.prototype.initialize = function() {
-        initialize.call(this);
+      initialize.call(this);
 
-        var nwHandle = new Handle();
-        var seHandle = new Handle();
+      this.__defineGetter__('target', _.bind(this.getTarget, this));
 
-        var parent = _.bind(function() {
-            return this.parent.parent;
-        }, this);
+      var nwHandle = new Handle();
+      nwHandle.addEventListener('move', _.bind(function(event) {
+        var width = this.target.width * this.target.content.scaleX;
+        var scale = (width - event.delta.x)/(width);
 
-        function setParentScale(scale) {
-            parent().content.scaleX *= scale;
-            parent().content.scaleY *= Math.abs(scale);
-        }
+        this.target.scale = scale;
+        this.target.x += event.delta.x;
+        this.target.y += event.delta.y;
+      }, this));
+      this.addChild(nwHandle);
 
-        // On drag the north-west handle, resize the box
-        nwHandle.addEventListener('move', _.bind(function(event) {
-            // Scale in the X dimension
-            var width = parent().width * parent().content.scaleX;
-            var scaleX = (width - event.delta.x)/(width);
+      var seHandle = new Handle();
+      seHandle.addEventListener('move', _.bind(function(event) {
+        var width = this.target.width * this.target.scale;
+        var scale = (width + event.delta.x)/(width);
+        var height = this.target.height * this.target.scale;
 
-            // Lets preserve the aspect ratio
-            setParentScale(scaleX);
+        this.target.scale = scale;
+        this.target.y += event.delta.y + (height - (height * scale));
+      }, this));
+      this.addChild(seHandle);
 
-            parent().x += event.delta.x;
-            parent().y += event.delta.y;
-        }, this));
+      this.addEventListener('tick', _.bind(function(event) {
+        nwHandle.set({
+          x: -Math.round(nwHandle.width),
+          y: -Math.round(nwHandle.height)
+        });
 
-        // On drag the south-east handle, resize the box
-        seHandle.addEventListener('move', _.bind(function(event) {
-            // Scale in the X dimension
-            var width = parent().width * parent().content.scaleX;
-            var scaleX = (width + event.delta.x)/(width);
-
-            var height = parent().height * parent().content.scaleX;
-
-            // Lets preserve the aspect ratio
-            setParentScale(scaleX);
-
-            parent().y += event.delta.y + (height - (height * scaleX));
-        }, this));
-
-        this.addEventListener('tick', _.bind(function(event) {
-            nwHandle.x = -Math.round(nwHandle.width);
-            nwHandle.y = -Math.round(nwHandle.height);
-
-            var width = parent().width * parent().content.scaleX;
-
-            var height = parent().height * parent().content.scaleY;
-
-            seHandle.x = width - 0 * Math.round(seHandle.width/2);
-            seHandle.y = height - 0 * Math.round(seHandle.height/2);
-        }, this));
-
-        this.addChild(nwHandle, seHandle);
+        seHandle.set({
+          x: this.target.width * this.target.scale,
+          y: this.target.height * this.target.scale
+        });
+      }, this));
     }
 
     return TextHandles;

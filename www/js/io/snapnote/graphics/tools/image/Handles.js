@@ -28,10 +28,12 @@ define([
 
       var nwHandle = new Handle();
       nwHandle.addEventListener('move', _.bind(function(event) {
-        this.target.x += event.delta.x;
-        this.target.width -= event.delta.x;
-        this.target.y += event.delta.y;
-        this.target.height -=  event.delta.y;
+        var scale =
+          (this.target.width - event.delta.x)/this.target.width;
+
+        this.target.scale *= scale;
+        this.target.x;
+
       }, this));
       this.addChild(nwHandle);
 

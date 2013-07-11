@@ -37,6 +37,16 @@ define([
       getText: function() { return this._text; },
 
       /**
+       * @property scale
+       * @type Number
+       */
+      getScale: function() { return this.content.scaleX; },
+      setScale: function(scale) {
+        this.content.scaleX *= scale;
+        this.content.scaleY *= Math.abs(scale);
+      },
+
+      /**
        * Event listener for when the text object
        * is selected on the stage
        */
@@ -87,6 +97,8 @@ define([
         this.__defineGetter__('text', _.bind(this.getText, this));
         this.__defineGetter__('width', _.bind(this.getWidth, this));
         this.__defineGetter__('height', _.bind(this.getHeight, this));
+        this.__defineGetter__('scale', _.bind(this.getScale, this));
+        this.__defineSetter__('scale', _.bind(this.setScale, this));
 
         // Draw the editable text box
         this._editableText = new EditableText('', '42px Helvetica,Arial', '#555');
