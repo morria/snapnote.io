@@ -39,7 +39,7 @@ header, footer {
   position: fixed;
   left: 0;
   width: 100%;
-  background-color: #000;
+  background-color: #373737;
   color: #fff;
   border-bottom: 1px solid #aaa;
   padding: 0;
@@ -94,7 +94,8 @@ button {
   background-repeat: no-repeat;
   background-position: 4px center;
   display: inline-block;
-  color: #fff;
+  color: #76daff;
+  font-weight: 600;
   padding: 0 4px;
   cursor: pointer;
   font-weight: normal;
@@ -102,11 +103,41 @@ button {
 }
 
 button:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.3), inset 0 1px 4px rgba(50,50,50,0.1);
+  background-color: #ccc;
+  color: #000;
+  // box-shadow: 0 1px 1px 0 rgba(0,0,0,0.3), inset 0 1px 4px rgba(50,50,50,0.1);
 }
 
 button.active {
   background-color: rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 1px 0 rgba(255,255,255,0.3),inset 0 1px 5px rgba(0,0,0,0.1);
+}
+
+#dragon-drop-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  pointer-events: none;
+
+  .container {
+    margin: 200px auto;
+    display: block;
+    width: 400px;
+    padding: 30px;
+    border-radius: 50px;
+    background-color: #aaa;
+    text-align: center;
+
+    label {
+      font-size: 32px;
+      text-shadow: rgba(0, 0, 0, 0.5) -1px 0, rgba(0, 0, 0, 0.3) 0 -1px, rgba(255, 255, 255, 0.5) 0 1px, rgba(0, 0, 0, 0.3) -1px -2px;
+      color: #555;
+      opacity: 0.9;
+
+    }
+  }
 }

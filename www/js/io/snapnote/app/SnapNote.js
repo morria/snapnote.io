@@ -2,12 +2,13 @@ define([
     'jquery',
     'Underscore',
     'io/snapnote/graphics/Stage',
+    'io/snapnote/app/DragonDrop',
     'io/snapnote/app/tool/ArrowTool',
     'io/snapnote/app/tool/ImageTool',
     'io/snapnote/app/tool/RectangleTool',
     'io/snapnote/app/tool/TextTool',
   ],
-  function($, _, Stage, ArrowTool, ImageTool, RectangleTool, TextTool) {
+  function($, _, Stage, DragonDrop, ArrowTool, ImageTool, RectangleTool, TextTool) {
 
     var SnapNote = function() {
       this._canvas = $('#' + this.canvasId);
@@ -40,6 +41,8 @@ define([
 
       // Do an initial rendering of the stage
       this._stage.update();
+
+      new DragonDrop(this._stage);
     }
 
     SnapNote.prototype = {
