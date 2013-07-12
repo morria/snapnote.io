@@ -9,7 +9,13 @@ define([
         this.initialize(url);
     }
 
-    Image.prototype = _.extend(new StageObject('Image'), {
+    Image.prototype = _.extend(new StageObject(), {
+      /**
+       * @property name
+       * @type String
+       */
+      name: 'Image',
+
       /**
        * @property url
        * @type String
@@ -45,6 +51,10 @@ define([
       setScale: function(scale) {
         this.content.scaleX = Math.max(scale, 0);
         this.content.scaleY = Math.max(scale, 0);
+      },
+
+      update: function() {
+        // Nothing to do
       }
     });
 

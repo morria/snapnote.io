@@ -2,11 +2,72 @@ define([
     'Underscore',
     'Easel'],
   function(_, Easel) {
-    var StageObject = function(name) {
-      this.initialize(name);
+    var StageObject = function() {
+      this.initialize();
     }
 
     StageObject.prototype = _.extend(new Easel.Container(), {
+      /**
+        * @property width
+        * @type Number
+        */
+      getWidth: function() { return this._width; },
+      setWidth: function(width) {
+        this._width = Math.max(width, 0);
+        this.update();
+      },
+
+      /**
+        * @property height
+        * @type Number
+        */
+      getHeight: function() { return this._height; },
+      setHeight: function(height) {
+        this._height = Math.max(height, 0);
+        this.update();
+      },
+
+      /**
+       * A CSS color for the arrow
+       *
+       * @prooperty color
+       * @type String
+       */
+      getColor: function() { return this._color; },
+      setColor: function(color) {
+        this._color = color;
+        this.update();
+      },
+
+      /**
+       * @property scale
+       * @type Number
+       */
+      getScale: function() { return this.content.scaleX; },
+      setScale: function(scale) {
+        this.content.scaleX *= scale;
+        this.content.scaleY *= Math.abs(scale);
+      },
+
+      /**
+       * @property selected
+       * @type Boolean
+       */
+      getSelected: function() { return this._selected; },
+      setSelected: function(selected) {
+        this._selected = selected;
+        if (this._selected) {
+          this.select();
+        } else {
+          this.deselect();
+        }
+        this.update();
+      },
+
+      update: function() {
+        console.error('Children of StageObject must override update()', this);
+      },
+
       /**
         * Select this object, deselecting all others
         *
@@ -21,12 +82,6 @@ define([
 
         // Turn the handles on
         this.handles.visible = true;
-
-        // Move the selected element to the top in order to
-        // minimize surprise on future grabs
-        this.getStage().stageObjectChildren.swapChildren(this,
-          this.getStage().stageObjectChildren.getChildAt(
-          this.getStage().stageObjectChildren.getNumChildren() - 1));
 
         // Let the world know I'm selected
         this.dispatchEvent({
@@ -60,21 +115,30 @@ define([
 
         // Redraw the stage with my handles gone
         this.getStage().update();
-      },
-
-      isSelected: function() {
-        return this._selected;
       }
+
     });
 
-    var initialize =
-        StageObject.prototype.initialize;
-
-    StageObject.prototype.initialize = function(name) {
+    var initialize = StageObject.prototype.initialize;
+    StageObject.prototype.initialize = function() {
       initialize.call(this);
-      this.name = name;
 
+      this._width = 0;
+      this._height = 0;
+      this._color = '#000';
+      this._scale = 1.0;
       this._selected = false;
+
+      this.__defineGetter__('width', _.bind(this.getWidth, this));
+      this.__defineSetter__('width', _.bind(this.setWidth, this));
+      this.__defineGetter__('height', _.bind(this.getHeight, this));
+      this.__defineSetter__('height', _.bind(this.setHeight, this));
+      this.__defineGetter__('color', _.bind(this.getColor, this));
+      this.__defineSetter__('color', _.bind(this.setColor, this));
+      this.__defineGetter__('scale', _.bind(this.getScale, this));
+      this.__defineSetter__('scale', _.bind(this.setScale, this));
+      this.__defineGetter__('selected', _.bind(this.getSelected, this));
+      this.__defineSetter__('selected', _.bind(this.setSelected, this));
 
       this.content = new Easel.Container();
       this.content.name = 'stageObject.content';
@@ -86,7 +150,7 @@ define([
       this.addChild(this.handles);
 
       this.content.addEventListener('mousedown', _.bind(function(event) {
-        this.select();
+        this.selected = true;
 
         var target = event.target.parent;
 

@@ -14,7 +14,8 @@ define([
       newStageObject: function() {
         return _.extend(new Arrow(40, 100), {
           x: 800,
-          y: 300
+          y: 300,
+          color: '#000'
         });
       }
     });

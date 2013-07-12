@@ -47,38 +47,59 @@ define(['Underscore', 'Easel'],
         this._update();
       },
 
+      /**
+       * Cause no objects on the stage to be in a
+       * selected state
+       */
       deselectAllChildren: function() {
-        for (var i=0; i < this.stageObjectChildren.getNumChildren(); i++) {
-          this.stageObjectChildren.getChildAt(i).deselect();
-        }
-      },
-
-      getNumChildren: function() {
-        return this.stageObjectChildren.getNumChildren();
+        _.each(this.stageObjects.children, function(stageObject, i) {
+          stageObject.selected = false;
+        });
       },
 
       addStageObject: function(stageObject) {
-        this.stageObjectChildren.addChild(stageObject);
+        this.stageObjects.addChild(stageObject);
+        this.sortChildrenByType();
+      },
+
+      /**
+       * Move the given stage object to the bottom of
+       * the stack
+       */
+      sortChildrenByType: function() {
+        _.each(this.stageObjects.children, function(child, i) {
+          child.sortValue = i;
+          if (child.name !== 'Image') {
+            child.sortValue += 10000;
+          }
+          if (child.name !== 'Text') {
+            child.sortValue -= 1000;
+          }
+        });
+
+        this.stageObjects.sortChildren(function(a, b) {
+          return (a.sortValue - b.sortValue);
+        });
       },
 
       deleteSelected: function() {
-        for (var i=0; i < this.stageObjectChildren.getNumChildren(); i++) {
-          var stageObject =
-            this.stageObjectChildren.getChildAt(i);
+        var stageObject =
+          _.find(this.stageObjects.children,
+            function(stageObject) {
+              return stageObject.selected;
+            });
 
-          if (stageObject.isSelected()) {
-              // Let the stage object know that it is
-              // being removed from the stage
-              stageObject.dispatchEvent({
-                type: 'remove'
-              }, stageObject);
-
-              // remove it from the stage
-              this.stageObjectChildren.removeChild(stageObject);
-              this.update();
-              return;
-          }
+        if (!stageObject) {
+          return;
         }
+
+        stageObject.dispatchEvent({
+          type: 'remove'
+        }, stageObject);
+
+        // remove it from the stage
+        this.stageObjects.removeChild(stageObject);
+        this.update();
       },
 
       /**
@@ -105,8 +126,8 @@ define(['Underscore', 'Easel'],
       // All stage objects are children of a child so
       // that we can work around the lack of event
       // bubbling
-      this.stageObjectChildren = new Easel.Container();
-      this.addChild(this.stageObjectChildren);
+      this.stageObjects = new Easel.Container();
+      this.addChild(this.stageObjects);
 
       // Deselect all display objects when the background
       // is clicked

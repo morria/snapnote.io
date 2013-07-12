@@ -14,7 +14,8 @@ define([
       newStageObject: function() {
         return _.extend(new Rectangle(100, 80), {
             x: 120,
-            y: 100
+            y: 100,
+            color: '#000'
           });
       }
     });

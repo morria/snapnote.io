@@ -12,9 +12,9 @@ define([
 
     TextTool.prototype = _.extend(new Tool(), {
       newStageObject: function() {
-        return _.extend(new Text("snapnote.io"), {
+        return _.extend(new Text("snapnote.io", '42px Helvetica,Arial', '#000'), {
             x: 350,
-            y: 0
+            y: 0,
           });
       }
     });

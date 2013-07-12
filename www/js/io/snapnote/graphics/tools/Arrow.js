@@ -7,11 +7,17 @@ define([
 
     var STROKE_WIDTH = 15;
 
-    var Arrow = function(dx, dy) {
-        this.initialize(dx, dy);
+    var Arrow = function(dx, dy, color) {
+        this.initialize(dx, dy, color);
     }
 
-    Arrow.prototype = _.extend(new StageObject('Arrow'), {
+    Arrow.prototype = _.extend(new StageObject(), {
+      /**
+       * @property name
+       * @type String
+       */
+      name: 'Arrow',
+
       /**
        * @property dx
        * @type Number
@@ -19,7 +25,8 @@ define([
       getDx: function() { return this._dx; },
       setDx: function(dx) {
         this._dx = dx;
-        this._update();
+        this.width = dx;
+        this.update();
       },
 
       /**
@@ -29,10 +36,11 @@ define([
       getDy: function() { return this._dy; },
       setDy: function(dy) {
         this._dy = dy;
-        this._update();
+        this.height = dy;
+        this.update();
       },
 
-      _update: function() {
+      update: function() {
         // The angle of an arrow head
         var a1 =
           Math.atan(Math.abs((this._dx / this._dy)))
@@ -48,16 +56,19 @@ define([
         this._arrow.graphics
           .clear()
           .setStrokeStyle(STROKE_WIDTH, 1, 'round')
-          .beginStroke('rgba(100, 100, 100, 1.0)')
+          .beginStroke(this.color)
           .moveTo(0, 0).lineTo(this._dx, this._dy)
           .moveTo(0, 0).lineTo(Math.cos(a1)*30, Math.sin(a1)*30)
           .moveTo(0, 0).lineTo(Math.cos(a2)*30, Math.sin(a2)*30)
           .endStroke();
+
+        this._arrow.shadow =
+          new Easel.Shadow('#fff', 2, 2, 4);
       }
     });
 
     var initialize = Arrow.prototype.initialize;
-    Arrow.prototype.initialize = function(dx, dy) {
+    Arrow.prototype.initialize = function(dx, dy, color) {
       initialize.call(this);
 
       this.__defineGetter__('dx', _.bind(this.getDx, this));
@@ -71,8 +82,9 @@ define([
       // Draw handles on top of the rectangle
       this.handles.addChild(new Handles());
 
-      this.dx = dx;
-      this.dy = dy;
+      this.dx = dx ? dx : 50;
+      this.dy = dy ? dy : 50;
+      this.color = color ? color : '#000';
     }
 
     return Arrow;
