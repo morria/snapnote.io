@@ -5,17 +5,17 @@ define([
     'io/snapnote/graphics/tools/Arrow'
   ],
   function($, _, Tool, Arrow) {
-    var ArrowTool = function(selector, stage) {
+    var ArrowTool = function(selector, stage, color) {
       this.selector = selector;
       this.stage = stage;
+      this.color = color;
     }
 
     ArrowTool.prototype = _.extend(new Tool(), {
       newStageObject: function() {
         return _.extend(new Arrow(40, 100), {
           x: 800,
-          y: 300,
-          color: '#000'
+          y: 300
         });
       }
     });

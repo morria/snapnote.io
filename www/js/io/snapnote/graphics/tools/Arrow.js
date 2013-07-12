@@ -62,8 +62,7 @@ define([
           .moveTo(0, 0).lineTo(Math.cos(a2)*30, Math.sin(a2)*30)
           .endStroke();
 
-        this._arrow.shadow =
-          new Easel.Shadow('#fff', 2, 2, 4);
+        this._arrow.shadow = this.shadow;
       }
     });
 

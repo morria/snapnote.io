@@ -35,8 +35,7 @@ define([
           .drawRoundRect(0, 0, this._width, this._height, RADIUS);
           */
 
-        this._rectangle.shadow =
-          new Easel.Shadow('#fff', 2, 2, 4);
+        this._rectangle.shadow = this.shadow;
       }
     });
 

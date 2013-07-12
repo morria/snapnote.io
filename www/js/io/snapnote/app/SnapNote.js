@@ -13,6 +13,7 @@ define([
     var SnapNote = function() {
       this._canvas = $('#' + this.canvasId);
       this._stage = new Stage();
+      this._stage.color = 'rgba(255, 255, 255, 0.01)';
 
       // Inhibit selection/highlighting on the canvas
       this._canvas.on('selectstart', false);
@@ -33,11 +34,13 @@ define([
       this.width = this.documentWidth;
       this.height = this.documentHeight;
 
+      var color = '#ff4f00';
+
       // Hook up tool buttons
-      this._arrowTool = new ArrowTool('#tool-arrow', this._stage);
-      this._rectangleTool = new RectangleTool('#tool-rectangle', this._stage);
-      this._imageTool = new ImageTool('#tool-image', this._stage);
-      this._textTool = new TextTool('#tool-text', this._stage);
+      this._arrowTool = new ArrowTool('#tool-arrow', this._stage, color);
+      this._rectangleTool = new RectangleTool('#tool-rectangle', this._stage, color);
+      this._imageTool = new ImageTool('#tool-image', this._stage, color);
+      this._textTool = new TextTool('#tool-text', this._stage, color);
 
       // Do an initial rendering of the stage
       this._stage.update();

@@ -60,6 +60,11 @@ define(['Underscore', 'Easel'],
       addStageObject: function(stageObject) {
         this.stageObjects.addChild(stageObject);
         this.sortChildrenByType();
+
+        stageObject.dispatchEvent({
+          type: 'added',
+          stage: this
+        });
       },
 
       /**
@@ -157,7 +162,7 @@ define(['Underscore', 'Easel'],
       // Set the dimensions, causing a redraw
       this.width = width;
       this.height = height;
-      this.color = '#fff';
+      this.color = null;
     }
 
     return Stage;

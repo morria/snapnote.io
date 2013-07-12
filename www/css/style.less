@@ -11,19 +11,19 @@ html {
 }
 
 body {
-  background-color: #fff;
   padding: 0;
   margin: 0;
   padding: @headerHeight 0 @footerHeight 0;
   margin: 0;
   font-family: Helvetica, Arial, sans;
+  background-repeat: repeat;
+  background-image: url('/img/background.jpg');
 }
 
 #content {
   #stage {
     padding: 0;
     margin: 0;
-    background-color: #aaa;
     display: block;
     user-select: none;
     -ms-user-select: none;
@@ -40,6 +40,7 @@ header, footer {
   left: 0;
   width: 100%;
   background-color: #373737;
+  opacity: 0.8;
   color: #fff;
   border-bottom: 1px solid #aaa;
   padding: 0;
@@ -94,7 +95,7 @@ button {
   background-repeat: no-repeat;
   background-position: 4px center;
   display: inline-block;
-  color: #76daff;
+  color: #fff;
   font-weight: 600;
   padding: 0 4px;
   cursor: pointer;
@@ -119,9 +120,10 @@ button.active {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   z-index: 100;
   pointer-events: none;
+  filter: blur(8px);
 
   .container {
     margin: 200px auto;
@@ -129,15 +131,14 @@ button.active {
     width: 400px;
     padding: 30px;
     border-radius: 50px;
-    background-color: #aaa;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.1);
 
     label {
       font-size: 32px;
       text-shadow: rgba(0, 0, 0, 0.5) -1px 0, rgba(0, 0, 0, 0.3) 0 -1px, rgba(255, 255, 255, 0.5) 0 1px, rgba(0, 0, 0, 0.3) -1px -2px;
-      color: #555;
-      opacity: 0.9;
-
+      color: #fff;
+      opacity: 0.8;
     }
   }
 }

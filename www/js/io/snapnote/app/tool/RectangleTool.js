@@ -5,9 +5,10 @@ define([
     'io/snapnote/graphics/tools/Rectangle'
   ],
   function($, _, Tool, Rectangle) {
-    var RectangleTool = function(selector, stage) {
+    var RectangleTool = function(selector, stage, color) {
       this.selector = selector;
       this.stage = stage;
+      this.color = color;
     }
 
     RectangleTool.prototype = _.extend(new Tool(), {
@@ -15,7 +16,6 @@ define([
         return _.extend(new Rectangle(100, 80), {
             x: 120,
             y: 100,
-            color: '#000'
           });
       }
     });

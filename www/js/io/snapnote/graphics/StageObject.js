@@ -28,7 +28,7 @@ define([
       },
 
       /**
-       * A CSS color for the arrow
+       * A CSS color
        *
        * @prooperty color
        * @type String
@@ -38,6 +38,21 @@ define([
         this._color = color;
         this.update();
       },
+
+      /**
+       * A CSS color for the shadow
+       *
+       * @prooperty color
+       * @type String
+       */
+      getShadowColor: function() { return this._shadowColor; },
+      setShadowColor: function(color) {
+        this._shadowColor = color;
+        this.shadow = new Easel.Shadow(color, 2, 2, 1),
+        this.update();
+      },
+
+      shadow: new Easel.Shadow('#000', 1, 2, 1),
 
       /**
        * @property scale
@@ -135,10 +150,13 @@ define([
       this.__defineSetter__('height', _.bind(this.setHeight, this));
       this.__defineGetter__('color', _.bind(this.getColor, this));
       this.__defineSetter__('color', _.bind(this.setColor, this));
+      this.__defineGetter__('shadowColor', _.bind(this.getShadowColor, this));
+      this.__defineSetter__('shadowColor', _.bind(this.setShadowColor, this));
       this.__defineGetter__('scale', _.bind(this.getScale, this));
       this.__defineSetter__('scale', _.bind(this.setScale, this));
       this.__defineGetter__('selected', _.bind(this.getSelected, this));
       this.__defineSetter__('selected', _.bind(this.setSelected, this));
+      this.__defineGetter__('stage', _.bind(this.getStage, this));
 
       this.content = new Easel.Container();
       this.content.name = 'stageObject.content';

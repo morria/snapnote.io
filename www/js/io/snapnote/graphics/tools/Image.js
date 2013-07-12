@@ -1,20 +1,21 @@
 define([
+    'jquery',
     'Underscore',
     'Easel',
     'io/snapnote/graphics/StageObject',
     'io/snapnote/graphics/tools/image/Handles'],
-  function(_, Easel, StageObject, Handles) {
+  function($, _, Easel, StageObject, Handles) {
 
-    var Image = function(url) {
+    var SImage = function(url) {
         this.initialize(url);
     }
 
-    Image.prototype = _.extend(new StageObject(), {
+    SImage.prototype = _.extend(new StageObject(), {
       /**
        * @property name
        * @type String
        */
-      name: 'Image',
+      name: 'SImage',
 
       /**
        * @property url
@@ -55,11 +56,35 @@ define([
 
       update: function() {
         // Nothing to do
+      },
+
+      _onLoad: function(event) {
+
+        // Make sure its not too wide
+        if ((this.width * this.scale) > this.stage.width) {
+          this.scale *= (this.stage.width/this.width);
+        }
+
+        // Or too tall
+        if ((this.height * this.scale) > this.stage.height) {
+          this.scale *= (this.stage.height/(this.height * this.scale));
+        }
+
+        // Or falling off the screen
+        if (this.x + (this.width * this.scale) > this.stage.width) {
+          this.x =
+            (this.stage.width - (this.width * this.scale));
+        }
+
+        if (this.y + (this.height * this.scale) > this.stage.height) {
+          this.y =
+            (this.stage.height - (this.height * this.scale));
+        }
       }
     });
 
-    var initialize = Image.prototype.initialize;
-    Image.prototype.initialize = function(url) {
+    var initialize = SImage.prototype.initialize;
+    SImage.prototype.initialize = function(url) {
       initialize.call(this);
 
       this._url = url;
@@ -72,12 +97,26 @@ define([
       this.__defineGetter__('scale', _.bind(this.getScale, this));
       this.__defineSetter__('scale', _.bind(this.setScale, this));
 
-      this._bitmap = new Easel.Bitmap(url);
+      this.addEventListener('load', _.bind(this._onLoad, this));
+
+      // Start loading the image
+      var image = new Image();
+      $(image).load(_.bind(function() {
+        this.dispatchEvent({
+          type: 'load',
+          image: this
+        });
+      }, this));
+
+      this._bitmap = new Easel.Bitmap(image);
       this.content.addChild(this._bitmap);
 
       this.handles.addChild(new Handles());
+
+      // Start loading the image
+      image.src = this.url;
     }
 
-    return Image;
+    return SImage;
   }
 );

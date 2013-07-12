@@ -4,9 +4,12 @@ define([
   ],
   function($, _) {
     var Tool = function() {
+      this._color = '#000';
       this._stage = null;
       this._selector = null;
 
+      this.__defineGetter__('color', _.bind(this.getColor, this));
+      this.__defineSetter__('color', _.bind(this.setColor, this));
       this.__defineGetter__('stage', _.bind(this.getStage, this));
       this.__defineSetter__('stage', _.bind(this.setStage, this));
       this.__defineGetter__('selector', _.bind(this.getSelector, this));
@@ -14,6 +17,16 @@ define([
     }
 
     Tool.prototype = {
+      /**
+       * @property stage
+       * @type Stage
+       */
+      getColor: function() { return this._color; },
+      setColor: function(color) {
+        this._color = color;
+      },
+
+
       /**
        * @property stage
        * @type Stage
@@ -61,7 +74,9 @@ define([
        * Listener for when the trigger is clicked
        */
       _onClickTrigger: function(event) {
-        var stageObject = this.newStageObject();
+        var stageObject = _.extend(this.newStageObject(), {
+          color: this.color
+        });
         this.stage.addStageObject(stageObject);
         this.stage.update();
       }

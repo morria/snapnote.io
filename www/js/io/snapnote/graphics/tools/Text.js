@@ -104,8 +104,7 @@ define([
       this._editableText.text = text;
       this._editableText.position = text.length + 1;
 
-      this._editableText.shadow =
-        new Easel.Shadow('#fff', 2, 2, 4);
+      this._editableText.shadow = this.shadow;
 
       // Listen for this object being selected and
       // deselected on the Stage
