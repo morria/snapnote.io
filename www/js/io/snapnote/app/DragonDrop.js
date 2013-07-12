@@ -32,8 +32,22 @@ define([
         }, this));
 
         if (dataTransfer.getData('text/uri-list')) {
-          // ...
+          this._onDropUrl(dataTransfer.getData('text/uri-list'), position, event);
         }
+      },
+
+      _onDropUrl: function(url, position, event) {
+        var image = _.extend(new SNImage(url), {
+          x: position.x,
+          y: position.y
+        })
+
+        image.addEventListener('load', _.bind(function() {
+          this.stage.update();
+        }, this));
+
+        // Add it to the stage as it loads
+        this.stage.addStageObject(image);
       },
 
       _onDropFile: function(file, position, event) {
