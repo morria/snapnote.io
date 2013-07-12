@@ -56,9 +56,7 @@ define([
       }
     });
 
-    var initialize =
-        Arrow.prototype.initialize;
-
+    var initialize = Arrow.prototype.initialize;
     Arrow.prototype.initialize = function(dx, dy) {
       initialize.call(this);
 

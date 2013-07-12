@@ -77,10 +77,12 @@ define([
       this._selected = false;
 
       this.content = new Easel.Container();
+      this.content.name = 'stageObject.content';
       this.addChild(this.content);
 
       this.handles = new Easel.Container();
       this.handles.visible = false;
+      this.handles.name = 'stageObject.handles';
       this.addChild(this.handles);
 
       this.content.addEventListener('mousedown', _.bind(function(event) {

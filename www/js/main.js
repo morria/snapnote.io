@@ -13,76 +13,8 @@ require.config({
   }
 });
 
-require([
-    'jquery',
-    'Easel',
-    'io/snapnote/graphics/Stage',
-    'io/snapnote/graphics/StageObject',
-    'io/snapnote/graphics/tools/Rectangle',
-    'io/snapnote/graphics/tools/Arrow',
-    'io/snapnote/graphics/tools/Text',
-    'io/snapnote/graphics/tools/Image'
-    ],
-  function($, Easel, Stage, StageObject, Rectangle, Arrow, Text, Image) {
-
-    var width = $(document).width();
-    var height = $(document).height();
-
-    $('#stage')
-      .on('selectstart', false)
-      .attr('width', width)
-      .attr('height', width)
-
-    var stage = new Stage(width, height);
-
-    // A few Rectangles
-    _.each(_.range(Math.random()*6), function() {
-        stage.addStageObject(
-          _.extend(new Rectangle(30 + Math.random() * 50, 30 + Math.random() * 50), {
-            x: Math.random() * width,
-            y: Math.random() * height
-          }));
-    });
-
-    // A few arrows
-    _.each(_.range(Math.random()*8), function() {
-        var dx = ((Math.random()>0.5)?-1:1)*(30 + Math.random()*100);
-        var dy = ((Math.random()>0.5)?-1:1)*(30 + Math.random()*100);
-        stage.addStageObject(
-          _.extend(new Arrow(dx, dy), {
-            x: Math.random() * width,
-            y: Math.random() * height
-          }));
-    });
-
-    // A few text boxes
-    _.each(_.range(Math.random()*4), function() {
-        stage.addStageObject(
-          _.extend(new Text("Lorem Ipsum\ndolor sit amet"), {
-            x: Math.random() * width,
-            y: Math.random() * height
-          }));
-    });
-
-    // A few images
-    _.each(_.range(Math.random()*4), function() {
-        stage.addStageObject(
-            _.extend(new Image('/img/beautiful/lazyButAlive.jpg'), {
-            x: Math.random() * width,
-            y: Math.random() * height,
-            scale: 0.5
-        }));
-    });
-
-/*
-    stage.addStageObject(
-        _.extend(new Text("Hello\nHello\nHello"), {
-        x: width * 0.3,
-        y: 100
-    }));
-*/
-
-    // Draw it for the first time
-    stage.update();
+require(['io/snapnote/app/SnapNote'],
+  function(SnapNote) {
+    var snapNote = new SnapNote();
   }
 );

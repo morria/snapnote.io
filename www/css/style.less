@@ -1,25 +1,112 @@
+@headerHeight: 50px;
+@footerHeight: 20px;
+@gutter: 10px;
+
+@import 'reset';
+
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 body {
   background-color: #fff;
   padding: 0;
   margin: 0;
+  padding: @headerHeight 0 @footerHeight 0;
+  margin: 0;
+  font-family: Helvetica, Arial, sans;
 }
 
 #content {
-  padding: 0;
-  margin: 0;
+  #stage {
+    padding: 0;
+    margin: 0;
+    background-color: #aaa;
+    display: block;
+    user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+  }
 }
 
-#stage {
+header, footer {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  border-bottom: 1px solid #aaa;
   padding: 0;
-  margin: 0;
-  background-color: #fff;
-  display: block;
 
-  user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-user-drag: none;
+  .container {
+    padding: 0 @gutter;
+    text-align: center;
+    height: @headerHeight;
+    >* {
+      height: @headerHeight;
+      line-height: @headerHeight;
+    }
+  }
+}
+
+header {
+  top: 0;
+  height: @headerHeight;
+  line-height: @headerHeight - 2*@gutter;
+
+  h1 {
+    float: left;
+    display: inline-block;
+  }
+
+  ul {
+    display: inline-block;
+    list-style-type: none;
+    li {
+      display: inline;
+    }
+  }
+
+  #tools {
+  }
+
+  #evergreen {
+    float: right;
+  }
+
+}
+
+footer {
+  bottom: 0;
+  height: @footerHeight;
+}
+
+button {
+  background-color: inherit;
+  border: none;
+  border-radius: 0;
+  background-repeat: no-repeat;
+  background-position: 4px center;
+  display: inline-block;
+  color: #fff;
+  padding: 0 4px;
+  cursor: pointer;
+  font-weight: normal;
+  height: @headerHeight;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.3), inset 0 1px 4px rgba(50,50,50,0.1);
+}
+
+button.active {
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px 0 rgba(255,255,255,0.3),inset 0 1px 5px rgba(0,0,0,0.1);
 }

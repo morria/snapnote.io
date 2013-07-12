@@ -5,6 +5,48 @@ define(['Underscore', 'Easel'],
     }
 
     Stage.prototype = _.extend(new Easel.Stage('stage'), {
+      /**
+       * @property Name
+       * @type String
+       */
+      name: 'Stage',
+
+      /**
+       * @property mouseMoveOutside
+       * @type Boolean
+       */
+      mouseMoveOutside: true,
+
+      /**
+       * @property width
+       * @type Number
+       */
+      getWidth: function() { return this._width; },
+      setWidth: function(width) {
+        this._width = width;
+        this._update();
+      },
+
+      /**
+       * @property height
+       * @type Number
+       */
+      getHeight: function() { return this._height; },
+      setHeight: function(height) {
+        this._height = height;
+        this._update();
+      },
+
+      /**
+       * @property color
+       * @type Number
+       */
+      getColor: function() { return this._color; },
+      setColor: function(color) {
+        this._color = color;
+        this._update();
+      },
+
       deselectAllChildren: function() {
         for (var i=0; i < this.stageObjectChildren.getNumChildren(); i++) {
           this.stageObjectChildren.getChildAt(i).deselect();
@@ -37,26 +79,28 @@ define(['Underscore', 'Easel'],
               return;
           }
         }
+      },
+
+      /**
+       * Redraw the stage
+       */
+      _update: function() {
+        this._background.graphics
+          .clear()
+          .beginFill(this.color)
+          .drawRect(0, 0, this._width, this._height);
       }
     });
 
-    var initialize =
-      Stage.prototype.initialize;
-
+    var initialize = Stage.prototype.initialize;
     Stage.prototype.initialize = function(width, height) {
-      // initialize.call(this);
-      this.name = 'SnapNote';
+      this._width = 0;
+      this._height = 0;
+      this._color = '#fff';
 
-      // Continue tracking the mouse even when it leaves
-      // the canvas
-      this.mouseMoveOutside = true;
-
-      // Add a background that can receive click events
-      var background = new Easel.Shape();
-      background.graphics
-        .beginFill('rgba(255, 255, 255, 0.01)')
-        .drawRect(0, 0, width, height);
-      this.addChild(background);
+      // Add a background for clickability
+      this._background = new Easel.Shape();
+      this.addChild(this._background);
 
       // All stage objects are children of a child so
       // that we can work around the lack of event
@@ -66,7 +110,7 @@ define(['Underscore', 'Easel'],
 
       // Deselect all display objects when the background
       // is clicked
-      background.addEventListener('click', _.bind(function(event) {
+      this._background.addEventListener('click', _.bind(function(event) {
         this.deselectAllChildren();
       }, this));
 
@@ -80,6 +124,19 @@ define(['Underscore', 'Easel'],
           break;
         }
       }, this));
+
+      // Define some programatic getters and setters
+      this.__defineGetter__('width', _.bind(this.getWidth, this));
+      this.__defineSetter__('width', _.bind(this.setWidth, this));
+      this.__defineGetter__('height', _.bind(this.getHeight, this));
+      this.__defineSetter__('height', _.bind(this.setHeight, this));
+      this.__defineGetter__('color', _.bind(this.getColor, this));
+      this.__defineSetter__('color', _.bind(this.setColor, this));
+
+      // Set the dimensions, causing a redraw
+      this.width = width;
+      this.height = height;
+      this.color = '#fff';
     }
 
     return Stage;
