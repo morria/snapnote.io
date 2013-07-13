@@ -31,7 +31,13 @@ define([
           type: 'POST',
           data: this.stage.dataURL,
           success: function(data) {
-            console.log(data);
+            if (!data || !data.success) {
+              return;
+            }
+
+            var id = data.id;
+            var path = id.match(/.{2}/g).join('/')+'.png';
+            location.href='http://images.snapnote.io/'+path;
           }
         });
       }

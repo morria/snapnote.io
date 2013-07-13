@@ -94,6 +94,9 @@ define(['Underscore', 'Easel'],
        * @type String
        */
       getDataURL: function() {
+        // Get rid of any handles and cursors
+        this.deselectAllChildren();
+
         // Get the bounding box around all stage elements
         var box = this.boundingBox;
 
