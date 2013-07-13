@@ -153,3 +153,26 @@ button:hover {
 
   }
 }
+
+.throb {
+  -webkit-animation: pulse 0.6s infinite;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-direction: alternate;
+
+  -moz-animation-name: pulse;
+  -moz-animation-duration: 0.6s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: ease-in-out;
+  -moz-animation-direction: alternate;
+}
+
+@-webkit-keyframes pulse {
+  from { opacity: 0.3; }
+  to { opacity: 1.0; }
+}
+
+@-moz-keyframes pulse {
+  from { opacity: 0.3; }
+  to { opacity: 1.0; }
+}

@@ -29,6 +29,13 @@ define([
       _onClickTrigger: function(event) {
         mixpanel.track('save');
 
+        if (this.stage.stageObjects.getNumChildren() < 1) {
+          // No Children;
+          return;
+        }
+
+        $(event.target).addClass('throb');
+
         $.ajax('/store', {
           type: 'POST',
           data: this.stage.dataURL,

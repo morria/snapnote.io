@@ -58,8 +58,8 @@ define([
 
               image.addEventListener('load', function() {
                 image.set({
-                  x: position.x - (image.width*image.scale/2),
-                  y: position.y - (image.height*image.scale/2)
+                  x: (stage.width/2) - (image.width*image.scale/2),
+                  y: (stage.height/2) - (image.height*image.scale/2)
                 });
                 stage.update();
               });
