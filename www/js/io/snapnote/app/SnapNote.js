@@ -40,7 +40,7 @@ define([
       // Hook up tool buttons
       this._arrowTool = new ArrowTool('#tool-arrow', this._stage, color);
       this._rectangleTool = new RectangleTool('#tool-rectangle', this._stage, color);
-      this._imageTool = new ImageTool('#tool-image', this._stage, color);
+      this._imageTool = new ImageTool('#tool-image-select', '#tool-image', this._stage, color);
       this._textTool = new TextTool('#tool-text', this._stage, color);
 
       // Do an initial rendering of the stage

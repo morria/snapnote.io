@@ -51,7 +51,7 @@ define([
         this.trigger = $(selector);
 
         // Listen for click events on the trigger
-        this.trigger.click(_.bind(this._onClickTrigger, this));
+        this.trigger.click(_.bind(this.onClickTrigger, this));
       },
 
       /**
@@ -70,10 +70,7 @@ define([
         console.error('newStageObject must be overridden', this);
       },
 
-      /**
-       * Listener for when the trigger is clicked
-       */
-      _onClickTrigger: function(event) {
+      addObjectToStage: function() {
         var stageObject = this.newStageObject();
         stageObject = _.extend(stageObject, {
           color: this.color,
@@ -82,6 +79,13 @@ define([
         });
         this.stage.addStageObject(stageObject);
         this.stage.update();
+      },
+
+      /**
+       * Listener for when the trigger is clicked
+       */
+      onClickTrigger: function(event) {
+        this.addObjectToStage();
       }
     };
 
