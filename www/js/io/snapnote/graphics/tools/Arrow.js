@@ -25,7 +25,7 @@ define([
       getDx: function() { return this._dx; },
       setDx: function(dx) {
         this._dx = dx;
-        this.width = Math.abs(dx);
+        this.width = dx;
         this.update();
       },
 
@@ -36,7 +36,7 @@ define([
       getDy: function() { return this._dy; },
       setDy: function(dy) {
         this._dy = dy;
-        this.height = Math.abs(dy);
+        this.height = dy;
         this.update();
       },
 
@@ -52,14 +52,17 @@ define([
         // The angle of the other arrow head
         var a2 = a1 + (Math.PI/2);
 
+        var originX = 0;
+        var originY = 0;
+
         // Draw the arrow
         this._arrow.graphics
           .clear()
           .setStrokeStyle(STROKE_WIDTH, 1)
           .beginStroke(this.color)
-          .moveTo(0, 0).lineTo(this._dx, this._dy)
-          .moveTo(0, 0).lineTo(Math.cos(a1)*30, Math.sin(a1)*30)
-          .moveTo(0, 0).lineTo(Math.cos(a2)*30, Math.sin(a2)*30)
+          .moveTo(originX, originX).lineTo(originX + this.dx, originX + this.dy)
+          .moveTo(originX, originX).lineTo(originX + Math.cos(a1)*30, + originY + Math.sin(a1)*30)
+          .moveTo(originX, originY).lineTo(originX + Math.cos(a2)*30, + originY + Math.sin(a2)*30)
           .endStroke();
 
         this._arrow.shadow = this.shadow;

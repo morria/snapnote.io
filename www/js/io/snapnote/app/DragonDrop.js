@@ -54,12 +54,13 @@ define([
         var reader = new FileReader();
         reader.onload = (function(file, stage) {
             return function(event) {
-              var image = _.extend(new SNImage(event.currentTarget.result), {
-                x: position.x,
-                y: position.y
-              })
+              var image = new SNImage(event.currentTarget.result);
 
               image.addEventListener('load', function() {
+                image.set({
+                  x: position.x - (image.width*image.scale/2),
+                  y: position.y - (image.height*image.scale/2)
+                });
                 stage.update();
               });
 

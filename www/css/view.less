@@ -25,5 +25,26 @@ body {
   }
 }
 
-header, footer {
+header {
+  opacity: 1.0;
+  #make {
+    float: right;
+    line-height: @headerHeight;
+
+    a {
+      display: inline-block;
+      // background-color: #51adee;
+      background-color: #526271;
+      color: #f1f1f1;
+      border-radius: 3px;
+      border: none;
+      padding: 3px 8px;
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    a:hover {
+      color: #fff;
+    }
+  }
 }

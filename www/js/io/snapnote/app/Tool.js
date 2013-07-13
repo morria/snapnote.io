@@ -80,8 +80,8 @@ define([
         var stageObject = this.newStageObject();
         stageObject = _.extend(stageObject, {
           color: this.color,
-          x: (this.stage.width/2) - (stageObject.width/2) + (Math.random() * 50),
-          y: (this.stage.height/3) - (stageObject.height/2) + (Math.random() * 50)
+          x: (this.stage.width/2) - (stageObject.width*stageObject.scale/2) + (Math.random()*50 - 25),
+          y: (this.stage.height/4) - (stageObject.height*stageObject.scale/2) + (Math.random()*50 - 25)
         });
         this.stage.addStageObject(stageObject);
         this.stage.update();

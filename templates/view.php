@@ -14,11 +14,18 @@
         <h1>
           <a class="logo" href="/">snapnote.io</a>
         </h1>
+        <div id="make">
+          <a href="/">
+            Make a Snap Note
+          </a>
+        </div>
       </div>
     </header>
     <div id="content">
       <div id="image">
-        <img src="<?= $url ?>" />
+        <a href="<?= $url ?>" target="_blank">
+          <img src="<?= $url ?>" />
+        </a>
       </div>
     </div>
     <footer>

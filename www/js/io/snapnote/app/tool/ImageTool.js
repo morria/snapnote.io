@@ -44,12 +44,11 @@ define([
                 var image =
                   new Image(event.currentTarget.result);
 
-                image.set({
-                  x: (stage.width/2 - (image.width/2)) + (Math.random()*50),
-                  y: (stage.height/2 - (image.height/2)) + (Math.random()*50)
-                });
-
-                image.addEventListener('load', function() {
+                image.addEventListener('load', function(event) {
+                  image.set({
+                    x: (stage.width/2 - ((image.width * image.scale)/2)) + (Math.random()*50 - 25),
+                    y: (stage.height/2 - ((image.height * image.scale)/2)) + (Math.random()*50 - 25)
+                  });
                   stage.update();
                 });
 

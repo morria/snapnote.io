@@ -29,7 +29,7 @@ class Storage {
 
     public function post() {
       $blob = file_get_contents("php://input");
-      $hash = '0'.substr(str_replace('+', '', base64_encode(md5($blob, true))), 0, 5);
+      $hash = '0'.substr(preg_replace('/[^a-zA-Z0-9]/', '', base64_encode(md5($blob, true))), 0, 5);
       $this->put($hash);
       return $hash;
     }
