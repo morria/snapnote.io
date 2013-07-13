@@ -2,6 +2,9 @@ define([
     'Underscore',
     'Easel'],
   function(_, Easel) {
+
+    var STAGE_PADDING = 10;
+
     var StageObject = function() {
       this.initialize();
     }
@@ -172,24 +175,24 @@ define([
        * the bounds of the stage
        */
       this.content.addEventListener('tick', _.bind(function(event) {
-        if ((this.width * this.scale) > this.stage.width) {
-          this.scale *= (this.stage.width/(this.width * this.scale));
+        if ((this.width*this.scale) > (this.stage.width - (STAGE_PADDING *2))) {
+          this.scale *= (this.stage.width - (STAGE_PADDING*2))/(this.width * this.scale);
         }
 
-        if ((this.height* this.scale) > this.stage.height) {
-          this.scale *= (this.stage.height/(this.height*this.scale));
+        if ((this.height*this.scale) > (this.stage.height - (STAGE_PADDING * 2))) {
+          this.scale *= (this.stage.height - (STAGE_PADDING*2))/(this.height*this.scale);
         }
 
-        if (this.x < 0) {
-          this.x = 0;
-        } else if ((this.x + (this.width * this.scale)) > this.stage.width) {
-          this.x = (this.stage.width - (this.width * this.scale));
+        if (this.x < STAGE_PADDING) {
+          this.x = STAGE_PADDING;
+        } else if ((this.x + (this.width*this.scale)) > (this.stage.width - (STAGE_PADDING*2))) {
+          this.x = ((this.stage.width - (STAGE_PADDING)) - (this.width * this.scale));
         }
 
-        if (this.y < 0) {
-          this.y = 0;
-        } else if ((this.y + (this.height * this.scale)) > this.stage.height) {
-          this.y = (this.stage.height - (this.height * this.scale));
+        if (this.y < STAGE_PADDING) {
+          this.y = STAGE_PADDING;
+        } else if ((this.y + (this.height * this.scale)) > (this.stage.height - (STAGE_PADDING*2))) {
+          this.y = ((this.stage.height - (STAGE_PADDING)) - (this.height * this.scale));
         }
 
       }, this));
