@@ -12,11 +12,7 @@ define([
 
     ImageTool.prototype = _.extend(new Tool(), {
       newStageObject: function() {
-        var image = _.extend(new Image('/img/beautiful/lazyButAlive.jpg'), {
-            x: 250,
-            y: 50,
-            scale: 0.9
-        });
+        var image = new Image('/img/beautiful/lazyButAlive.jpg');
 
         // Update the stage a second time after the image
         // finishes loading

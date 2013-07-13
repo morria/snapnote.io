@@ -11,24 +11,40 @@
   <body>
     <header>
       <div class="container">
-        <h1>snapnote.io</h1>
+        <h1>
+          <a href="/">snapnote.io</a>
+        </h1>
         <ul id="tools">
           <li>
-            <button id="tool-arrow">Arrow</button>
+            <button id="tool-arrow">
+              <span class="icon icon-arrow"></span>
+              <label>Draw Arrow</label>
+            </button>
           </li>
           <li>
-            <button id="tool-text">Text</button>
+            <button id="tool-text">
+              <span class="icon icon-text"></span>
+              <label>Write Text</label>
+            </button>
           </li>
           <li>
-            <button id="tool-rectangle">Rectangle</button>
+            <button id="tool-rectangle">
+              <span class="icon icon-box"></span>
+              <label>Draw Box</label>
+            </button>
           </li>
           <li>
-            <button id="tool-image">Image</button>
+            <button id="tool-image">
+              <span class="icon icon-image"></span>
+              <label>Upload Image</label>
+            </button>
           </li>
         </ul>
         <ul id="evergreen">
           <li>
-            <button id="evergreen-share">Share</button>
+            <button id="tool-share">
+              <span class="icon icon-save"></span>
+            </button>
           </li>
         </ul>
       </div>
@@ -36,6 +52,11 @@
     <div id="dragon-drop-message" style="display: none;">
       <div class="container">
         <label>Upload</label>
+      </div>
+    </div>
+    <div id="blank-slate">
+      <div class="container">
+        <label>Drop An Image To Annotate</label>
       </div>
     </div>
     <div id="content">

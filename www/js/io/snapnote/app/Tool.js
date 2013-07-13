@@ -74,8 +74,11 @@ define([
        * Listener for when the trigger is clicked
        */
       _onClickTrigger: function(event) {
-        var stageObject = _.extend(this.newStageObject(), {
-          color: this.color
+        var stageObject = this.newStageObject();
+        stageObject = _.extend(stageObject, {
+          color: this.color,
+          x: (this.stage.width/2) - (stageObject.width/2) + (Math.random() * 50),
+          y: (this.stage.height/2) - (stageObject.height/2) + (Math.random() * 50)
         });
         this.stage.addStageObject(stageObject);
         this.stage.update();

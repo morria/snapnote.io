@@ -1,0 +1,54 @@
+@font-face {
+	font-family: 'snapnote';
+	src:url('fonts/snapnote.eot');
+	src:url('fonts/snapnote.eot?#iefix') format('embedded-opentype'),
+		url('fonts/snapnote.woff') format('woff'),
+		url('fonts/snapnote.ttf') format('truetype'),
+		url('fonts/snapnote.svg#snapnote') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'snapnote';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"] {
+*/
+.icon-text, .icon-box, .icon-arrow, .icon-image, .icon-save {
+	font-family: 'snapnote';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-text:before {
+	content: "\21";
+}
+.icon-box:before {
+	content: "\22";
+}
+.icon-arrow:before {
+	content: "\23";
+}
+.icon-image:before {
+	content: "\24";
+}
+.icon-save:before {
+	content: "\25";
+}

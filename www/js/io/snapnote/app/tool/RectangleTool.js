@@ -13,10 +13,7 @@ define([
 
     RectangleTool.prototype = _.extend(new Tool(), {
       newStageObject: function() {
-        return _.extend(new Rectangle(100, 80), {
-            x: 120,
-            y: 100,
-          });
+        return new Rectangle(100, 80);
       }
     });
 

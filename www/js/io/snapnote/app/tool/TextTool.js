@@ -13,10 +13,7 @@ define([
 
     TextTool.prototype = _.extend(new Tool(), {
       newStageObject: function() {
-        return _.extend(new Text("Text", '42px Helvetica,Arial', this.color), {
-            x: 350,
-            y: 0,
-          });
+        return new Text("Text", '42px Helvetica,Arial', this.color);
       }
     });
 

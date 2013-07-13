@@ -65,6 +65,12 @@ define(['Underscore', 'Easel'],
           type: 'added',
           stage: this
         });
+
+        this.dispatchEvent({
+          type: 'added',
+          stage: this,
+          stageObject: stageObject
+        });
       },
 
       /**

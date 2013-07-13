@@ -45,6 +45,10 @@ define([
       // Do an initial rendering of the stage
       this._stage.update();
 
+      this._stage.addEventListener('added', _.bind(function(event) {
+        $('#blank-slate').hide();
+      }, this));
+
       new DragonDrop(this._stage);
     }
 
