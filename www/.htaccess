@@ -10,3 +10,6 @@
 </FilesMatch>
 
 AddType application/font-woff .woff
+
+RewriteEngine On
+RewriteRule   ^store$  /store.php   [L]
