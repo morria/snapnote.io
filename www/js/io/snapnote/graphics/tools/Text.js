@@ -90,9 +90,13 @@ define([
       this._text = null;
 
       // Hook up function-based getters and setters
-      this.__defineGetter__('text', _.bind(this.getText, this));
-      this.__defineGetter__('font', _.bind(this.getFont, this));
-      this.__defineSetter__('font', _.bind(this.setFont, this));
+      Object.defineProperty(this, 'text', {
+        get: this.getText.bind(this)
+      });
+      Object.defineProperty(this, 'font', {
+        get: this.getFont.bind(this),
+        set: this.setFont.bind(this)
+      });
 
       // Draw the editable text box
       this._editableText = new EditableText(text, font, color);

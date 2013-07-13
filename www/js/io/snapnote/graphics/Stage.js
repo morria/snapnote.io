@@ -241,14 +241,24 @@ define(['Underscore', 'Easel'],
       }, this));
 
       // Define some programatic getters and setters
-      this.__defineGetter__('boundingBox', _.bind(this.getBoundingBox, this));
-      this.__defineGetter__('width', _.bind(this.getWidth, this));
-      this.__defineSetter__('width', _.bind(this.setWidth, this));
-      this.__defineGetter__('height', _.bind(this.getHeight, this));
-      this.__defineSetter__('height', _.bind(this.setHeight, this));
-      this.__defineGetter__('color', _.bind(this.getColor, this));
-      this.__defineSetter__('color', _.bind(this.setColor, this));
-      this.__defineGetter__('dataURL', _.bind(this.getDataURL, this));
+      Object.defineProperty(this, 'boundingBox', {
+        get: this.getBoundingBox.bind(this)
+      });
+      Object.defineProperty(this, 'width', {
+        get: this.getWidth.bind(this),
+        set: this.setWidth.bind(this)
+      });
+      Object.defineProperty(this, 'height', {
+        get: this.getHeight.bind(this),
+        set: this.setHeight.bind(this)
+      });
+      Object.defineProperty(this, 'color', {
+        get: this.getColor.bind(this),
+        set: this.setColor.bind(this)
+      });
+      Object.defineProperty(this, 'dataURL', {
+        get: this.getDataURL.bind(this)
+      });
 
       // Set the dimensions, causing a redraw
       this.width = width;

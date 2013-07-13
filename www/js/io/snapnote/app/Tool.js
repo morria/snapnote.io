@@ -8,12 +8,18 @@ define([
       this._stage = null;
       this._selector = null;
 
-      this.__defineGetter__('color', _.bind(this.getColor, this));
-      this.__defineSetter__('color', _.bind(this.setColor, this));
-      this.__defineGetter__('stage', _.bind(this.getStage, this));
-      this.__defineSetter__('stage', _.bind(this.setStage, this));
-      this.__defineGetter__('selector', _.bind(this.getSelector, this));
-      this.__defineSetter__('selector', _.bind(this.setSelector, this));
+      Object.defineProperty(this, 'color', {
+        get: this.getColor.bind(this),
+        set: this.setColor.bind(this)
+      });
+      Object.defineProperty(this, 'stage', {
+        get: this.getStage.bind(this),
+        set: this.setStage.bind(this)
+      });
+      Object.defineProperty(this, 'selector', {
+        get: this.getSelector.bind(this),
+        set: this.setSelector.bind(this)
+      });
     }
 
     Tool.prototype = {

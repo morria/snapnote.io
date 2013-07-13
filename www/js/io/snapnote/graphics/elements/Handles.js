@@ -24,7 +24,9 @@ define([
       initialize.call(this);
       this.name = name;
 
-      this.__defineGetter__('target', _.bind(this.getTarget, this));
+      Object.defineProperty(this, 'target', {
+        get: _.bind(this.getTarget, this)
+      });
     }
 
     return Handles;

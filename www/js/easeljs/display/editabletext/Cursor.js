@@ -109,14 +109,22 @@ define(['Underscore', 'Easel'], function(_, Easel) {
     this.addChild(this.glyph);
 
     // Create some functional getters and setters
-    this.__defineGetter__('lineHeight', _.bind(this.getLineHeight, this));
-    this.__defineSetter__('lineHeight', _.bind(this.setLineHeight, this));
-    this.__defineGetter__('strokeWidth', _.bind(this.getStrokeWidth, this));
-    this.__defineSetter__('strokeWidth', _.bind(this.setStrokeWidth, this));
-    this.__defineGetter__('color', _.bind(this.getColor, this));
-    this.__defineSetter__('color', _.bind(this.setColor, this));
-    this.__defineGetter__('visible', _.bind(this.getVisible, this));
-    this.__defineSetter__('visible', _.bind(this.setVisible, this));
+    Object.defineProperty(this, 'lineHeight', {
+      get: this.getLineHeight.bind(this),
+      set: this.setLineHeight.bind(this)
+    });
+    Object.defineProperty(this, 'strokeWidth', {
+      get: this.getStrokeWidth.bind(this),
+      set: this.setStrokeWidth.bind(this)
+    });
+    Object.defineProperty(this, 'color', {
+      get: this.getColor.bind(this),
+      set: this.setColor.bind(this)
+    });
+    Object.defineProperty(this, 'visible', {
+      get: this.getVisible.bind(this),
+      set: this.setVisible.bind(this)
+    });
 
     // Set the passed in parameters to the fully
     // established setters

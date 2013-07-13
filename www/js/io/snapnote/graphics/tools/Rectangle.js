@@ -6,7 +6,7 @@ define([
   function(_, Easel, StageObject, Handles) {
 
     var RADIUS = 2;
-    var STROKE_WIDTH = 8;
+    var STROKE_WIDTH = 6;
 
     var Rectangle = function(width, height, color) {
       this.initialize(width, height, color);
@@ -30,11 +30,6 @@ define([
           .beginStroke(this.color)
           .drawRoundRect(0, 0, this._width, this._height, RADIUS)
           .endStroke();
-          /*
-          .beginFill('rgba(255, 255, 255, 0.01)')
-          .drawRoundRect(0, 0, this._width, this._height, RADIUS);
-          */
-
         this._rectangle.shadow = this.shadow;
       }
     });

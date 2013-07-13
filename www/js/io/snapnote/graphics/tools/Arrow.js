@@ -5,7 +5,7 @@ define([
     'io/snapnote/graphics/tools/arrow/Handles'],
   function(_, Easel, StageObject, Handles) {
 
-    var STROKE_WIDTH = 15;
+    var STROKE_WIDTH = 8;
 
     var Arrow = function(dx, dy, color) {
         this.initialize(dx, dy, color);
@@ -55,7 +55,7 @@ define([
         // Draw the arrow
         this._arrow.graphics
           .clear()
-          .setStrokeStyle(STROKE_WIDTH, 1, 'round')
+          .setStrokeStyle(STROKE_WIDTH, 1)
           .beginStroke(this.color)
           .moveTo(0, 0).lineTo(this._dx, this._dy)
           .moveTo(0, 0).lineTo(Math.cos(a1)*30, Math.sin(a1)*30)
@@ -70,10 +70,14 @@ define([
     Arrow.prototype.initialize = function(dx, dy, color) {
       initialize.call(this);
 
-      this.__defineGetter__('dx', _.bind(this.getDx, this));
-      this.__defineSetter__('dx', _.bind(this.setDx, this));
-      this.__defineGetter__('dy', _.bind(this.getDy, this));
-      this.__defineSetter__('dy', _.bind(this.setDy, this));
+      Object.defineProperty(this, 'dx', {
+        get: this.getDx.bind(this),
+        set: this.setDx.bind(this)
+      });
+      Object.defineProperty(this, 'dy', {
+        get: this.getDy.bind(this),
+        set: this.setDy.bind(this)
+      });
 
       this._arrow = new Easel.Shape();
       this.content.addChild(this._arrow);

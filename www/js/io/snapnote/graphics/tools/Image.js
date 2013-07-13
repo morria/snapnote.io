@@ -89,13 +89,9 @@ define([
 
       this._url = url;
 
-      this.__defineGetter__('url', _.bind(this.getUrl, this));
-      this.__defineGetter__('width', _.bind(this.getWidth, this));
-      this.__defineSetter__('width', _.bind(this.setWidth, this));
-      this.__defineGetter__('height', _.bind(this.getHeight, this));
-      this.__defineSetter__('height', _.bind(this.setHeight, this));
-      this.__defineGetter__('scale', _.bind(this.getScale, this));
-      this.__defineSetter__('scale', _.bind(this.setScale, this));
+      Object.defineProperty(this, 'url', {
+        get: this.getUrl.bind(this)
+      });
 
       this.addEventListener('load', _.bind(this._onLoad, this));
 

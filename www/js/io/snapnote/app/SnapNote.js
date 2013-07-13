@@ -20,12 +20,20 @@ define([
       this._canvas.on('selectstart', false);
 
       // Define some programatic getters and setters
-      this.__defineGetter__('width', _.bind(this.getWidth, this));
-      this.__defineSetter__('width', _.bind(this.setWidth, this));
-      this.__defineGetter__('height', _.bind(this.getHeight, this));
-      this.__defineSetter__('height', _.bind(this.setHeight, this));
-      this.__defineGetter__('documentWidth', _.bind(this.getDocumentWidth, this));
-      this.__defineGetter__('documentHeight', _.bind(this.getDocumentHeight, this));
+      Object.defineProperty(this, 'width', {
+        get: this.getWidth.bind(this),
+        set: this.setWidth.bind(this)
+      })
+      Object.defineProperty(this, 'height', {
+        get: this.getHeight.bind(this),
+        set: this.setHeight.bind(this)
+      });
+      Object.defineProperty(this, 'documentWidth', {
+        get: this.getDocumentWidth.bind(this)
+      });
+      Object.defineProperty(this, 'documentHeight', {
+        get: this.getDocumentHeight.bind(this)
+      });
 
       // When the browser dimensions change, update the
       // stage dimensions

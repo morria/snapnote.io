@@ -149,19 +149,33 @@ define([
       this._scale = 1.0;
       this._selected = false;
 
-      this.__defineGetter__('width', _.bind(this.getWidth, this));
-      this.__defineSetter__('width', _.bind(this.setWidth, this));
-      this.__defineGetter__('height', _.bind(this.getHeight, this));
-      this.__defineSetter__('height', _.bind(this.setHeight, this));
-      this.__defineGetter__('color', _.bind(this.getColor, this));
-      this.__defineSetter__('color', _.bind(this.setColor, this));
-      this.__defineGetter__('shadowColor', _.bind(this.getShadowColor, this));
-      this.__defineSetter__('shadowColor', _.bind(this.setShadowColor, this));
-      this.__defineGetter__('scale', _.bind(this.getScale, this));
-      this.__defineSetter__('scale', _.bind(this.setScale, this));
-      this.__defineGetter__('selected', _.bind(this.getSelected, this));
-      this.__defineSetter__('selected', _.bind(this.setSelected, this));
-      this.__defineGetter__('stage', _.bind(this.getStage, this));
+      Object.defineProperty(this, 'width', {
+        get: this.getWidth.bind(this),
+        set: this.setWidth.bind(this)
+      });
+      Object.defineProperty(this, 'height', {
+        get: this.getHeight.bind(this),
+        set: this.setHeight.bind(this)
+      });
+      Object.defineProperty(this, 'color', {
+        get: this.getColor.bind(this),
+        set: this.setColor.bind(this)
+      });
+      Object.defineProperty(this, 'shadowColor', {
+        get: this.getShadowColor.bind(this),
+        set: this.setShadowColor.bind(this)
+      });
+      Object.defineProperty(this, 'scale', {
+        get: this.getScale.bind(this),
+        set: this.setScale.bind(this)
+      });
+      Object.defineProperty(this, 'selected', {
+        get: this.getSelected.bind(this),
+        set: this.setSelected.bind(this)
+      });
+      Object.defineProperty(this, 'stage', {
+        get: this.getStage.bind(this)
+      });
 
       this.content = new Easel.Container();
       this.content.name = 'stageObject.content';

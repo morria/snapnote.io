@@ -312,19 +312,35 @@ define([
     this.addChild(this._textDisplayObject);
 
     // Hook up function-based getters and setters
-    this.__defineGetter__('text', _.bind(this.getText, this));
-    this.__defineSetter__('text', _.bind(this.setText, this));
-    this.__defineGetter__('editable', _.bind(this.getEditable, this));
-    this.__defineSetter__('editable', _.bind(this.setEditable, this));
-    this.__defineGetter__('width', _.bind(this.getWidth, this));
-    this.__defineGetter__('height', _.bind(this.getHeight, this));
-    this.__defineGetter__('lineHeight', _.bind(this.getLineHeight, this));
-    this.__defineGetter__('font', _.bind(this.getFont, this));
-    this.__defineSetter__('font', _.bind(this.setFont, this));
-    this.__defineGetter__('color', _.bind(this.getColor, this));
-    this.__defineSetter__('color', _.bind(this.setColor, this));
-    this.__defineGetter__('position', _.bind(this.getPosition, this));
-    this.__defineSetter__('position', _.bind(this.setPosition, this));
+    Object.defineProperty(this, 'text', {
+      get: this.getText.bind(this),
+      set: this.setText.bind(this)
+    });
+    Object.defineProperty(this, 'editable', {
+      get: this.getEditable.bind(this),
+      set: this.setEditable.bind(this)
+    });
+    Object.defineProperty(this, 'width', {
+      get: this.getWidth.bind(this),
+    });
+    Object.defineProperty(this, 'height', {
+      get: this.getHeight.bind(this),
+    });
+    Object.defineProperty(this, 'lineHeight', {
+      get: this.getLineHeight.bind(this),
+    });
+    Object.defineProperty(this, 'font', {
+      get: this.getFont.bind(this),
+      set: this.setFont.bind(this)
+    });
+    Object.defineProperty(this, 'color', {
+      get: this.getColor.bind(this),
+      set: this.setColor.bind(this)
+    });
+    Object.defineProperty(this, 'position', {
+      get: this.getPosition.bind(this),
+      set: this.setPosition.bind(this)
+    });
 
     // With everything established, update our state
     // given any initialization parameters
