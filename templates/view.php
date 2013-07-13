@@ -9,7 +9,11 @@
     <script type="text/javascript" src="js/vendor/less-1.3.3.min.js"></script>
   </head>
   <body>
-    <img src="<?= $url ?>" />
+    <div id="content">
+      <div id="image">
+        <img src="<?= $url ?>" />
+      </div>
+    </div>
     <script src="js/vendor/require-jquery.js" data-main="js/view"></script>
   </body>
 </html>
