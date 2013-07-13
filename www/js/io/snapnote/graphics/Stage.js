@@ -18,11 +18,44 @@ define(['Underscore', 'Easel'],
       mouseMoveOutside: true,
 
       /**
+       * @property boundingBox
+       * @type Number
+       */
+      getBoundingBox: function() {
+        var box = {
+          minX: 0, minY: 0,
+          maxX: 0, maxY: 0
+        }
+
+        if (this.stageObjects.getNumChildren() > 0) {
+          box.minX = box.minY = Number.MAX_VALUE;
+        }
+
+        _.each(this.stageObjects.children, function(stageObject, i) {
+          box.minX = Math.min(stageObject.x, box.minX);
+          box.minY = Math.min(stageObject.y, box.minY);
+          box.maxX = Math.max(stageObject.x + (stageObject.width * stageObject.scale), box.maxX);
+          box.maxY = Math.max(stageObject.y + (stageObject.height * stageObject.scale), box.maxY);
+        });
+
+        return box;
+      },
+
+      /**
        * @property width
        * @type Number
        */
       getWidth: function() { return this._width; },
       setWidth: function(width) {
+        var scale = width/this.width;
+        if (!isNaN(scale)) {
+          var box = this.boundingBox;
+          var dx = (box.minX*scale) - box.minX;
+          _.each(this.stageObjects.children, function(stageObject, i) {
+            stageObject.x += dx;
+          });
+        }
+
         this._width = width;
         this._update();
       },
@@ -33,6 +66,15 @@ define(['Underscore', 'Easel'],
        */
       getHeight: function() { return this._height; },
       setHeight: function(height) {
+        var scale = height/this.height;
+        if (!isNaN(scale)) {
+          var box = this.boundingBox;
+          var dy = (box.minY*scale) - box.minY;
+          _.each(this.stageObjects.children, function(stageObject, i) {
+            stageObject.y += dy;
+          });
+        }
+
         this._height = height;
         this._update();
       },
@@ -158,6 +200,7 @@ define(['Underscore', 'Easel'],
       }, this));
 
       // Define some programatic getters and setters
+      this.__defineGetter__('boundingBox', _.bind(this.getBoundingBox, this));
       this.__defineGetter__('width', _.bind(this.getWidth, this));
       this.__defineSetter__('width', _.bind(this.setWidth, this));
       this.__defineGetter__('height', _.bind(this.getHeight, this));

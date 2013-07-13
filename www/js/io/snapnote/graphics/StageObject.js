@@ -167,6 +167,36 @@ define([
       this.handles.name = 'stageObject.handles';
       this.addChild(this.handles);
 
+      /**
+       * Before rendering, make sure the object is within
+       * the bounds of the stage
+       */
+      this.content.addEventListener('tick', _.bind(function(event) {
+        if ((this.width * this.scale) > this.stage.width) {
+          this.scale *= (this.stage.width/(this.width * this.scale));
+        }
+
+        if ((this.height* this.scale) > this.stage.height) {
+          this.scale *= (this.stage.height/(this.height*this.scale));
+        }
+
+        if (this.x < 0) {
+          this.x = 0;
+        } else if ((this.x + (this.width * this.scale)) > this.stage.width) {
+          this.x = (this.stage.width - (this.width * this.scale));
+        }
+
+        if (this.y < 0) {
+          this.y = 0;
+        } else if ((this.y + (this.height * this.scale)) > this.stage.height) {
+          this.y = (this.stage.height - (this.height * this.scale));
+        }
+
+      }, this));
+
+      /**
+       * Enable the dragging of stage objects
+       */
       this.content.addEventListener('mousedown', _.bind(function(event) {
         this.selected = true;
 

@@ -64,17 +64,17 @@ define([
       this.addChild(seHandle);
 
       this.addEventListener('tick', _.bind(function(event) {
-        nwHandle.x = -Math.round(nwHandle.width/2);
-        nwHandle.y = -Math.round(nwHandle.height/2);
+        nwHandle.x = 0;
+        nwHandle.y = 0;
 
-        neHandle.x = (this.target.width - Math.round(neHandle.width/2)) * this.target.scale;
-        neHandle.y = -Math.round(neHandle.height/2);
+        neHandle.x = (this.target.width * this.target.scale) - neHandle.width;
+        neHandle.y = 0;
 
-        swHandle.x = -Math.round(swHandle.width/2);
-        swHandle.y = (this.target.height - Math.round(swHandle.height/2)) * this.target.scale;
+        swHandle.x = 0;
+        swHandle.y = (this.target.height * this.target.scale) - swHandle.height;
 
-        seHandle.x = (this.target.width - Math.round(seHandle.width/2)) * this.target.scale;
-        seHandle.y = (this.target.height - Math.round(seHandle.height/2)) * this.target.scale;
+        seHandle.x = (this.target.width * this.target.scale) - seHandle.width;
+        seHandle.y = (this.target.height * this.target.scale) - seHandle.height;
       }, this));
     }
 

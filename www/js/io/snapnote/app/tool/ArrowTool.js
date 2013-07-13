@@ -13,7 +13,7 @@ define([
 
     ArrowTool.prototype = _.extend(new Tool(), {
       newStageObject: function() {
-        return new Arrow(40, 100);
+        return new Arrow(-60, 60);
       }
     });
 
