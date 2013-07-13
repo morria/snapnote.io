@@ -36,8 +36,8 @@ define([
             }
 
             var id = data.id;
-            var path = id.match(/.{2}/g).join('/')+'.png';
-            location.href='http://images.snapnote.io/'+path;
+            // var path = id.match(/.{2}/g).join('/')+'.png';
+            location.href = '/' + id;
           }
         });
       }

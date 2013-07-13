@@ -10,3 +10,6 @@
 </FilesMatch>
 
 AddType application/font-woff .woff
+
+RewriteEngine On
+RewriteRule   ^s(.*)$    /?$1           [L,NC]
