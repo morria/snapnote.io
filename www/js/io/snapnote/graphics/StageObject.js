@@ -132,7 +132,9 @@ define([
         }, this);
 
         // Redraw the stage with my handles gone
-        this.getStage().update();
+        if (this.getStage()) {
+          this.getStage().update();
+        }
       }
 
     });

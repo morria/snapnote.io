@@ -50,6 +50,15 @@ define([
         $('#blank-slate').hide();
       }, this));
 
+      this._stage.addEventListener('remove', _.bind(function(event) {
+        // Note: this event fires pre-removal, so having
+        // a single child means it'll be empty
+        if (this._stage.stageObjects.getNumChildren() < 2) {
+          $('#blank-slate').show();
+        }
+      }, this));
+
+
       new DragonDrop(this._stage);
       new Save('#tool-share', this._stage);
     }

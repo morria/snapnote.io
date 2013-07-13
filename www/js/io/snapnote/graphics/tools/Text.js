@@ -54,6 +54,10 @@ define([
        */
       _onDeselect: function(event) {
         this._editableText.editable = false;
+
+        if (this._editableText.text == '') {
+          this.stage.removeStageObject(this);
+        }
       },
 
       /**

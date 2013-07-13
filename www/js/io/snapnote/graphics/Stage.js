@@ -174,9 +174,22 @@ define(['Underscore', 'Easel'],
           return;
         }
 
+        this.removeStageObject(stageObject);
+      },
+
+      /**
+       * Remove the given stage object
+       */
+      removeStageObject: function(stageObject) {
         stageObject.dispatchEvent({
           type: 'remove'
         }, stageObject);
+
+        this.dispatchEvent({
+          type: 'remove',
+          stage: this,
+          stageObject: stageObject
+        });
 
         // remove it from the stage
         this.stageObjects.removeChild(stageObject);
