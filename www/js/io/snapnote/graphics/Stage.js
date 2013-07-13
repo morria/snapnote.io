@@ -90,6 +90,31 @@ define(['Underscore', 'Easel'],
       },
 
       /**
+       * @property dataURL
+       * @type String
+       */
+      getDataURL: function() {
+        // Get the bounding box around all stage elements
+        var box = this.boundingBox;
+
+        var imageData =
+          this.canvas.getContext('2d')
+          .getImageData(box.minX, box.minY,
+            box.maxX - box.minX,
+            box.maxY - box.minY);
+
+        var newCanvas =
+          $('<canvas />')
+            .attr('width', box.maxX - box.minX)
+            .attr('height', box.maxY - box.minY).get(0);
+
+        var newContext = newCanvas.getContext('2d');
+        newContext.putImageData(imageData, 0, 0);
+
+        return newCanvas.toDataURL('image/png');
+      },
+
+      /**
        * Cause no objects on the stage to be in a
        * selected state
        */
@@ -207,6 +232,7 @@ define(['Underscore', 'Easel'],
       this.__defineSetter__('height', _.bind(this.setHeight, this));
       this.__defineGetter__('color', _.bind(this.getColor, this));
       this.__defineSetter__('color', _.bind(this.setColor, this));
+      this.__defineGetter__('dataURL', _.bind(this.getDataURL, this));
 
       // Set the dimensions, causing a redraw
       this.width = width;

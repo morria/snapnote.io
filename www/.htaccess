@@ -9,4 +9,4 @@
   </ifModule>
 </FilesMatch>
 
-AddType font/woff .woff
+AddType application/font-woff .woff

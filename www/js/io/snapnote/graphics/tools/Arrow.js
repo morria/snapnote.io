@@ -25,7 +25,7 @@ define([
       getDx: function() { return this._dx; },
       setDx: function(dx) {
         this._dx = dx;
-        this.width = dx;
+        this.width = Math.abs(dx);
         this.update();
       },
 
@@ -36,7 +36,7 @@ define([
       getDy: function() { return this._dy; },
       setDy: function(dy) {
         this._dy = dy;
-        this.height = dy;
+        this.height = Math.abs(dy);
         this.update();
       },
 
