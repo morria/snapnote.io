@@ -29,7 +29,7 @@ class Storage {
 
     public function post() {
       $blob = file_get_contents("php://input");
-      $hash = 's'.substr(base64_encode(md5($blob, true)), 0, 5);
+      $hash = '0'.substr(base64_encode(md5($blob, true)), 0, 5);
       $this->put($hash);
       return $hash;
     }
@@ -58,7 +58,7 @@ class Storage {
             $this->amazonS3->create_object(self::BUCKET_NAME,
                 $filename,
                 array('body' => $blob,
-                      'contentType' => 'application/png'));
+                      'contentType' => 'image/png'));
 
         if($response->status != 200) {
             $this->reply($response->status,

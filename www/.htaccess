@@ -12,4 +12,5 @@
 AddType application/font-woff .woff
 
 RewriteEngine On
-RewriteRule   ^s(.*)$    /?$1           [L,NC]
+RewriteRule   ^store$      /store.php                [L,NC,QSA]
+RewriteRule   ^(0.*)$      /view.php?id=$1           [L,NC,QSA]
