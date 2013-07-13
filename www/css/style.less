@@ -12,10 +12,10 @@
 @import 'definitions';
 
 html {
-  height: 100%;
   padding: 0;
   margin: 0;
   min-width: 730px;
+  height: 100%;
 }
 
 body {
@@ -85,7 +85,6 @@ header {
 
     a {
       color: #eee;
-      color: @color;
       text-shadow: 1px 2px 1px #000;
       letter-spacing: 0.2em;
       font-weight: 100;
@@ -102,6 +101,9 @@ header {
   }
 
   #tools {
+    .icon {
+      color: @color;
+    }
   }
 
   #evergreen {
@@ -109,12 +111,13 @@ header {
     right: @gutter;
 
     #tool-share {
-      .icon {
-        font-size: 22px;
-      }
+        padding-right: @gutter;
+        .icon {
+          font-size: 22px;
+          height: @headerHeight - 3*@gutter;
+        }
     }
   }
-
 }
 
 footer {
@@ -122,21 +125,11 @@ footer {
   height: @footerHeight;
 }
 
-#tools {
-  li {
-    margin-left: 10px;
-  }
-
-  li:first-child {
-    margin-left: 0;
-  }
-}
-
 button {
   height: @headerHeight;
   border: none;
   display: inline-block;
-  padding: 0 5px;
+  padding: 0 5px 0 10px;
   cursor: pointer;
   text-align: left;
   background-color: inherit;
@@ -144,9 +137,12 @@ button {
 
   .icon {
     font-size: 30px;
-    margin-right: 5px;
     text-shadow: 1px 2px 2px #000;
-    color: @color;
+    display: inline-block;
+    width: 35px;
+    height: @headerHeight - (2*@gutter);
+    padding: 0;
+    margin: 0;
   }
 
   label {
@@ -204,9 +200,8 @@ button:hover {
 
 #blank-slate {
   position: absolute;
-  top: 40%;
+  top: 300px;
   width: 100%;
-  height: 100%;
   pointer-events: none;
 
   .container {
@@ -219,7 +214,7 @@ button:hover {
       text-shadow: 1px 2px 1px #666;
       color: #000;
       font-weight: 600;
-      opacity: 0.4;
+      opacity: 0.3;
     }
 
   }
