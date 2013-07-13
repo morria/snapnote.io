@@ -1,6 +1,29 @@
+@headerHeight: 35px;
+
+@import 'reset';
+@import 'font.css';
+@import 'definitions';
 @import 'common';
 
+body {
+  position: relative;
+}
+
 #content {
-  margin-top: 30px;
+  padding: @gutter;
   text-align: center;
+
+  #image {
+    display: inline-block;
+
+    img {
+      width: auto;
+      height: auto;
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+header, footer {
 }
