@@ -27,7 +27,13 @@ define([
        * Listener for when 'Save' is clicked on
        */
       _onClickTrigger: function(event) {
-        location.href = this.stage.dataURL;
+        $.ajax('http://api.snapnote.io/store', {
+          type: 'POST',
+          data: this.stage.dataURL,
+          success: function(data) {
+            console.log(data);
+          }
+        });
       }
     };
 

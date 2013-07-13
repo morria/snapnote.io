@@ -1,0 +1,5 @@
+Header set Access-Control-Allow-Methods "POST"
+Header set Access-Control-Allow-Origin "http://dev.snapnote.io"
+
+RewriteEngine On
+RewriteRule   ^store$  /store.php   [L]
