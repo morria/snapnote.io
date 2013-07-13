@@ -12,6 +12,12 @@ define([
     }
 
     RectangleTool.prototype = _.extend(new Tool(), {
+      /**
+       * @property eventName
+       * @type String
+       */
+      eventName: 'rectangle_add',
+
       newStageObject: function() {
         return new Rectangle(100, 80);
       }

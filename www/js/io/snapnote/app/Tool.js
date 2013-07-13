@@ -85,6 +85,7 @@ define([
        * Listener for when the trigger is clicked
        */
       onClickTrigger: function(event) {
+        mixpanel.track(this.eventName);
         this.addObjectToStage();
       }
     };

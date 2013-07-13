@@ -24,11 +24,18 @@ define([
     }
 
     ImageTool.prototype = _.extend(new Tool(), {
+      /**
+       * @property eventName
+       * @type String
+       */
+      eventName: 'image_add',
+
       onClickTrigger: function(event) {
-        // Do nothing
+        mixpanel.track(this.eventName + '_select');
       },
 
       _onFileSelectorChange: function(event) {
+        mixpanel.track(this.eventName + '');
         var files = $(event.target).prop('files');
         _.each(files, _.bind(function(file) {
           var reader = new FileReader();

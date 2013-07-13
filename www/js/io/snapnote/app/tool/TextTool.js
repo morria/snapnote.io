@@ -12,6 +12,12 @@ define([
     }
 
     TextTool.prototype = _.extend(new Tool(), {
+      /**
+       * @property eventName
+       * @type String
+       */
+      eventName: 'text_add',
+
       newStageObject: function() {
         return new Text("Text", '42px Helvetica,Arial', this.color);
       }

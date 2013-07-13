@@ -27,6 +27,8 @@ define([
        * Listener for when 'Save' is clicked on
        */
       _onClickTrigger: function(event) {
+        mixpanel.track('save');
+
         $.ajax('/store', {
           type: 'POST',
           data: this.stage.dataURL,
