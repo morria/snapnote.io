@@ -181,7 +181,6 @@ define(['Underscore', 'Easel'],
       getSelectedObject: function() {
         return _.find(this.stageObjects.children,
             function(stageObject) {
-              console.log(stageObject);
               return stageObject.selected;
             });
       },
