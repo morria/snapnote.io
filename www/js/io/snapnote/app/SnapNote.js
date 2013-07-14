@@ -122,7 +122,7 @@ define([
         this._toolShadowColor = color;
         this._arrowTool.shadowColor = color;
         this._rectangleTool.shadowColor = color;
-        this._imageTool.shadowColor = color;
+        // this._imageTool.shadowColor = color;
         this._textTool.shadowColor = color;
 
         var selectedObject = this._stage.selectedObject;
@@ -177,6 +177,7 @@ define([
       _onResize: function(event) {
         this.width = this.documentWidth;
         this.height = this.documentHeight;
+        mixpanel.track('resize_screen');
       }
     };
 

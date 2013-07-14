@@ -12,6 +12,7 @@ define([
 
     Paste.prototype = {
       _onPaste: function(event) {
+        mixpanel.track('paste_file');
         var clipboardData = event.originalEvent.clipboardData;
         var file = clipboardData.items[0].getAsFile();
         var reader = new FileReader();

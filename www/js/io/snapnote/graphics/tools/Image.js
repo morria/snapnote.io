@@ -54,6 +54,14 @@ define([
         this.content.scaleY = Math.max(scale, 0);
       },
 
+      /**
+       * Don't allow shadows on images
+       */
+      shadow: null,
+      setShadowColor: function(color) {
+        this._shadowColor = color;
+      },
+
       update: function() {
         // Nothing to do
       },

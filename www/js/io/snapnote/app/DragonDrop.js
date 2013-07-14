@@ -51,6 +51,7 @@ define([
       },
 
       _onDropFile: function(file, position, event) {
+        mixpanel.track('drop_file');
         var reader = new FileReader();
         reader.onload = (function(file, stage) {
             return function(event) {
