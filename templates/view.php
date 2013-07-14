@@ -20,7 +20,7 @@
     <link rel="stylesheet/less"
       href="css/mobile/view.less"
       type="text/css"
-      media="screen and (max-width: 680px)" />
+      media="screen and (max-width: 530px)" />
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-capable"
