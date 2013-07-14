@@ -15,17 +15,20 @@ require.config({
 
 require(['jquery', 'Underscore'],
   function($, _) {
-      // When the browser dimensions change, update the
-      // stage dimensions
-      $(window).resize(_.bind(onResize, this));
-
       $img = $('#image img');
       $img.css('max-height', window.innerHeight - 90);
-      $img.css('max-width', window.innerWidth - 90);
+      $img.css('max-width', window.innerWidth - 20);
 
-      function onResize(event) {
-        $img.css('max-height', window.innerHeight - 90);
-        $img.css('max-width', window.innerWidth - 90);
+      if (!/mobile/i.test(navigator.userAgent)) {
+        // When the browser dimensions change, update the
+        // stage dimensions
+        $(window).resize(_.bind(onResize, this));
+
+
+        function onResize(event) {
+          $img.css('max-height', window.innerHeight - 90);
+          $img.css('max-width', window.innerWidth - 20);
+        }
       }
 
       // Highlight (select) the URL for easy copying
@@ -43,5 +46,8 @@ require(['jquery', 'Underscore'],
         selection.removeAllRanges();
         selection.addRange(range);
       }
+
+      // Get rid of the URL bar on iOS
+      /mobile/i.test(navigator.userAgent) && window.scrollTo(0, 1);
   }
 );

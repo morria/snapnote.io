@@ -4,8 +4,27 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-    <title>snapnote.io</title>
-    <link rel="stylesheet/less" href="css/view.less" />
+    <title>snapnote.io - Annotate and Share Images and Screenshots</title>
+    <meta name="description" content="snapnote.io - Annotate and Share Images and Screenshots" />
+    <meta name="viewport" content="width=device-width" />
+    <meta property="og:title" content="snapnote.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="snapnote.io - Annotate and Share Image and Screenshots" />
+    <meta property="og:site_name" content="snapnote.io" />
+    <meta property="fb:admins" content="209372" />
+    <meta property="og:image" content="" />
+    <meta itemprop="name" content="snapnote.io" />
+    <meta itemprop="description" content="snapnote.io - Annotate and Share Images and Screenshots" />
+    <link rel="stylesheet/less"
+       href="css/view.less" />
+    <link rel="stylesheet/less"
+      href="css/mobile/view.less"
+      type="text/css"
+      media="screen and (max-width: 680px)" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable"
+      content="yes" />
     <script type="text/javascript" src="js/vendor/less-1.3.3.min.js"></script>
   </head>
   <body>
@@ -15,11 +34,16 @@
           <a class="logo" href="/">snapnote.io</a>
         </h1>
         <div id="share">
-          <span class="icon icon-send"></span><span id="share-url"><?= $share_url ?></span>
+          <span class="icon icon-send"></span>
+          <span id="share-url">
+            <a href="<?= $share_url ?>">
+              <?= $share_url ?>
+            </a>
+          </span>
         </div>
         <div id="make">
           <a href="/">
-            Make a Snapnote
+            New Snapnote
           </a>
         </div>
       </div>
