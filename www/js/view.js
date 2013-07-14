@@ -31,7 +31,7 @@ require(['jquery', 'Underscore'],
       // Highlight (select) the URL for easy copying
       // note: jQuery.select() only works on input
       // and textarea elements
-      var element = $('#share').get(0);
+      var element = $('#share-url').get(0);
       if (document.body.createTextRange) {
         var range = document.body.createTextRange();
         range.moveToElementText(element);

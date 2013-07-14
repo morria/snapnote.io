@@ -15,7 +15,7 @@
           <a class="logo" href="/">snapnote.io</a>
         </h1>
         <div id="share">
-          <?= $share_url ?>
+          <span class="icon icon-send"></span><span id="share-url"><?= $share_url ?></span>
         </div>
         <div id="make">
           <a href="/">
