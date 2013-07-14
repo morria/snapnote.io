@@ -51,11 +51,11 @@ define([
       getShadowColor: function() { return this._shadowColor; },
       setShadowColor: function(color) {
         this._shadowColor = color;
-        this.shadow = new Easel.Shadow(color, 2, 2, 1),
+        this.shadow = new Easel.Shadow(color, 1, 1, 1),
         this.update();
       },
 
-      shadow: new Easel.Shadow('#000', 1, 2, 1),
+      shadow: new Easel.Shadow('#000', 1, 1, 1),
 
       /**
        * @property scale

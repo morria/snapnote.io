@@ -112,8 +112,6 @@ define([
       this._editableText.text = text;
       this._editableText.position = text.length + 1;
 
-      this._editableText.shadow = this.shadow;
-
       // Listen for this object being selected and
       // deselected on the Stage
       this.addEventListener('select', _.bind(this._onSelect, this));

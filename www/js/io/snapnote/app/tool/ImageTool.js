@@ -6,8 +6,8 @@ define([
   ],
   function($, _, Tool, Image) {
 
-    var ImageTool = function(fileSelector, triggerSelector, stage) {
-      this.selector = fileSelector;
+    var ImageTool = function(triggerSelector, fileSelector, stage) {
+      this.selector = triggerSelector;
       this.stage = stage;
 
       var $fileSelector = $(fileSelector);

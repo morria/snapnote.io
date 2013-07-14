@@ -90,6 +90,17 @@ define(['Underscore', 'Easel'],
       },
 
       /**
+       * @property color
+       * @type Number
+       */
+      getToolColor: function() { return this._toolColor; },
+      setToolColor: function(color) {
+        this._toolColor = color;
+        this._update();
+      },
+
+
+      /**
        * @property dataURL
        * @type String
        */

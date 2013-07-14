@@ -169,6 +169,17 @@ define([
     },
 
     /**
+     * @property shadow
+     * @type String
+     */
+    getShadow: function() { return this._textDisplayObject.shadow; },
+    setShadow: function(shadow) {
+      this._cursor.shadow = shadow;
+      this._textDisplayObject.shadow = shadow;
+    },
+
+
+    /**
      * Enable the editing of the text
      *
      * @return void
@@ -337,6 +348,11 @@ define([
       get: this.getColor.bind(this),
       set: this.setColor.bind(this)
     });
+    Object.defineProperty(this, 'shadow', {
+      get: this.getShadow.bind(this),
+      set: this.setShadow.bind(this)
+    });
+
     Object.defineProperty(this, 'position', {
       get: this.getPosition.bind(this),
       set: this.setPosition.bind(this)

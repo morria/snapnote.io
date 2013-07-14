@@ -5,12 +5,17 @@ define([
   function($, _) {
     var Tool = function() {
       this._color = '#000';
+      this._shadowColor = '#fff';
       this._stage = null;
       this._selector = null;
 
       Object.defineProperty(this, 'color', {
         get: this.getColor.bind(this),
         set: this.setColor.bind(this)
+      });
+      Object.defineProperty(this, 'shadowColor', {
+        get: this.getShadowColor.bind(this),
+        set: this.setShadowColor.bind(this)
       });
       Object.defineProperty(this, 'stage', {
         get: this.getStage.bind(this),
@@ -30,8 +35,19 @@ define([
       getColor: function() { return this._color; },
       setColor: function(color) {
         this._color = color;
+        this.trigger.find('.icon').css('color', color);
       },
 
+      /**
+       * @property stage
+       * @type Stage
+       */
+      getShadowColor: function() { return this._shadowColor; },
+      setShadowColor: function(color) {
+        this._shadowColor = color;
+        this.trigger.find('.icon').css('text-shadow',
+          '1px 2px 1px ' + color);
+      },
 
       /**
        * @property stage
@@ -80,6 +96,7 @@ define([
         var stageObject = this.newStageObject();
         stageObject = _.extend(stageObject, {
           color: this.color,
+          shadowColor: this.shadowColor,
           x: (this.stage.width/2) - (stageObject.width*stageObject.scale/2) + (Math.random()*50 - 25),
           y: (this.stage.height/4) - (stageObject.height*stageObject.scale/2) + (Math.random()*50 - 25)
         });

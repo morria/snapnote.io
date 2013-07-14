@@ -5,25 +5,36 @@ define([
     'io/snapnote/app/DragonDrop',
     'io/snapnote/app/Save',
     'io/snapnote/app/tool/ArrowTool',
+    'io/snapnote/app/tool/ColorTool',
     'io/snapnote/app/tool/ImageTool',
     'io/snapnote/app/tool/RectangleTool',
     'io/snapnote/app/tool/TextTool',
   ],
-  function($, _, Stage, DragonDrop, Save, ArrowTool, ImageTool, RectangleTool, TextTool) {
+  function($, _, Stage, DragonDrop, Save, ArrowTool, ColorTool, ImageTool, RectangleTool, TextTool) {
 
     var SnapNote = function() {
       this._canvas = $('#' + this.canvasId);
       this._stage = new Stage();
       this._stage.color = 'rgba(255, 255, 255, 0.01)';
+      this._toolColor = null;
+      this._toolShadowColor = null;
 
       // Inhibit selection/highlighting on the canvas
       this._canvas.on('selectstart', false);
 
       // Define some programatic getters and setters
+      Object.defineProperty(this, 'toolColor', {
+        get: this.getToolColor.bind(this),
+        set: this.setToolColor.bind(this)
+      });
+      Object.defineProperty(this, 'toolShadowColor', {
+        get: this.getToolShadowColor.bind(this),
+        set: this.setToolShadowColor.bind(this)
+      });
       Object.defineProperty(this, 'width', {
         get: this.getWidth.bind(this),
         set: this.setWidth.bind(this)
-      })
+      });
       Object.defineProperty(this, 'height', {
         get: this.getHeight.bind(this),
         set: this.setHeight.bind(this)
@@ -39,17 +50,20 @@ define([
       // stage dimensions
       $(window).resize(_.bind(this._onResize, this));
 
+
+      // Hook up tool buttons
+      this._arrowTool = new ArrowTool('#tool-arrow', this._stage, this.toolColor);
+      this._rectangleTool = new RectangleTool('#tool-rectangle', this._stage, this.toolColor);
+      this._imageTool = new ImageTool('#tool-image', '#tool-image-select', this._stage, this.toolColor);
+      this._textTool = new TextTool('#tool-text', this._stage, this.toolColor);
+      this._colorTool = new ColorTool('#color-chooser', this);
+
       // Set initial dimensions for the stage
       this.width = this.documentWidth;
       this.height = this.documentHeight;
 
-      var color = '#ff4f00';
-
-      // Hook up tool buttons
-      this._arrowTool = new ArrowTool('#tool-arrow', this._stage, color);
-      this._rectangleTool = new RectangleTool('#tool-rectangle', this._stage, color);
-      this._imageTool = new ImageTool('#tool-image-select', '#tool-image', this._stage, color);
-      this._textTool = new TextTool('#tool-text', this._stage, color);
+      this.toolColor = '#ff4f00';
+      this.toolShadowColor = '#000';
 
       // Do an initial rendering of the stage
       this._stage.update();
@@ -77,6 +91,32 @@ define([
        * @type String
        */
       canvasId: 'stage',
+
+      /**
+       * @property color
+       * @type Number
+       */
+      getToolColor: function() { return this._toolColor; },
+      setToolColor: function(color) {
+        this._toolColor = color;
+        this._arrowTool.color = color;
+        this._rectangleTool.color = color;
+        this._imageTool.color = color;
+        this._textTool.color = color;
+      },
+
+      /**
+       * @property shadowColor
+       * @type Number
+       */
+      getToolShadowColor: function() { return this._toolShadowColor; },
+      setToolShadowColor: function(color) {
+        this._toolShadowColor = color;
+        this._arrowTool.shadowColor = color;
+        this._rectangleTool.shadowColor = color;
+        this._imageTool.shadowColor = color;
+        this._textTool.shadowColor = color;
+      },
 
       /**
        * @property width

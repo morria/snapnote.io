@@ -32,16 +32,19 @@ header {
   .unselectable;
 
   ul {
+    height: @headerHeight;
     display: inline-block;
     list-style-type: none;
     li {
       display: inline;
+      height: @headerHeight;
     }
   }
 
   #tools {
     .icon {
       color: @color;
+      text-shadow: 1px 1px 1px #000;
     }
   }
 
@@ -175,4 +178,34 @@ button:hover {
 @-moz-keyframes pulse {
   from { opacity: 0.3; }
   to { opacity: 1.0; }
+}
+
+#color-chooser {
+  display: inline-block;
+  height: @headerHeight - 30px;;
+  vertical-align: top;
+  padding: 15px 0;
+  margin-left: 15px;
+
+  .color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    opacity: 0.5;
+  }
+
+  .color:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+
+  .color:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+
+  .color:hover {
+    opacity: 1.0;
+  }
 }
