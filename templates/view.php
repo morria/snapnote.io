@@ -15,17 +15,19 @@
     <meta property="og:image" content="" />
     <meta itemprop="name" content="snapnote.io" />
     <meta itemprop="description" content="snapnote.io - Annotate and Share Images and Screenshots" />
-    <link rel="stylesheet/less"
-       href="css/view.less" />
-    <link rel="stylesheet/less"
-      href="css/mobile/view.less"
+    <link rel="<?= $css['rel'] ?>" type="<?= $css['media'] ?>"
+      href="css/view.<?= $css['suffix'] ?>" />
+    <link rel="<?= $css['rel'] ?>" type="<?= $css['media'] ?>"
+      href="css/mobile/view.<?= $css['suffix'] ?>"
       type="text/css"
       media="screen and (max-width: 530px)" />
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-capable"
       content="yes" />
-    <script type="text/javascript" src="js/vendor/less-1.3.3.min.js"></script>
+    <?php if (ENVIRONMENT == 'development'):  ?>
+      <script type="text/javascript" src="js/vendor/less-1.3.3.min.js"></script>
+    <?php endif ?>
   </head>
   <body>
     <header>
