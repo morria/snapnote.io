@@ -3,7 +3,7 @@ define([
     'Underscore',
     'io/snapnote/graphics/tools/Image'
   ],
-  function($, _, SNImage) {
+  function($, _, Image) {
     var DragonDrop = function(stage) {
       this.stage = stage;
       $('body').bind('drop', _.bind(this._onDrop, this));
@@ -37,7 +37,7 @@ define([
       },
 
       _onDropUrl: function(url, position, event) {
-        var image = _.extend(new SNImage(url), {
+        var image = _.extend(new Image(url), {
           x: position.x,
           y: position.y
         })
@@ -54,7 +54,7 @@ define([
         var reader = new FileReader();
         reader.onload = (function(file, stage) {
             return function(event) {
-              var image = new SNImage(event.currentTarget.result);
+              var image = new Image(event.currentTarget.result);
 
               image.addEventListener('load', function() {
                 image.set({

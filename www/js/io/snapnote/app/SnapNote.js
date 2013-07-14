@@ -3,6 +3,7 @@ define([
     'Underscore',
     'io/snapnote/graphics/Stage',
     'io/snapnote/app/DragonDrop',
+    'io/snapnote/app/Paste',
     'io/snapnote/app/Save',
     'io/snapnote/app/tool/ArrowTool',
     'io/snapnote/app/tool/ColorTool',
@@ -10,7 +11,7 @@ define([
     'io/snapnote/app/tool/RectangleTool',
     'io/snapnote/app/tool/TextTool',
   ],
-  function($, _, Stage, DragonDrop, Save, ArrowTool, ColorTool, ImageTool, RectangleTool, TextTool) {
+  function($, _, Stage, DragonDrop, Paste, Save, ArrowTool, ColorTool, ImageTool, RectangleTool, TextTool) {
 
     var SnapNote = function() {
       this._canvas = $('#' + this.canvasId);
@@ -83,6 +84,7 @@ define([
 
       new DragonDrop(this._stage);
       new Save('#tool-share', this._stage);
+      new Paste(this._stage);
     }
 
     SnapNote.prototype = {
