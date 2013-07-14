@@ -103,6 +103,12 @@ define([
         this._rectangleTool.color = color;
         this._imageTool.color = color;
         this._textTool.color = color;
+
+        var selectedObject = this._stage.selectedObject;
+        if (selectedObject) {
+          selectedObject.color = color;
+          this._stage.update();
+        }
       },
 
       /**
@@ -116,6 +122,12 @@ define([
         this._rectangleTool.shadowColor = color;
         this._imageTool.shadowColor = color;
         this._textTool.shadowColor = color;
+
+        var selectedObject = this._stage.selectedObject;
+        if (selectedObject) {
+          selectedObject.shadowColor = color;
+          this._stage.update();
+        }
       },
 
       /**

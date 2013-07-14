@@ -174,13 +174,20 @@ define(['Underscore', 'Easel'],
         });
       },
 
-      deleteSelected: function() {
-        var stageObject =
-          _.find(this.stageObjects.children,
+      /**
+       * @property selectedObject
+       * @type StageObject
+       */
+      getSelectedObject: function() {
+        return _.find(this.stageObjects.children,
             function(stageObject) {
+              console.log(stageObject);
               return stageObject.selected;
             });
+      },
 
+      deleteSelected: function() {
+        var stageObject = this.selectedObject;
         if (!stageObject) {
           return;
         }
@@ -269,6 +276,9 @@ define(['Underscore', 'Easel'],
       });
       Object.defineProperty(this, 'dataURL', {
         get: this.getDataURL.bind(this)
+      });
+      Object.defineProperty(this, 'selectedObject', {
+        get: this.getSelectedObject.bind(this),
       });
 
       // Set the dimensions, causing a redraw
