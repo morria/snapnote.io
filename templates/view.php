@@ -14,9 +14,12 @@
         <h1>
           <a class="logo" href="/">snapnote.io</a>
         </h1>
+        <div id="share">
+          <?= $share_url ?>
+        </div>
         <div id="make">
           <a href="/">
-            Make a Snap Note
+            Make a Snapnote
           </a>
         </div>
       </div>

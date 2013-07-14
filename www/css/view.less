@@ -27,24 +27,45 @@ body {
 
 header {
   opacity: 1.0;
+  height: @headerHeight - (@gutter);
+  padding: (@gutter/2) 0;
+
+  .container {
+    height: (@headerHeight - @gutter);
+    line-height: (@headerHeight - @gutter);
+  }
+
+  h1 {
+    line-height: inherit;
+  }
+
+  #share {
+    display: inline-block;
+    background-color: #111;
+    border-radius: 3px;
+    padding: 2px 10px;
+    line-height: (@headerHeight - @gutter - 4px);
+    color: #f1f1f1;
+  }
+
   #make {
-    float: right;
-    line-height: @headerHeight;
+    position: absolute;
+    top: 0;
+    right: @gutter;
 
     a {
       display: inline-block;
-      // background-color: #51adee;
-      background-color: #526271;
+      background-color: #3498db;
       color: #f1f1f1;
-      border-radius: 3px;
-      border: none;
+      border-radius: 2px;
       padding: 3px 8px;
-      font-size: 12px;
-      line-height: 14px;
+      font-size: 14px;
+      line-height: 19px;
     }
 
     a:hover {
       color: #fff;
+      background-color: #5dade2;
     }
   }
 }

@@ -22,6 +22,9 @@ a {
   text-decoration: none;
 }
 
+::-moz-selection { background: #ff4f00; color: #fff; text-shadow: none; }
+::selection { background: #ff4f00; color: #fff; text-shadow: none; }
+
 .logo {
   letter-spacing: 0.1em;
   font-weight: 100;
@@ -42,6 +45,7 @@ header, footer {
   padding: 0;
 
   .container {
+    position: relative;
     padding: 0 @gutter;
     text-align: center;
   }

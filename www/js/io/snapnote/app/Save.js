@@ -29,8 +29,10 @@ define([
       _onClickTrigger: function(event) {
         mixpanel.track('save');
 
-        if (this.stage.stageObjects.getNumChildren() < 1) {
-          // No Children;
+        var box = this.stage.boundingBox;
+        if (this.stage.stageObjects.getNumChildren() < 1
+            || box.maxX <= box.minX
+            || box.maxY <= box.minY) {
           return;
         }
 
