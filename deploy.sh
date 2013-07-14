@@ -35,7 +35,6 @@ cp -R templates staging/
 cd staging
 ln -s phplib/conf/production.php environment.php
 
-cd ..
-rm -rf target
-mv staging target
+cd -
+rm -rf target && mv staging target
 
