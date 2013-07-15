@@ -177,7 +177,11 @@ define([
       _onResize: function(event) {
         this.width = this.documentWidth;
         this.height = this.documentHeight;
-        mixpanel.track('resize_screen');
+
+        if (!this._loggedResize) {
+          mixpanel.track('resize_screen');
+          this._loggedResize = true;
+        }
       }
     };
 
