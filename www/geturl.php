@@ -7,5 +7,5 @@ header('Access-Control-Allow-Origin', 'http://snapnote.io');
 $response =
   (new Storage())->postImage();
 
-print 'http://dev.snapnote.io/'.$response['id'];
+print 'http://snapnote.io/'.$response['id'];
 exit;
