@@ -2,5 +2,8 @@ AddType application/font-woff .woff
 
 RewriteEngine On
 RewriteRule   ^store$                /store.php                [L,NC,QSA]
-RewriteRule   ^(0.)(..)(..).png$     http://images.snapnote.io/$1/$2/$3.png           [L,NC,QSA]
+RewriteRule   ^geturl$               /geturl.php               [L,NC,QSA]
+RewriteRule   ^(d.{5})$             /index.php?d=$1           [L,NC,QSA]
 RewriteRule   ^(0[0-9a-zA-Z]+)$      /view.php?id=$1           [L,NC,QSA]
+RewriteRule   ^(0.)(..)(..).png$     http://images.snapnote.io/$1/$2/$3.png           [L,NC,QSA]
+RewriteRule   ^(d.)(..)(..).png$     http://images.snapnote.io/$1/$2/$3.png           [P,L,NC,QSA]
