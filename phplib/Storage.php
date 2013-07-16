@@ -15,41 +15,40 @@ class Storage {
         header('Content-type: application/json');
     }
 
-    private function reply($status, $map) {
-        if($status != 200) {
-            header('HTTP/1.0 ' . $status);
-        }
-        print json_encode($map);
-        exit;
-    }
-
     private function getFilenameForId($id) {
         return wordwrap($id, 2, "/", true).'.png';
     }
 
+    public function postImage() {
+      $blob =
+        base64_decode(str_replace(' ','+', file_get_contents('php://input')));
+
+      $hash = 'd'.substr(preg_replace('/[^a-zA-Z0-9]/', '', base64_encode(md5($blob, true))), 0, 5);
+      return $this->put($hash, $blob);
+    }
+
     public function post() {
-      $blob = file_get_contents("php://input");
+      $blob =
+        base64_decode(substr(str_replace(' ','+', file_get_contents('php://input')),
+          strlen('data:image/png;base64,')));
+
       $hash = '0'.substr(preg_replace('/[^a-zA-Z0-9]/', '', base64_encode(md5($blob, true))), 0, 5);
-      $this->put($hash);
-      return $hash;
+      return $this->put($hash, $blob);
     }
 
     /**
      * Store an object
      */
-    public function put($id) {
-        $blob = file_get_contents("php://input");
-
-        // Convert canvas.toDataURL data to a proper
-        // PNG
-        $blob =
-          base64_decode(substr(str_replace(' ','+', $blob),
-            strlen('data:image/png;base64,')));
-
-        // Don't store anything if we don't have data
+    public function put($id, $blob) {
+        // Don't store anything if we don't have data or if its
+        // over 2Mb
         if(strlen($blob) < 1 ||
-           strlen($blob) > 1048576) {
-            $this->reply(500, array('id' => $id, 'success' => false));
+           strlen($blob) > 2097152) {
+             return [
+               'status' => 500,
+               'id' => $id,
+               'success' => false,
+             ];
         }
 
         $filename = $this->getFilenameForId($id);
@@ -61,40 +60,18 @@ class Storage {
                       'contentType' => 'image/png'));
 
         if($response->status != 200) {
-            $this->reply($response->status,
-                array('id' => $id, 'success' => false));
+          return [
+              'status' => $response->status,
+              'id' => $id,
+              'success' => false
+            ];
         }
         else {
-            $this->reply(self::STATUS_OK,
-                array('id' => $id, 'success' => true));
+          return [
+              'status' => 200,
+              'id' => $id,
+              'success' => true
+            ];
         }
-    }
-
-    public function getData($id) {
-        $response =
-            $this->amazonS3->get_object(self::BUCKET_NAME,
-                $this->getFilenameForId($id));
-
-        if($response->status != 200) {
-            return null;
-        }
-
-        return json_decode($response->body);
-    }
-
-    /**
-     * Get an object
-     */
-    public function get($id) {
-        $response =
-            $this->amazonS3->get_object(self::BUCKET_NAME,
-                $this->getFilenameForId($id));
-
-        if($response->status != 200) {
-            $this->reply($response->status,
-                array('id' => $id, 'success' => false));
-        }
-
-        $this->reply(self::STATUS_OK, json_decode($response->body));
     }
 }

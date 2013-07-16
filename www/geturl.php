@@ -5,10 +5,7 @@ header('Access-Control-Allow-Methods', 'POST');
 header('Access-Control-Allow-Origin', 'http://snapnote.io');
 
 $response =
-  (new Storage())->post();
+  (new Storage())->postImage();
 
-if($response['status'] != 200) {
-    header('HTTP/1.0 ' . $response['status']);
-}
-print json_encode($response);
+print 'http://dev.snapnote.io/'.$response['id'];
 exit;

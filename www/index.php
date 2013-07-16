@@ -7,5 +7,7 @@ $css = [
   'rel'    => ENVIRONMENT == 'development' ? 'stylesheet/less' : 'stylesheet',
 ];
 
+$desktop_image_id = $_GET['d'] ?: null;
+
 include '../templates/index.php';
 exit;

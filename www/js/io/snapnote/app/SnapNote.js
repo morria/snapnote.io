@@ -3,6 +3,7 @@ define([
     'Underscore',
     'Easel',
     'io/snapnote/graphics/Stage',
+    'io/snapnote/app/DesktopImage',
     'io/snapnote/app/DragonDrop',
     'io/snapnote/app/Paste',
     'io/snapnote/app/Save',
@@ -10,9 +11,9 @@ define([
     'io/snapnote/app/tool/ColorTool',
     'io/snapnote/app/tool/ImageTool',
     'io/snapnote/app/tool/RectangleTool',
-    'io/snapnote/app/tool/TextTool',
+    'io/snapnote/app/tool/TextTool'
   ],
-  function($, _, Easel, Stage, DragonDrop, Paste, Save, ArrowTool, ColorTool, ImageTool, RectangleTool, TextTool) {
+  function($, _, Easel, Stage, DesktopImage, DragonDrop, Paste, Save, ArrowTool, ColorTool, ImageTool, RectangleTool, TextTool) {
 
     var SnapNote = function() {
       this._canvas = $('#' + this.canvasId);
@@ -85,12 +86,12 @@ define([
       new DragonDrop(this._stage);
       new Save('#tool-share', this._stage);
       new Paste(this._stage);
+      new DesktopImage(this._stage);
 
       if (Easel.Touch.isSupported()) {
         Easel.Touch.enable(this._stage);
         window.scrollTo(0, 1);
       }
-
     }
 
     SnapNote.prototype = {

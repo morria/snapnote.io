@@ -100,7 +100,8 @@
       </div>
     </div>
     <div id="content">
-      <canvas id="stage" width="0" height="0" unselectable="on" tabindex="1"></canvas>
+      <canvas id="stage" width="0" height="0" unselectable="on" tabindex="1"
+        data-desktop-image-id="<?= $desktop_image_id ?>"></canvas>
     </div>
     <footer>
       <div class="container">
