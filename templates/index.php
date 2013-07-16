@@ -96,11 +96,11 @@
     </div>
     <div id="blank-slate-mobile" class="blank-slate">
       <div class="container">
-        <label>Upload an Image to Annotate</label>
+        <label>Add an Image to Annotate</label>
       </div>
     </div>
     <div id="content">
-      <canvas id="stage" width="0" height="0" unselectable="on"></canvas>
+      <canvas id="stage" width="0" height="0" unselectable="on" tabindex="1"></canvas>
     </div>
     <footer>
       <div class="container">

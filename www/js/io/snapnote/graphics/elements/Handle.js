@@ -1,9 +1,9 @@
 define(['Underscore', 'Easel'],
   function(_, Easel) {
 
-    var WIDTH = 10;
-    var HEIGHT = 10;
-    var RADIUS = 2;
+    var WIDTH = 13;
+    var HEIGHT = 13;
+    var RADIUS = 3;
 
     var Handle = function() {
       this.initialize();
@@ -12,16 +12,17 @@ define(['Underscore', 'Easel'],
       this.enableMouseOver = true;
       this.cursor = 'pointer';
 
+      // Build the Body
+      this.graphics
+        .beginLinearGradientFill(["#fdfdfd","#dcdcdc"], [0, 1], 0, 0, 0, HEIGHT)
+        .drawRoundRect(0, 0, WIDTH, HEIGHT, RADIUS);
+
       // Build the Border
       this.graphics
         .beginStroke('#cecec3')
         .drawRoundRect(0, 0, WIDTH, HEIGHT, RADIUS)
         .endStroke();
 
-      // Build the Body
-      this.graphics
-        .beginLinearGradientFill(["#fdfdfd","#dcdcdc"], [0, 1], 0, 0, 0, HEIGHT)
-        .drawRoundRect(0, 0, WIDTH, HEIGHT, RADIUS);
 
       // A lil' shadow
       this.shadow = new Easel.Shadow('#ccc', 0, 0, 1);

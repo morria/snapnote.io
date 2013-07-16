@@ -88,7 +88,9 @@ define([
 
       if (Easel.Touch.isSupported()) {
         Easel.Touch.enable(this._stage);
+        window.scrollTo(0, 1);
       }
+
     }
 
     SnapNote.prototype = {

@@ -178,6 +178,28 @@ define([
       this._textDisplayObject.shadow = shadow;
     },
 
+    _onKeydown: function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      var keys = new Keys();
+
+      // Map the event to changes to the text
+      // and position
+      var altered =
+        keys.alterByEvent(
+          this.text, this.position, event);
+
+      if (this.text !== altered.text ||
+          this.position !== altered.position) {
+        // Update our representation of both
+        this.text = altered.text;
+        this.position = altered.position;
+
+        // Update the stage
+        this.getStage().update();
+      }
+    },
 
     /**
      * Enable the editing of the text
@@ -190,28 +212,8 @@ define([
       // Listen for keydown events on document, catching
       // the event before it bubbles to 'window', the
       // stage listener
-      var keys = new Keys();
       $(document).unbind('keydown')
-        .keydown(_.bind(function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        // Map the event to changes to the text
-        // and position
-        var altered =
-          keys.alterByEvent(
-            this.text, this.position, event);
-
-        if (this.text !== altered.text ||
-            this.position !== altered.position) {
-          // Update our representation of both
-          this.text = altered.text;
-          this.position = altered.position;
-
-          // Update the stage
-          this.getStage().update();
-        }
-      }, this));
+        .keydown(this._onKeydown.bind(this));
     },
 
     /**
