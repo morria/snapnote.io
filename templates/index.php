@@ -50,6 +50,13 @@
         </div>
         <ul id="tools">
           <li>
+            <input type="file" id="tool-image-select" accept="image/*" multiple hidden class="hidden" />
+            <button id="tool-image">
+              <span class="icon icon-image"></span>
+              <label>Upload Image</label>
+            </button>
+          </li>
+          <li>
             <button id="tool-arrow">
               <span class="icon icon-arrow"></span>
               <label>Draw Arrow</label>
@@ -67,13 +74,6 @@
               <label>Draw Box</label>
             </button>
           </li>
-          <li>
-            <input type="file" id="tool-image-select" accept="image/*" multiple hidden class="hidden" />
-            <button id="tool-image">
-              <span class="icon icon-image"></span>
-              <label>Upload Image</label>
-            </button>
-          </li>
         </ul>
         <ul id="evergreen">
           <li>
@@ -89,9 +89,14 @@
         <label>Upload</label>
       </div>
     </div>
-    <div id="blank-slate">
+    <div id="blank-slate" class="blank-slate">
       <div class="container">
         <label>Drop or Paste An Image To Annotate</label>
+      </div>
+    </div>
+    <div id="blank-slate-mobile" class="blank-slate">
+      <div class="container">
+        <label>Upload an Image to Annotate</label>
       </div>
     </div>
     <div id="content">

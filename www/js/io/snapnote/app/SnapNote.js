@@ -1,6 +1,7 @@
 define([
     'jquery',
     'Underscore',
+    'Easel',
     'io/snapnote/graphics/Stage',
     'io/snapnote/app/DragonDrop',
     'io/snapnote/app/Paste',
@@ -11,7 +12,7 @@ define([
     'io/snapnote/app/tool/RectangleTool',
     'io/snapnote/app/tool/TextTool',
   ],
-  function($, _, Stage, DragonDrop, Paste, Save, ArrowTool, ColorTool, ImageTool, RectangleTool, TextTool) {
+  function($, _, Easel, Stage, DragonDrop, Paste, Save, ArrowTool, ColorTool, ImageTool, RectangleTool, TextTool) {
 
     var SnapNote = function() {
       this._canvas = $('#' + this.canvasId);
@@ -51,7 +52,6 @@ define([
       // stage dimensions
       $(window).resize(_.bind(this._onResize, this));
 
-
       // Hook up tool buttons
       this._arrowTool = new ArrowTool('#tool-arrow', this._stage, this.toolColor);
       this._rectangleTool = new RectangleTool('#tool-rectangle', this._stage, this.toolColor);
@@ -70,6 +70,7 @@ define([
       this._stage.update();
 
       this._stage.addEventListener('added', _.bind(function(event) {
+        $('#blank-slate-mobile').hide();
         $('#blank-slate').hide();
       }, this));
 
@@ -81,10 +82,13 @@ define([
         }
       }, this));
 
-
       new DragonDrop(this._stage);
       new Save('#tool-share', this._stage);
       new Paste(this._stage);
+
+      if (Easel.Touch.isSupported()) {
+        Easel.Touch.enable(this._stage);
+      }
     }
 
     SnapNote.prototype = {

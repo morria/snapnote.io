@@ -135,8 +135,29 @@ define([
         if (this.getStage()) {
           this.getStage().update();
         }
-      }
+      },
 
+      _onMouseDown: function(event) {
+        this.selected = true;
+
+        var target = event.target.parent;
+
+        // Stored from the mousedown moment as a reference point to
+        // the offset from the top-left of the object
+        var offset = {
+          x: target.x - event.stageX,
+          y: target.y - event.stageY
+        };
+
+        event.addEventListener('mousemove', this._onMouseMove.bind(this, target, offset));
+      },
+
+      _onMouseMove: function(target, offset, event) {
+        target.set({
+          x: event.stageX + offset.x,
+          y: event.stageY + offset.y
+        }).getStage().update();
+      }
     });
 
     var initialize = StageObject.prototype.initialize;
@@ -216,25 +237,7 @@ define([
       /**
        * Enable the dragging of stage objects
        */
-      this.content.addEventListener('mousedown', _.bind(function(event) {
-        this.selected = true;
-
-        var target = event.target.parent;
-
-        // Stored from the mousedown moment as a reference point to
-        // the offset from the top-left of the object
-        var offset = {
-          x: target.x - event.stageX,
-          y: target.y - event.stageY
-        };
-
-        event.addEventListener('mousemove', _.bind(function(event) {
-          target.set({
-            x: event.stageX + offset.x,
-            y: event.stageY + offset.y
-          }).getStage().update();
-        }, this));
-      }, this));
+      this.content.addEventListener('mousedown', this._onMouseDown.bind(this));
     }
 
     return StageObject;

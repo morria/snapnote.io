@@ -1,5 +1,9 @@
 @import '../definitions';
 
+html, body, header, footer {
+  min-width: inherit;
+}
+
 header {
   #color-chooser {
     display: none;
@@ -8,5 +12,29 @@ header {
   .container {
     text-align: left;
   }
+
+  #tools {
+    font-size: 10px;
+
+    label {
+      width: inherit;
+      display: none;
+    }
+  }
+
 }
 
+button {
+  label {
+    font-size: 12px;
+  }
+}
+
+#blank-slate {
+  display: none;
+}
+
+#blank-slate-mobile {
+  display: inherit;
+  top: 150px;
+}

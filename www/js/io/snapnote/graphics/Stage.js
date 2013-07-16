@@ -242,9 +242,8 @@ define(['Underscore', 'Easel'],
 
       // Deselect all display objects when the background
       // is clicked
-      this._background.addEventListener('click', _.bind(function(event) {
-        this.deselectAllChildren();
-      }, this));
+      this._background.addEventListener('click', this.deselectAllChildren.bind(this));
+      this._background.addEventListener('touchstart', this.deselectAllChildren.bind(this));
 
       // Listen for key presses
       $(window).keydown(_.bind(function(event) {
