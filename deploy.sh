@@ -8,6 +8,7 @@ mkdir -p staging/www
 cp www/.htaccess.live staging/www/.htaccess
 cp www/* staging/www/
 cp -R www/img staging/www/
+cp -R www/app staging/www/
 
 # Compress all CSS
 mkdir -p staging/www/css/
