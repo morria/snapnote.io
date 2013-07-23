@@ -58,14 +58,7 @@
         </a>
       </div>
     </div>
-    <footer>
-      <div class="container">
-        <ul>
-          <li><a href="">snapnote.io</a></li>
-          <li>by <a href="http://twitter.com/asmorrison" target="_blank">@asmorrison</a></li>
-        </ul>
-      </div>
-    </footer>
+    <?php include 'footer.php' ?>
     <script src="js/vendor/require.js" data-main="js/view"></script>
     <!--
     <?php if (ENVIRONMENT == 'development') { ?>

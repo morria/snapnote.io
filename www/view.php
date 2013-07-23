@@ -14,4 +14,7 @@ $url = 'http://images.snapnote.io/'
 $share_url =
  'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
+$is_mac =
+  preg_match('/Mac/', $_SERVER['HTTP_USER_AGENT']);
+
 include '../templates/view.php';
