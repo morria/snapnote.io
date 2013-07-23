@@ -92,6 +92,10 @@ define([
         Easel.Touch.enable(this._stage);
         window.scrollTo(0, 1);
       }
+
+      mixpanel.track_links('#link-home', 'footer home');
+      mixpanel.track_links('#link-author', 'author');
+      mixpanel.track_links('#link-app', 'download app');
     }
 
     SnapNote.prototype = {
