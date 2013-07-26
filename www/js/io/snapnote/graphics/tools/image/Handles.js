@@ -23,6 +23,10 @@ define([
         var height = this.target.height * this.target.scale;
         var scale = (width - event.delta.x)/width;
 
+        if (scale * width < 1.0 || scale * height < 1.0) {
+          return;
+        }
+
         this.target.scale *= scale;
         this.target.x -= ((width * scale) - width) ;
         this.target.y -= ((height * scale) - height) ;
@@ -35,6 +39,10 @@ define([
         var height = this.target.height * this.target.scale;
         var scale = width/(width - event.delta.x);
 
+        if (scale * width < 1.0 || scale * height < 1.0) {
+          return;
+        }
+
         this.target.scale *= scale;
         this.target.y -= ((height * scale) - height) ;
       }, this));
@@ -46,6 +54,10 @@ define([
         var height = this.target.height * this.target.scale;
         var scale = (width - event.delta.x)/width;
 
+        if (scale * width < 1.0 || scale * height < 1.0) {
+          return;
+        }
+
         this.target.scale *= scale;
         this.target.x += event.delta.x;
       }, this));
@@ -54,23 +66,29 @@ define([
       var seHandle = new Handle();
       seHandle.addEventListener('move', _.bind(function(event) {
         var width = this.target.width * this.target.scale;
+        var height = this.target.height * this.target.scale;
         var scale = (width + event.delta.x)/width;
+
+        if (scale * width < 1.0 || scale * height < 1.0) {
+          return;
+        }
+
         this.target.scale *= scale;
       }, this));
       this.addChild(seHandle);
 
       this.addEventListener('tick', _.bind(function(event) {
-        nwHandle.x = 0;
-        nwHandle.y = 0;
+        nwHandle.x = -nwHandle.width/3;
+        nwHandle.y = -nwHandle.height/3;
 
-        neHandle.x = (this.target.width * this.target.scale) - neHandle.width;
-        neHandle.y = 0;
+        neHandle.x = (this.target.width * this.target.scale) - (2*neHandle.width/3);
+        neHandle.y = -swHandle.width/3;
 
-        swHandle.x = 0;
-        swHandle.y = (this.target.height * this.target.scale) - swHandle.height;
+        swHandle.x = -swHandle.width/3;
+        swHandle.y = (this.target.height * this.target.scale) - (2*swHandle.height/3);
 
-        seHandle.x = (this.target.width * this.target.scale) - seHandle.width;
-        seHandle.y = (this.target.height * this.target.scale) - seHandle.height;
+        seHandle.x = (this.target.width * this.target.scale) - (2*seHandle.width/3);
+        seHandle.y = (this.target.height * this.target.scale) - (2*seHandle.height/3);
       }, this));
     }
 
