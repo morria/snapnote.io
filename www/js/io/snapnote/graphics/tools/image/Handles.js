@@ -20,22 +20,23 @@ define([
       var nwHandle = new Handle();
       nwHandle.addEventListener('move', _.bind(function(event) {
         var width = this.target.width * this.target.scale;
+        var height = this.target.height * this.target.scale;
         var scale = (width - event.delta.x)/width;
 
         this.target.scale *= scale;
-        this.target.x += event.delta.x;
-        this.target.y += event.delta.y;
+        this.target.x -= ((width * scale) - width) ;
+        this.target.y -= ((height * scale) - height) ;
       }, this));
       this.addChild(nwHandle);
 
       var neHandle = new Handle();
       neHandle.addEventListener('move', _.bind(function(event) {
         var width = this.target.width * this.target.scale;
+        var height = this.target.height * this.target.scale;
         var scale = width/(width - event.delta.x);
 
         this.target.scale *= scale;
-        this.target.x += event.delta.x - (width * scale - width);
-        this.target.y += event.delta.y;
+        this.target.y -= ((height * scale) - height) ;
       }, this));
       this.addChild(neHandle);
 
@@ -47,19 +48,14 @@ define([
 
         this.target.scale *= scale;
         this.target.x += event.delta.x;
-        this.target.y += event.delta.y + (height - (height * scale));
       }, this));
       this.addChild(swHandle);
 
       var seHandle = new Handle();
       seHandle.addEventListener('move', _.bind(function(event) {
         var width = this.target.width * this.target.scale;
-        var height = this.target.height * this.target.scale;
-
         var scale = (width + event.delta.x)/width;
-
         this.target.scale *= scale;
-        this.target.y += event.delta.y + (height - (height * scale));
       }, this));
       this.addChild(seHandle);
 
