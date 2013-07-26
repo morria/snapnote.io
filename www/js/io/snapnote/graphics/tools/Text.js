@@ -77,7 +77,7 @@ define([
        * changes text
        */
       _onChange: function(event) {
-        this.text = event.text;
+        this._text = event.text;
         this.width = event.width;
         this.height = event.height;
       },
@@ -86,7 +86,7 @@ define([
        * Called whenever a key is down
        */
       _onKeydown: function(event) {
-        if(this._isFirstKeydown /* && event.which ==  8 */) {
+        if(this._isFirstKeydown) {
           this._editableText.text = '';
         }
         this._isFirstKeydown = false;

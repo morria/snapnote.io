@@ -63,8 +63,8 @@ define([
        */
       getScale: function() { return this.content.scaleX; },
       setScale: function(scale) {
-        this.content.scaleX *= scale;
-        this.content.scaleY *= Math.abs(scale);
+        this.content.scaleX = scale;
+        this.content.scaleY = Math.abs(scale);
       },
 
       /**
@@ -212,24 +212,32 @@ define([
        * the bounds of the stage
        */
       this.content.addEventListener('tick', _.bind(function(event) {
-        if ((this.width*this.scale) > (this.stage.width - (STAGE_PADDING *2))) {
-          this.scale *= (this.stage.width - (STAGE_PADDING*2))/(this.width * this.scale);
+        var width = (this.width * this.scale);
+        var height = (this.height * this.scale);
+
+        var maxWidth = (this.stage.width - (STAGE_PADDING * 2));
+        var maxHeight = (this.stage.height - (STAGE_PADDING * 2));
+
+        if (width > maxWidth) {
+          this.scale *= maxWidth/width;
         }
 
-        if ((this.height*this.scale) > (this.stage.height - (STAGE_PADDING * 2))) {
-          this.scale *= (this.stage.height - (STAGE_PADDING*2))/(this.height*this.scale);
+        if (height > maxHeight) {
+          this.scale *= maxHeight/height;
+          width = (this.width * this.scale);
+          height = (this.height * this.scale);
         }
 
         if (this.x < STAGE_PADDING) {
           this.x = STAGE_PADDING;
-        } else if ((this.x + (this.width*this.scale)) > (this.stage.width - (STAGE_PADDING*2))) {
-          this.x = ((this.stage.width - (STAGE_PADDING)) - (this.width * this.scale));
+        } else if ((this.x + width) > (this.stage.width - STAGE_PADDING)) {
+          this.x = this.stage.width - STAGE_PADDING - width;
         }
 
         if (this.y < STAGE_PADDING) {
           this.y = STAGE_PADDING;
-        } else if ((this.y + (this.height * this.scale)) > (this.stage.height - (STAGE_PADDING*2))) {
-          this.y = ((this.stage.height - (STAGE_PADDING)) - (this.height * this.scale));
+        } else if ((this.y + height) > (this.stage.height - STAGE_PADDING)) {
+          this.y = this.stage.height - STAGE_PADDING - height;
         }
 
       }, this));

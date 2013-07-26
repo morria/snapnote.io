@@ -21,7 +21,7 @@ define([
         var height = this.target.height * this.target.scale;
         var scale = (width - event.delta.x)/(width);
 
-        this.target.scale = scale;
+        this.target.scale *= scale;
         this.target.x += event.delta.x;
         this.target.y -= (height * scale - height);
       }, this));
@@ -33,19 +33,18 @@ define([
         var scale = (width + event.delta.x)/(width);
         var height = this.target.height * this.target.scale;
 
-        this.target.scale = scale;
-        // this.target.y += event.delta.y + (height - (height * scale));
+        this.target.scale *= scale;
       }, this));
       this.addChild(seHandle);
 
       this.addEventListener('tick', _.bind(function(event) {
         nwHandle.set({
-          x: -Math.round(nwHandle.width),
+          x: 0,
           y: -Math.round(nwHandle.height)
         });
 
         seHandle.set({
-          x: this.target.width * this.target.scale,
+          x: (this.target.width * this.target.scale) - (Math.round(nwHandle.height)),
           y: this.target.height * this.target.scale
         });
       }, this));
