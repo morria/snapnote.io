@@ -12,5 +12,8 @@ $desktop_image_id = $_GET['d'] ?: null;
 $is_mac =
   preg_match('/Mac/', $_SERVER['HTTP_USER_AGENT']);
 
+$is_chrome =
+  preg_match('/Chrome/', $_SERVER['HTTP_USER_AGENT']);
+
 include '../templates/index.php';
 exit;

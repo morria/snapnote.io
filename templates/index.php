@@ -91,7 +91,11 @@
     </div>
     <div id="blank-slate" class="blank-slate">
       <div class="container">
-        <label>Drop Or Paste An Image To Annotate</label>
+        <?php if ($is_chrome): ?>
+          <label>Drop Or Paste An Image To Annotate</label>
+        <?php else: ?>
+          <label>Drop An Image To Annotate</label>
+        <?php endif ?>
       </div>
     </div>
     <div id="blank-slate-mobile" class="blank-slate">
