@@ -182,6 +182,11 @@ define([
       event.preventDefault();
       event.stopPropagation();
 
+      this.dispatchEvent({
+        type: 'keydown',
+        which: event.which
+      });
+
       var keys = new Keys();
 
       // Map the event to changes to the text

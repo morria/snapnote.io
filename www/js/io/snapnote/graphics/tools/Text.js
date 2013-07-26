@@ -80,6 +80,16 @@ define([
         this.text = event.text;
         this.width = event.width;
         this.height = event.height;
+      },
+
+      /**
+       * Called whenever a key is down
+       */
+      _onKeydown: function(event) {
+        if(this._isFirstKeydown /* && event.which ==  8 */) {
+          this._editableText.text = '';
+        }
+        this._isFirstKeydown = false;
       }
     });
 
@@ -88,6 +98,9 @@ define([
       initialize.call(this);
 
       this._text = null;
+
+      // We do special stuff on first keypress
+      this._isFirstKeydown = true;
 
       // Hook up function-based getters and setters
       Object.defineProperty(this, 'text', {
@@ -101,6 +114,8 @@ define([
       // Draw the editable text box
       this._editableText = new EditableText(text, font, color);
       this.content.addChild(this._editableText);
+
+      this._editableText.addEventListener('keydown', this._onKeydown.bind(this));
 
       // Update our internal dimensions and state when
       // the editable text changes
