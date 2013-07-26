@@ -91,7 +91,7 @@
     </div>
     <div id="blank-slate" class="blank-slate">
       <div class="container">
-        <label>Drop or Paste An Image To Annotate</label>
+        <label>Drop Or Paste An Image To Annotate</label>
       </div>
     </div>
     <div id="blank-slate-mobile" class="blank-slate">
