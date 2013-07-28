@@ -120,7 +120,7 @@ define([
       // Update our internal dimensions and state when
       // the editable text changes
       this._editableText.addEventListener('change',
-        _.bind(this._onChange, this));
+        this._onChange.bind(this));
 
       // We set the text after adding the event listener
       // so that we can get the first change event

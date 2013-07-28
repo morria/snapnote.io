@@ -74,6 +74,12 @@
               <label>Draw Box</label>
             </button>
           </li>
+          <li>
+            <button id="tool-label">
+              <span class="icon icon-arrow"></span>
+              <label>Label</label>
+            </button>
+          </li>
         </ul>
         <ul id="evergreen">
           <li>

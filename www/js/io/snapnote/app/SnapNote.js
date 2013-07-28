@@ -10,10 +10,11 @@ define([
     'io/snapnote/app/tool/ArrowTool',
     'io/snapnote/app/tool/ColorTool',
     'io/snapnote/app/tool/ImageTool',
+    'io/snapnote/app/tool/LabelTool',
     'io/snapnote/app/tool/RectangleTool',
     'io/snapnote/app/tool/TextTool'
   ],
-  function($, _, Easel, Stage, DesktopImage, DragonDrop, Paste, Save, ArrowTool, ColorTool, ImageTool, RectangleTool, TextTool) {
+  function($, _, Easel, Stage, DesktopImage, DragonDrop, Paste, Save, ArrowTool, ColorTool, ImageTool, LabelTool, RectangleTool, TextTool) {
 
     var SnapNote = function() {
       this._canvas = $('#' + this.canvasId);
@@ -58,6 +59,7 @@ define([
       this._rectangleTool = new RectangleTool('#tool-rectangle', this._stage, this.toolColor);
       this._imageTool = new ImageTool('#tool-image', '#tool-image-select', this._stage, this.toolColor);
       this._textTool = new TextTool('#tool-text', this._stage, this.toolColor);
+      this._labelTool = new LabelTool('#tool-label', this._stage, this.toolColor);
       this._colorTool = new ColorTool('#color-chooser', this);
 
       // Set initial dimensions for the stage
@@ -116,6 +118,7 @@ define([
         this._rectangleTool.color = color;
         this._imageTool.color = color;
         this._textTool.color = color;
+        this._labelTool.color = color;
 
         var selectedObject = this._stage.selectedObject;
         if (selectedObject) {
@@ -133,8 +136,8 @@ define([
         this._toolShadowColor = color;
         this._arrowTool.shadowColor = color;
         this._rectangleTool.shadowColor = color;
-        // this._imageTool.shadowColor = color;
         this._textTool.shadowColor = color;
+        this._labelTool.shadowColor = color;
 
         var selectedObject = this._stage.selectedObject;
         if (selectedObject) {
