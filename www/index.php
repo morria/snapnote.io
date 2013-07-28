@@ -9,11 +9,16 @@ $css = [
 
 $desktop_image_id = $_GET['d'] ?: null;
 
+$host_name = $_SERVER['HTTP_HOST'];
+
 $is_mac =
   preg_match('/Mac/', $_SERVER['HTTP_USER_AGENT']);
 
 $is_chrome =
   preg_match('/Chrome/', $_SERVER['HTTP_USER_AGENT']);
+
+$is_ohsnap =
+  preg_match('/ohsnap\.io/', $host_name);
 
 include '../templates/index.php';
 exit;

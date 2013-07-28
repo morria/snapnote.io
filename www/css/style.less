@@ -39,6 +39,11 @@ header {
       display: inline;
       font-size: 0px;
       height: @headerHeight;
+
+      label {
+        height: 32px;
+        vertical-align: top;
+      }
     }
   }
 
@@ -79,6 +84,30 @@ header {
           font-size: 22px;
           height: @headerHeight - 3*@gutter;
         }
+    }
+  }
+}
+
+.ohsnap {
+  header {
+    ul li label {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    #tools {
+      #tool-image label {
+        font-size: 14px;
+        line-height: inherit;
+      }
+
+      #tool-label-boom label {
+        width: 68px;
+      }
+
+      #tool-label-oh-snap label {
+        width: 100px
+      }
     }
   }
 }

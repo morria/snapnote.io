@@ -59,7 +59,7 @@ define([
       this._rectangleTool = new RectangleTool('#tool-rectangle', this._stage, this.toolColor);
       this._imageTool = new ImageTool('#tool-image', '#tool-image-select', this._stage, this.toolColor);
       this._textTool = new TextTool('#tool-text', this._stage, this.toolColor);
-      this._labelTool = new LabelTool('#tool-label', this._stage, this.toolColor);
+      this._labelTool = new LabelTool('.tool-label', this._stage, this.toolColor);
       this._colorTool = new ColorTool('#color-chooser', this);
 
       // Set initial dimensions for the stage

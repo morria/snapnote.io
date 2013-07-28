@@ -60,7 +60,6 @@ define([
         this._color = color;
 
         this._editableText.color = '#fff';
-        console.log(color);
 
         if (color == 'rgb(255, 255, 255)') {
           this._editableText.color = '#555';

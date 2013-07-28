@@ -4,11 +4,6 @@ define([
   ],
   function($, _) {
     var Tool = function() {
-      this._color = '#000';
-      this._shadowColor = '#fff';
-      this._stage = null;
-      this._selector = null;
-
       Object.defineProperty(this, 'color', {
         get: this.getColor.bind(this),
         set: this.setColor.bind(this)
@@ -28,6 +23,11 @@ define([
     }
 
     Tool.prototype = {
+      _color: '#000',
+      _shadowColor: '#fff',
+      _stage: null,
+      _selector: null,
+
       /**
        * @property stage
        * @type Stage
@@ -92,8 +92,8 @@ define([
         console.error('newStageObject must be overridden', this);
       },
 
-      addObjectToStage: function() {
-        var stageObject = this.newStageObject();
+      addObjectToStage: function(event) {
+        var stageObject = this.newStageObject(event);
         stageObject = _.extend(stageObject, {
           color: this.color,
           shadowColor: this.shadowColor,
@@ -112,7 +112,7 @@ define([
        */
       onClickTrigger: function(event) {
         mixpanel.track(this.eventName);
-        this.addObjectToStage();
+        this.addObjectToStage(event);
       }
     };
 

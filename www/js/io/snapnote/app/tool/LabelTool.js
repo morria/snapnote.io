@@ -18,8 +18,12 @@ define([
        */
       eventName: 'label_add',
 
-      newStageObject: function() {
-        return new Label("this", '42px Helvetica,Arial', this.color);
+      newStageObject: function(event) {
+        var label = $(event.target).closest('.tool-label').attr('data-label');
+        console.log($(event.target), label);
+
+        return new Label(label,
+          '42px Helvetica,Arial', this.color);
       }
     });
 

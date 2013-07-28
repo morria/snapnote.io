@@ -34,7 +34,7 @@
       <script type="text/javascript" src="js/vendor/less-1.3.3.min.js"></script>
     <?php endif ?>
   </head>
-  <body>
+  <body <?php if($is_ohsnap): ?>class="ohsnap"<?php endif; ?>>
     <header>
       <div class="container">
         <div id="color-chooser">
@@ -56,6 +56,7 @@
               <label>Upload Image</label>
             </button>
           </li>
+          <?php if(!$is_ohsnap): ?>
           <li>
             <button id="tool-arrow">
               <span class="icon icon-arrow"></span>
@@ -75,11 +76,31 @@
             </button>
           </li>
           <li>
-            <button id="tool-label">
+            <button class="tool-label" id="tool-label" data-label="This">
               <span class="icon icon-label"></span>
               <label>Add Label</label>
             </button>
           </li>
+          <?php else: ?>
+            <li>
+              <button class="tool-label" id="tool-label-wtf" data-label="WTF">
+                <span class="icon icon-label"></span>
+                <label>WTF</label>
+              </button>
+            </li>
+            <li>
+              <button class="tool-label" id="tool-label-boom" data-label="Boom">
+                <span class="icon icon-label"></span>
+                <label>Boom</label>
+              </button>
+            </li>
+            <li>
+              <button class="tool-label" id="tool-label-oh-snap" data-label="Oh Snap">
+                <span class="icon icon-label"></span>
+                <label>Oh Snap</label>
+              </button>
+            </li>
+          <?php endif; ?>
         </ul>
         <ul id="evergreen">
           <li>

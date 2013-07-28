@@ -8,7 +8,6 @@ define([
       var id = $(stage.canvas).attr('data-desktop-image-id');
       if (id) {
         var image = new Image('/' + id + '.png');
-        console.log(image);
         image.addEventListener('load', _.bind(function() {
           image.set({
             x: (stage.width/2) - (image.width*image.scale/2),
