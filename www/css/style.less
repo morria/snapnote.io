@@ -4,6 +4,7 @@
 // @color: #b7d595;
 // @color: #f9aeb5;
 @color: #ff4f00;
+@colorOhSnap: #ea4483;
 
 @import 'common';
 
@@ -91,22 +92,30 @@ header {
 .ohsnap {
   header {
     ul li label {
-      font-size: 24px;
+      font-size: 18px;
       line-height: 32px;
     }
 
     #tools {
+      .icon {
+        color: @colorOhSnap;
+      }
+
       #tool-image label {
         font-size: 14px;
         line-height: inherit;
       }
 
+      #tool-label-wtf label {
+        width: 40px;
+      }
+
       #tool-label-boom label {
-        width: 68px;
+        width: 53px;
       }
 
       #tool-label-oh-snap label {
-        width: 100px
+        width: 76px
       }
     }
   }

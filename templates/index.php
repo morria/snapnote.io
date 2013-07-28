@@ -37,7 +37,7 @@
   <body <?php if($is_ohsnap): ?>class="ohsnap"<?php endif; ?>>
     <header>
       <div class="container">
-        <div id="color-chooser">
+      <div id="color-chooser" <?php if(!$is_ohsnap): ?>data-default='#ff4f00'<?php else: ?>data-default="#ea4483"<?php endif; ?>>
           <!--
           --!><span class="color" style="background-color: #ff4f00" data-shadow-color="#000"></span><!--
           --!><span class="color" style="background-color: #000" data-shadow-color="#666"></span><!--

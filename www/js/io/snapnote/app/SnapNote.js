@@ -66,7 +66,7 @@ define([
       this.width = this.documentWidth;
       this.height = this.documentHeight;
 
-      this.toolColor = '#ff4f00';
+      this.toolColor = $('#color-chooser').attr('data-default');
       // this.toolShadowColor = '#000';
 
       // Do an initial rendering of the stage
