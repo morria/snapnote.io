@@ -21,11 +21,11 @@
     <link rel="<?= $css['rel'] ?>" type="<?= $css['media'] ?>"
       href="css/mobile/tablet.<?= $css['suffix'] ?>"
       type="text/css"
-      media="screen and (max-width: 830px)" />
+      media="screen and (max-width: 930px)" />
     <link rel="<?= $css['rel'] ?>" type="<?= $css['media'] ?>"
       href="css/mobile/mobile.<?= $css['suffix'] ?>"
       type="text/css"
-      media="screen and (max-width: 630px)" />
+      media="screen and (max-width: 772px)" />
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-capable"
@@ -70,14 +70,14 @@
           </li>
           <li>
             <button id="tool-rectangle">
-              <span class="icon icon-box"></span>
+              <span class="icon icon-rectangle"></span>
               <label>Draw Box</label>
             </button>
           </li>
           <li>
             <button id="tool-label">
-              <span class="icon icon-arrow"></span>
-              <label>Label</label>
+              <span class="icon icon-label"></span>
+              <label>Add Label</label>
             </button>
           </li>
         </ul>

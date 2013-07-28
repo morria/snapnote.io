@@ -45,8 +45,12 @@ define([
 
         this.angle = Math.atan2(x,y);
 
-        if (this.angle >= (-Math.PI/2) && this.angle < (Math.PI/2)) {
+        if (this.angle >= (-Math.PI/4) && this.angle < (Math.PI/4)) {
           this.target.direction = Direction.SOUTH;
+        } else if (this.angle < (-Math.PI/4) && this.angle > (-3 * Math.PI/4)) {
+          this.target.direction = Direction.WEST;
+        } else if (this.angle >= (Math.PI/4) && this.angle < (3 * Math.PI/4)) {
+          this.target.direction = Direction.EAST;
         } else {
           this.target.direction = Direction.NORTH;
         }
@@ -66,8 +70,8 @@ define([
         }
 
         directionHandle.set({
-          x: center.x + (Math.sin(this.angle)*60*this.target.scale),
-          y: center.y + (Math.cos(this.angle)*60*this.target.scale)
+          x: center.x + (Math.sin(this.angle)*70*this.target.scale),
+          y: center.y + (Math.cos(this.angle)*70*this.target.scale)
         });
 
       }, this));

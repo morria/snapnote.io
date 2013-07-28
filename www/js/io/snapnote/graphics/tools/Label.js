@@ -15,7 +15,7 @@ define([
       this.initialize(text, font, color);
     }
 
-    Label.prototype = _.extend(new Text('initial'), {
+    Label.prototype = _.extend(new Text(), {
       /**
        * @property name
        * @type String
@@ -55,82 +55,154 @@ define([
         * parameters
         */
       update: function() {
-        // curve dimensions
-        var c = { w: 40, h: 40 };
-
-        // Width and Height of the label
-        // background
-        var width = Math.max(this._textWidth + (2*PADDING), c.w + 2*PADDING);
-        var height = Math.max(this._textHeight + (2*PADDING), this._editableText.lineHeight);
-
+        // Draw the box around the text
         this._labelShape.graphics.clear();
 
+        // Move the text to be more well centered
         this._editableText.set({
           x: PADDING,
           y: PADDING - (this._editableText.lineHeight * 0.15)
         });
 
-        // The Box
-        this._labelShape.graphics
-          .beginFill(this.color)
-          .drawRoundRect(
-              0,
-              0,
-              width,
-              height,
-              RADIUS);
-
-        // The Point
-        if (this.direction == Direction.SOUTH) {
-          var p = {
-            x: PADDING + (width - (2*PADDING))/2 - c.w/2,
-            y: PADDING + this._textHeight + (PADDING)
-          };
-
-          var offX = function(divisor) { return p.x + (c.w/divisor); }
-          var offY = function(divisor) { return p.y + (c.h/divisor); }
-
-          this._labelShape.graphics
-            .moveTo(p.x, p.y)
-            .bezierCurveTo(offX(40/06), offY(40/01), offX(40/10), offY(40/10), offX(40/10), offY(40/10))
-            .bezierCurveTo(offX(40/14), offY(40/19), offX(40/18), offY(40/39), offX(40/19), offY(40/40))
-            .bezierCurveTo(offX(40/20), offY(40/41), offX(40/20), offY(40/41), offX(40/21), offY(40/40))
-            .bezierCurveTo(offX(40/22), offY(40/39), offX(40/26), offY(40/19), offX(40/30), offY(40/10))
-            .bezierCurveTo(offX(40/34), offY(40/01), offX(40/40), offY(40/00), offX(40/40), offY(40/00))
-            .endFill();
-
-          this._width = width;
-          this._height = p.y + c.h;
-
-        } else if (this.direction == Direction.EAST) {
-          this._labelShape.graphics
-            .endFill();
-        } else if (this.direction == Direction.NORTH) {
-          var p = {
-            x: PADDING + (width - (2*PADDING))/2 - c.w/2,
-            y: 0
-          };
-
-          var offX = function(divisor) { return p.x + (c.w/divisor); }
-          var offY = function(divisor) { return p.y - (c.h/divisor); }
-
-          this._labelShape.graphics
-            .moveTo(p.x, p.y)
-            .bezierCurveTo(offX(40/06), offY(40/01), offX(40/10), offY(40/10), offX(40/10), offY(40/10))
-            .bezierCurveTo(offX(40/14), offY(40/19), offX(40/18), offY(40/39), offX(40/19), offY(40/40))
-            .bezierCurveTo(offX(40/20), offY(40/41), offX(40/20), offY(40/41), offX(40/21), offY(40/40))
-            .bezierCurveTo(offX(40/22), offY(40/39), offX(40/26), offY(40/19), offX(40/30), offY(40/10))
-            .bezierCurveTo(offX(40/34), offY(40/01), offX(40/40), offY(40/00), offX(40/40), offY(40/00))
-            .endFill();
-
-          this._width = width;
-          this._height = p.y + c.h;
-        } else if (this.direction == Direction.WEST) {
-          this._labelShape.graphics
-            .endFill();
+        // Draw the pointer in the label's direction
+        switch(this.direction) {
+          case Direction.NORTH: this.updateNorth(); break;
+          case Direction.EAST: this.updateEast(); break;
+          case Direction.SOUTH: this.updateSouth(); break;
+          case Direction.WEST: this.updateWest(); break;
         }
 
+        // Add the shadow
         this._labelShape.shadow = this.shadow;
+      },
+
+      updateNorth: function() {
+        // curve dimensions
+        var c = { w: 40, h: 40 };
+
+        // Width and Height of the label background
+        var width = Math.max(this._textWidth + (2*PADDING), c.w + 2*PADDING);
+        var height = Math.max(this._textHeight + (2*PADDING), this._editableText.lineHeight);
+
+        // Origin point of arrow
+        var p = {
+          x: PADDING + (width - (2*PADDING))/2 - c.w/2,
+          y: 0
+        };
+
+        // Functions for getting the offset within a coordinate system
+        // that I'm capable of groking
+        var _x = function(divisor) { return p.x + (c.w/(40/divisor)); }
+        var _y = function(divisor) { return p.y - (c.h/(40/divisor)); }
+
+        // Draw the box around the label
+        this._labelShape.graphics
+          .beginFill(this.color)
+          .drawRoundRect(0, 0, width, height, RADIUS)
+          .moveTo(p.x, p.y)
+          .bezierCurveTo(_x(06), _y(01), _x(10), _y(10), _x(10), _y(10))
+          .bezierCurveTo(_x(14), _y(19), _x(18), _y(39), _x(19), _y(40))
+          .bezierCurveTo(_x(20), _y(41), _x(20), _y(41), _x(21), _y(40))
+          .bezierCurveTo(_x(22), _y(39), _x(26), _y(19), _x(30), _y(10))
+          .bezierCurveTo(_x(34), _y(01), _x(40), _y(00), _x(40), _y(00))
+          .endFill();
+
+        this._width = width;
+        this._height = p.y + c.h;
+      },
+
+      updateSouth: function() {
+        // curve dimensions
+        var c = { w: 40, h: 40 };
+
+        // Width and Height of the label background
+        var width = Math.max(this._textWidth + (2*PADDING), c.w + 2*PADDING);
+        var height = Math.max(this._textHeight + (2*PADDING), this._editableText.lineHeight);
+
+        // Functions for getting the offset within a coordinate system
+        // that I'm capable of groking
+        var p = {
+          x: PADDING + (width - (2*PADDING))/2 - c.w/2,
+          y: PADDING + this._textHeight + (PADDING)
+        };
+
+        var _x = function(divisor) { return p.x + (c.w/(40/divisor)); }
+        var _y = function(divisor) { return p.y + (c.h/(40/divisor)); }
+
+        this._labelShape.graphics
+          .beginFill(this.color)
+          .drawRoundRect(0, 0, width, height, RADIUS)
+          .moveTo(p.x, p.y)
+          .bezierCurveTo(_x(06), _y(01), _x(10), _y(10), _x(10), _y(10))
+          .bezierCurveTo(_x(14), _y(19), _x(18), _y(39), _x(19), _y(40))
+          .bezierCurveTo(_x(20), _y(41), _x(20), _y(41), _x(21), _y(40))
+          .bezierCurveTo(_x(22), _y(39), _x(26), _y(19), _x(30), _y(10))
+          .bezierCurveTo(_x(34), _y(01), _x(40), _y(00), _x(40), _y(00));
+
+        this._width = width;
+        this._height = p.y + c.h;
+      },
+
+      updateEast: function() {
+        // curve dimensions
+        var c = { w: 38, h: (this._editableText.lineHeight + (1.3*PADDING)) };
+
+        // Width and Height of the label background
+        var width = Math.max(this._textWidth + (2*PADDING), c.w + 2*PADDING);
+        var height = Math.max(this._textHeight + (2*PADDING), this._editableText.lineHeight);
+
+        var p = {
+          x: this._textWidth + (2*PADDING),
+          y: PADDING + (this._textHeight/2) - (c.h/2)
+        };
+
+        var _x = function(divisor) { return p.x + (c.w/(40/divisor)); }
+        var _y = function(divisor) { return p.y + (c.h/(40/divisor)); }
+
+        this._labelShape.graphics
+          .beginFill(this.color)
+          .drawRoundRect(0, 0, width, height, RADIUS)
+          .moveTo(p.x, p.y)
+          .bezierCurveTo(_x(00), _y(00), _x(01), _y(06), _x(10), _y(10))
+          .bezierCurveTo(_x(19), _y(14), _x(38), _y(17), _x(40), _y(18))
+          .bezierCurveTo(_x(42), _y(19), _x(42), _y(21), _x(40), _y(22))
+          .bezierCurveTo(_x(38), _y(23), _x(19), _y(26), _x(10), _y(30))
+          .bezierCurveTo(_x(01), _y(34), _x(00), _y(40), _x(00), _y(40))
+          .endFill();
+
+        this._width = p.x + c.w;
+        this._height = height;
+      },
+
+      updateWest: function() {
+        // curve dimensions
+        var c = { w: 38, h: (this._editableText.lineHeight + (1.4*PADDING)) };
+
+        // Width and Height of the label background
+        var width = Math.max(this._textWidth + (2*PADDING), c.w + 2*PADDING);
+        var height = Math.max(this._textHeight + (2*PADDING), this._editableText.lineHeight);
+
+        var p = {
+          x: 0,
+          y: PADDING + (this._textHeight/2) - (c.h/2)
+        };
+
+        var _x = function(divisor) { return p.x - (c.w/(40/divisor)); }
+        var _y = function(divisor) { return p.y + (c.h/(40/divisor)); }
+
+        this._labelShape.graphics
+          .beginFill(this.color)
+          .drawRoundRect(0, 0, width, height, RADIUS)
+          .moveTo(p.x, p.y)
+          .bezierCurveTo(_x(00), _y(00), _x(01), _y(06), _x(10), _y(10))
+          .bezierCurveTo(_x(19), _y(14), _x(38), _y(17), _x(40), _y(18))
+          .bezierCurveTo(_x(42), _y(19), _x(42), _y(21), _x(40), _y(22))
+          .bezierCurveTo(_x(38), _y(23), _x(19), _y(26), _x(10), _y(30))
+          .bezierCurveTo(_x(01), _y(34), _x(00), _y(40), _x(00), _y(40))
+          .endFill();
+
+        this._width = this._textWidth + (2*PADDING);
+        this._height = height;
       }
     });
 

@@ -19,7 +19,7 @@ define([
       eventName: 'label_add',
 
       newStageObject: function() {
-        return new Label("label", '42px Helvetica,Arial', this.color);
+        return new Label("this", '42px Helvetica,Arial', this.color);
       }
     });
 

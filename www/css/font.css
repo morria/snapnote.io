@@ -27,7 +27,7 @@ Instead of a list of all class selectors,
 you can use the generic selector below, but it's slower:
 [class*="icon-"] {
 */
-.icon-text, .icon-box, .icon-arrow, .icon-image, .icon-save, .icon-send {
+.icon-image, .icon-arrow, .icon-text, .icon-rectangle, .icon-label, .icon-save, .icon-send {
 	font-family: 'snapnote';
 	speak: none;
 	font-style: normal;
@@ -37,21 +37,24 @@ you can use the generic selector below, but it's slower:
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
 }
-.icon-text:before {
-	content: "\21";
-}
-.icon-box:before {
-	content: "\22";
-}
-.icon-arrow:before {
-	content: "\23";
-}
 .icon-image:before {
-	content: "\24";
-}
-.icon-save:before {
 	content: "\25";
 }
-.icon-send:before {
+.icon-arrow:before {
 	content: "\26";
+}
+.icon-text:before {
+	content: "\28";
+}
+.icon-rectangle:before {
+	content: "\23";
+}
+.icon-label:before {
+	content: "\2b";
+}
+.icon-save:before {
+	content: "\21";
+}
+.icon-send:before {
+	content: "\22";
 }

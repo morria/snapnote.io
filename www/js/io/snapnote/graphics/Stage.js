@@ -161,7 +161,7 @@ define(['Underscore', 'Easel'],
       sortChildrenByType: function() {
         _.each(this.stageObjects.children, function(child, i) {
           child.sortValue = i;
-          if (child.name !== 'Image') {
+          if (child.name !== 'SImage') {
             child.sortValue += 10000;
           }
           if (child.name !== 'Text') {

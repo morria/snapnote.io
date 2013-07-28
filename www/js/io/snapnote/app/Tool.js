@@ -101,6 +101,9 @@ define([
           y: (this.stage.height/4) - (stageObject.height*stageObject.scale/2) + (Math.random()*50 - 25)
         });
         this.stage.addStageObject(stageObject);
+
+        stageObject.selected = true;
+
         this.stage.update();
       },
 
