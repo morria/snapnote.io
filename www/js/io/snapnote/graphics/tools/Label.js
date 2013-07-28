@@ -23,6 +23,12 @@ define([
       name: 'Label',
 
       /**
+       * @property padding
+       * @type Number
+       */
+      padding: PADDING,
+
+      /**
         * @property width
         * @type Number
         */

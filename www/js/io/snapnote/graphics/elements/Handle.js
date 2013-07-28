@@ -42,7 +42,9 @@ define(['Underscore', 'Easel'],
             delta: {
               x: (event.stageX + offset.x) - event.target.x,
               y: (event.stageY + offset.y) - event.target.y
-            }
+            },
+            stageX: event.stageX,
+            stageY: event.stageY
           }, this);
           event.target.getStage().update();
 

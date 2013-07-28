@@ -20,7 +20,6 @@ define([
 
       newStageObject: function(event) {
         var label = $(event.target).closest('.tool-label').attr('data-label');
-        console.log($(event.target), label);
 
         return new Label(label,
           '42px Helvetica,Arial', this.color);

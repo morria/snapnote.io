@@ -14,7 +14,14 @@ define([
        * @property angle
        * @type Number
        */
-      angle: 0
+      angle: 0,
+
+      /**
+       * @property direction
+       * @type Direction
+       */
+      direction: Direction.SOUTH
+
     });
 
     var initialize = LabelHandles.prototype.initialize;
@@ -33,26 +40,22 @@ define([
       var directionHandle = new Handle();
       directionHandle.addEventListener('move', _.bind(function(event) {
         var center = {
-          x: (this.target.width * this.target.scale)/2,
-          y: (this.target.height * this.target.scale)/2
-        }
+          x: this.target._editableText.x + (this.target._editableText.width * this.target.scale)/2,
+          y: this.target._editableText.y + (this.target._editableText.height * this.target.scale)/2
+        };
 
-        var x =
-          (directionHandle.x + event.delta.x) - center.x;
+        var mouse = this.globalToLocal(event.stageX, event.stageY);
 
-        var y =
-          (directionHandle.y + event.delta.y) - center.y;
-
-        this.angle = Math.atan2(x,y);
+        this.angle = Math.atan2(mouse.x - center.x, mouse.y - center.y);
 
         if (this.angle >= (-Math.PI/4) && this.angle < (Math.PI/4)) {
-          this.target.direction = Direction.SOUTH;
+          this.direction = this.target.direction = Direction.SOUTH;
         } else if (this.angle < (-Math.PI/4) && this.angle > (-3 * Math.PI/4)) {
-          this.target.direction = Direction.WEST;
+          this.direction = this.target.direction = Direction.WEST;
         } else if (this.angle >= (Math.PI/4) && this.angle < (3 * Math.PI/4)) {
-          this.target.direction = Direction.EAST;
+          this.direction = this.target.direction = Direction.EAST;
         } else {
-          this.target.direction = Direction.NORTH;
+          this.direction = this.target.direction = Direction.NORTH;
         }
 
       }, this));
@@ -60,18 +63,21 @@ define([
 
       this.addEventListener('tick', _.bind(function(event) {
         neHandle.set({
-          x: (neHandle.width/2) + (this.target.width * this.target.scale) - (Math.round(neHandle.height)),
+          x: (neHandle.width/2) + (this.target.width * this.target.scale) - (Math.round(neHandle.height)) - ((this.direction == Direction.EAST ? 38 : 0)*this.target.scale),
           y: -(neHandle.height/2)
         });
 
         var center = {
-          x: (this.target.width * this.target.scale)/2,
-          y: (this.target.height * this.target.scale)/2
-        }
+          x: this.target._editableText.x + (this.target._editableText.width * this.target.scale)/2,
+          y: this.target._editableText.y + (this.target._editableText.height * this.target.scale)/2 + (this.target._editableText.lineHeight * 0.1)
+        };
+
+        var radiusX = this.target._editableText.width/2 + 40 + (2*this.target.padding);
+        var radiusY = this.target._editableText.height/2 + 40 + (2*this.target.padding);
 
         directionHandle.set({
-          x: center.x + (Math.sin(this.angle)*70*this.target.scale),
-          y: center.y + (Math.cos(this.angle)*70*this.target.scale)
+          x: center.x + (Math.sin(this.angle)*radiusX*this.target.scale) - (directionHandle.width/2),
+          y: center.y + (Math.cos(this.angle)*radiusY*this.target.scale) - (directionHandle.height/2)
         });
 
       }, this));
