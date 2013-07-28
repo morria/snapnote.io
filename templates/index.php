@@ -41,11 +41,11 @@
           <!--
           --!><span class="color" style="background-color: #ff4f00" data-shadow-color="#000"></span><!--
           --!><span class="color" style="background-color: #000" data-shadow-color="#666"></span><!--
+          --!><span class="color" style="background-color: #fff" data-shadow-color="#000"></span><!--
           --!><span class="color" style="background-color: #3498DB" data-shadow-color="#000"></span><!--
           --!><span class="color" style="background-color: #f1c40f" data-shadow-color="#000"></span><!--
           --!><span class="color" style="background-color: #63bc22" data-shadow-color="#000"></span><!--
           --!><span class="color" style="background-color: #ea4483" data-shadow-color="#000"></span><!--
-          --!><span class="color" style="background-color: #fff" data-shadow-color="#000"></span><!--
           -->
         </div>
         <ul id="tools">
