@@ -67,7 +67,7 @@ define([
       this.height = this.documentHeight;
 
       this.toolColor = '#ff4f00';
-      this.toolShadowColor = '#000';
+      // this.toolShadowColor = '#000';
 
       // Do an initial rendering of the stage
       this._stage.update();

@@ -55,7 +55,6 @@ define([
        * is deselected on the stage
        */
       _onDeselect: function(event) {
-        console.log('called', this);
         this._editableText.editable = false;
 
         if (this._editableText.text == '') {
@@ -133,7 +132,6 @@ define([
       // Listen for this object being selected and
       // deselected on the Stage
       this.addEventListener('select', _.bind(this._onSelect, this));
-      console.error('binding');
       this.addEventListener('deselect', _.bind(this._onDeselect, this));
       this.addEventListener('remove', _.bind(this._onRemove, this));
 

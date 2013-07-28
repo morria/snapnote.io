@@ -19,7 +19,7 @@ define([
       eventName: 'rectangle_add',
 
       newStageObject: function() {
-        return new Rectangle(100, 80);
+        return new Rectangle(100, 61);
       }
     });
 

@@ -51,6 +51,31 @@ define([
       },
 
       /**
+       * A CSS color
+       *
+       * @prooperty color
+       * @type String
+       */
+      setColor: function(color) {
+        this._color = color;
+
+        this._editableText.color = '#fff';
+        console.log(color);
+
+        if (color == 'rgb(255, 255, 255)') {
+          this._editableText.color = '#555';
+        } else if (color == 'rgb(241, 196, 15)') {
+          this._editableText.color = '#333';
+        }
+
+        this.shadow = null;
+        this.content.shadow = null;
+        this._editableText.shadow = null;
+
+        this.update();
+      },
+
+      /**
         * Redraw the rectangle with current
         * parameters
         */
