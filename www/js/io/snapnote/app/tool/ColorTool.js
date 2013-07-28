@@ -10,8 +10,12 @@ define([
       this.target.find('.color').click(_.bind(function(event) {
         this.snapNote.toolColor =
           $(event.target).css('background-color');
+
+        /*
         this.snapNote.toolShadowColor =
           $(event.target).attr('data-shadow-color');
+        */
+
         mixpanel.track(this.eventName);
       }, this));
     }

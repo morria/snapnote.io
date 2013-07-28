@@ -133,6 +133,7 @@ define([
        */
       getToolShadowColor: function() { return this._toolShadowColor; },
       setToolShadowColor: function(color) {
+        return;
         this._toolShadowColor = color;
         this._arrowTool.shadowColor = color;
         this._rectangleTool.shadowColor = color;
