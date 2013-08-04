@@ -21,7 +21,7 @@
     <link rel="<?= $css['rel'] ?>" type="<?= $css['media'] ?>"
       href="css/mobile/view.<?= $css['suffix'] ?>"
       type="text/css"
-      media="screen and (max-width: 530px)" />
+      media="screen and (max-width: 630px)" />
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-capable"
