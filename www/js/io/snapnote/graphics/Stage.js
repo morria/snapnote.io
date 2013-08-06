@@ -1,5 +1,5 @@
-define(['Underscore', 'Easel'],
-  function(_, Easel) {
+define(['jquery', 'Underscore', 'Easel'],
+  function($, _, Easel) {
     var Stage = function(width, height) {
       this.initialize(width, height);
     }
