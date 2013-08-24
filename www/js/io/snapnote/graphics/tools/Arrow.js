@@ -30,33 +30,33 @@ define([
         var height = (Math.max(Math.abs(this.dy), HEAD_LENGTH) * this.scale);
         var border = (STROKE_WIDTH/2);
 
-        if (this.dx > 0 && this.dy > 0) {
+        if (this.dx >= 0 && this.dy >= 0) {
           return {
-            top: this.y - border,
-            left: this.x - border,
-            bottom: this.y + height + border,
-            right: this.x + width + border
+            top: this.y - border - HEAD_LENGTH,
+            left: this.x - border - HEAD_LENGTH,
+            bottom: this.y + height + border + HEAD_LENGTH,
+            right: this.x + width + border + HEAD_LENGTH
           };
-        } else if (this.dx < 0 && this.dy > 0) {
+        } else if (this.dx <= 0 && this.dy >= 0) {
           return {
-            top: this.y - border,
-            left: this.x - width - border,
-            bottom: this.y + height + border,
-            right: this.x + border
+            top: this.y - border - HEAD_LENGTH,
+            left: this.x - width - border - HEAD_LENGTH,
+            bottom: this.y + height + border + HEAD_LENGTH,
+            right: this.x + border + HEAD_LENGTH
           };
-        } else if (this.dx > 0 && this.dy < 0) {
+        } else if (this.dx >= 0 && this.dy <= 0) {
           return {
-            top: this.y - height - border,
-            left: this.x - border,
-            bottom: this.y + border,
-            right: this.x + width + border
+            top: this.y - height - border - HEAD_LENGTH,
+            left: this.x - border - HEAD_LENGTH,
+            bottom: this.y + border + HEAD_LENGTH,
+            right: this.x + width + border + HEAD_LENGTH
           };
         } else {
           return {
-            top: this.y - height - border,
-            left: this.x - width - border,
-            bottom: this.y + border,
-            right: this.x + border
+            top: this.y - height - border - HEAD_LENGTH,
+            left: this.x - width - border - HEAD_LENGTH,
+            bottom: this.y + border + HEAD_LENGTH,
+            right: this.x + border + HEAD_LENGTH
           };
         }
       },
