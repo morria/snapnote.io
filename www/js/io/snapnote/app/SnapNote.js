@@ -3,6 +3,7 @@ define([
     'Underscore',
     'Easel',
     'io/snapnote/graphics/Stage',
+    'io/snapnote/app/Analytics',
     'io/snapnote/app/DesktopImage',
     'io/snapnote/app/DragonDrop',
     'io/snapnote/app/Paste',
@@ -14,7 +15,7 @@ define([
     'io/snapnote/app/tool/RectangleTool',
     'io/snapnote/app/tool/TextTool'
   ],
-  function($, _, Easel, Stage, DesktopImage, DragonDrop, Paste, Save, ArrowTool, ColorTool, ImageTool, LabelTool, RectangleTool, TextTool) {
+  function($, _, Easel, Stage, Analytics, DesktopImage, DragonDrop, Paste, Save, ArrowTool, ColorTool, ImageTool, LabelTool, RectangleTool, TextTool) {
 
     var SnapNote = function() {
       this._canvas = $('#' + this.canvasId);
