@@ -14,8 +14,9 @@ require.config({
   }
 });
 
-require(['io/snapnote/app/SnapNote'],
-  function(SnapNote) {
+require(['io/snapnote/app/SnapNote', 'io/snapnote/app/Analytics'],
+  function(SnapNote, Analytics) {
     var snapNote = new SnapNote();
+    var analytics = new Analytics();
   }
 );

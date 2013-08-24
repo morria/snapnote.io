@@ -3,24 +3,31 @@ define([
     'Underscore'
   ],
   function($, _) {
-    $('#link-author').click(trackOutboundEvent);
-    $('#link-app').click(trackOutboundEvent);
 
-    /**
-     * Interrupt outbound links, tracking the event before
-     * going
-     */
-    function trackOutboundEvent(event) {
-      event.preventDefault();
+    var Analytics = function() {
+      $('#link-author').click(trackOutboundEvent);
+      $('#link-app').click(trackOutboundEvent);
 
-      try {
-        ga('send', 'event', 'outbound', $(event.target).data('name'));
-      } catch(exception) {}
+      /**
+      * Interrupt outbound links, tracking the event before
+      * going
+      */
+      function trackOutboundEvent(event) {
+        event.preventDefault();
 
-      setTimeout(function() {
-        document.location.href = $(event.target).attr('href');
-      }, 100);
+        try {
+          ga('send', 'event', 'outbound', $(event.target).data('name'));
+        } catch(exception) {}
+
+        setTimeout(function() {
+          document.location.href = $(event.target).attr('href');
+        }, 100);
+      }
     }
+
+    Analytics.prototype = {};
+
+    return Analytics;
   }
 );
 
