@@ -6,6 +6,7 @@ define([
   function(_, Easel, StageObject, Handles) {
 
     var STROKE_WIDTH = 8;
+    var HEAD_LENGTH = 30;
 
     var Arrow = function(dx, dy, color) {
         this.initialize(dx, dy, color);
@@ -17,6 +18,48 @@ define([
        * @type String
        */
       name: 'Arrow',
+
+      /**
+        * @property boundingBox
+        * @type Number
+        * Returns the top, right, bottom and left positions
+        * of the stage object
+        */
+      getBoundingBox: function() {
+        var width = (Math.max(Math.abs(this.dx), HEAD_LENGTH) * this.scale);
+        var height = (Math.max(Math.abs(this.dy), HEAD_LENGTH) * this.scale);
+        var border = (STROKE_WIDTH/2);
+
+        if (this.dx > 0 && this.dy > 0) {
+          return {
+            top: this.y - border,
+            left: this.x - border,
+            bottom: this.y + height + border,
+            right: this.x + width + border
+          };
+        } else if (this.dx < 0 && this.dy > 0) {
+          return {
+            top: this.y - border,
+            left: this.x - width - border,
+            bottom: this.y + height + border,
+            right: this.x + border
+          };
+        } else if (this.dx > 0 && this.dy < 0) {
+          return {
+            top: this.y - height - border,
+            left: this.x - border,
+            bottom: this.y + border,
+            right: this.x + width + border
+          };
+        } else {
+          return {
+            top: this.y - height - border,
+            left: this.x - width - border,
+            bottom: this.y + border,
+            right: this.x + border
+          };
+        }
+      },
 
       /**
        * @property dx
@@ -61,8 +104,8 @@ define([
           .setStrokeStyle(STROKE_WIDTH, 1)
           .beginStroke(this.color)
           .moveTo(originX, originX).lineTo(originX + this.dx, originX + this.dy)
-          .moveTo(originX, originX).lineTo(originX + Math.cos(a1)*30, + originY + Math.sin(a1)*30)
-          .moveTo(originX, originY).lineTo(originX + Math.cos(a2)*30, + originY + Math.sin(a2)*30)
+          .moveTo(originX, originX).lineTo(originX + Math.cos(a1)*HEAD_LENGTH, + originY + Math.sin(a1)*HEAD_LENGTH)
+          .moveTo(originX, originY).lineTo(originX + Math.cos(a2)*HEAD_LENGTH, + originY + Math.sin(a2)*HEAD_LENGTH)
           .endStroke();
 
         this._arrow.shadow = this.shadow;

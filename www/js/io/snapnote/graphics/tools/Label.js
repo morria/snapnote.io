@@ -57,6 +57,51 @@ define([
       },
 
       /**
+        * @property boundingBox
+        * @type Number
+        * Returns the top, right, bottom and left positions
+        * of the stage object
+        */
+      getBoundingBox: function() {
+        var height = (this.height + 4*PADDING + STROKE_WIDTH) * this.scale;
+        var width = (this.width + STROKE_WIDTH) * this.scale;
+
+        var pinSize = (40 * this.scale);
+
+        if (this.direction == Direction.SOUTH) {
+          return {
+            top: this.y,
+            left: this.x,
+            bottom: this.y + height + pinSize,
+            right: this.x + width
+          };
+        } else if (this.direction == Direction.EAST) {
+          return {
+            top: this.y,
+            left: this.x,
+            bottom: this.y + height,
+            right: this.x + width + pinSize
+          };
+        } else if (this.direction == Direction.NORTH) {
+          return {
+            top: this.y - pinSize,
+            left: this.x,
+            bottom: this.y + height,
+            right: this.x + width
+          };
+        } else if (this.direction == Direction.WEST) {
+          return {
+            top: this.y,
+            left: this.x - pinSize,
+            bottom: this.y + height,
+            right: this.x + width
+          };
+        }
+
+        throw new String("Unknown direction " + this.direction);
+      },
+
+      /**
        * A CSS color
        *
        * @prooperty color

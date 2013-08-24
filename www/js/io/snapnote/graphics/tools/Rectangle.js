@@ -20,6 +20,21 @@ define([
       name: 'Rectangle',
 
       /**
+        * @property boundingBox
+        * @type Number
+        * Returns the top, right, bottom and left positions
+        * of the stage object
+        */
+      getBoundingBox: function() {
+        return {
+          top: this.y - (STROKE_WIDTH/2),
+          left: this.x - (STROKE_WIDTH/2),
+          bottom: this.y + (this.height * this.scale) + (STROKE_WIDTH/2),
+          right: this.x + (this.width * this.scale) + (STROKE_WIDTH/2)
+        };
+      },
+
+      /**
         * Redraw the rectangle with current
         * parameters
         */

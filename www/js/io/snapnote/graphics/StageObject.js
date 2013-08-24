@@ -31,6 +31,21 @@ define([
       },
 
       /**
+        * @property boundingBox
+        * @type Number
+        * Returns the top, right, bottom and left positions
+        * of the stage object
+        */
+      getBoundingBox: function() {
+        return {
+          top: this.y,
+          left: this.x,
+          bottom: this.y + (this.height * this.scale),
+          right: this.x + (this.width * this.scale)
+        };
+      },
+
+      /**
        * A CSS color
        *
        * @prooperty color
@@ -179,6 +194,9 @@ define([
       Object.defineProperty(this, 'height', {
         get: this.getHeight.bind(this),
         set: this.setHeight.bind(this)
+      });
+      Object.defineProperty(this, 'boundingBox', {
+        get: this.getBoundingBox.bind(this),
       });
       Object.defineProperty(this, 'color', {
         get: this.getColor.bind(this),

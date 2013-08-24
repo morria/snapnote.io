@@ -32,10 +32,12 @@ define(['jquery', 'Underscore', 'Easel'],
         }
 
         _.each(this.stageObjects.children, function(stageObject, i) {
-          box.minX = Math.min(stageObject.x, box.minX);
-          box.minY = Math.min(stageObject.y, box.minY);
-          box.maxX = Math.max(stageObject.x + (stageObject.width * stageObject.scale), box.maxX);
-          box.maxY = Math.max(stageObject.y + (stageObject.height * stageObject.scale), box.maxY);
+          var objectBox = stageObject.boundingBox;
+
+          box.minX = Math.min(objectBox.left, box.minX);
+          box.minY = Math.min(objectBox.top, box.minY);
+          box.maxX = Math.max(objectBox.right, box.maxX);
+          box.maxY = Math.max(objectBox.bottom, box.maxY);
         });
 
         return box;
