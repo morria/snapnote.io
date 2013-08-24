@@ -16,7 +16,8 @@ define([
           $(event.target).attr('data-shadow-color');
         */
 
-        mixpanel.track(this.eventName);
+        ga('send', 'event', 'annotation', this.eventName, null, null, false);
+
       }, this));
     }
 

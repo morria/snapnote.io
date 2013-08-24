@@ -31,11 +31,13 @@ define([
       eventName: 'image_add',
 
       onClickTrigger: function(event) {
-        mixpanel.track(this.eventName + '_select');
+        ga('send', 'event', 'annotation', this.eventName + '_select', null, null, false);
+
       },
 
       _onFileSelectorChange: function(event) {
-        mixpanel.track(this.eventName + '');
+        ga('send', 'event', 'annotation', this.eventName, null, null, false);
+
         var files = $(event.target).prop('files');
         _.each(files, _.bind(function(file) {
           var reader = new FileReader();

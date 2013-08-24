@@ -94,10 +94,6 @@ define([
         Easel.Touch.enable(this._stage);
         window.scrollTo(0, 1);
       }
-
-      mixpanel.track_links('#link-home', 'footer home');
-      mixpanel.track_links('#link-author', 'author');
-      mixpanel.track_links('#link-app', 'download app');
     }
 
     SnapNote.prototype = {
@@ -194,7 +190,7 @@ define([
         this.height = this.documentHeight;
 
         if (!this._loggedResize) {
-          mixpanel.track('resize_screen');
+          ga('send', 'event', 'annotation', 'resize_screen', null, null, false);
           this._loggedResize = true;
         }
       }

@@ -27,7 +27,7 @@ define([
        * Listener for when 'Save' is clicked on
        */
       _onClickTrigger: function(event) {
-        mixpanel.track('save');
+        ga('send', 'event', 'annotation', 'save', null, null, false);
 
         var box = this.stage.boundingBox;
         if (this.stage.stageObjects.getNumChildren() < 1

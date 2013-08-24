@@ -111,7 +111,8 @@ define([
        * Listener for when the trigger is clicked
        */
       onClickTrigger: function(event) {
-        mixpanel.track(this.eventName);
+        ga('send', 'event', 'annotation', this.eventName, null, null, false);
+
         this.addObjectToStage(event);
       }
     };
