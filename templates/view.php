@@ -67,6 +67,7 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-42413186-1', 'snapnote.io');
       ga('send', 'pageview');
+      ga('send', 'event', 'page', 'view');
     </script>
     <!--
     <?php if (ENVIRONMENT == 'development') { ?>
