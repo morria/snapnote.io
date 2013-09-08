@@ -12,7 +12,7 @@
     <meta property="og:description" content="<?= $host_name ?> - Annotate and Share Image and Screenshots" />
     <meta property="og:site_name" content="<?= $host_name ?>" />
     <meta property="fb:admins" content="209372" />
-    <meta property="og:image" content="" />
+    <meta property="og:image" content="/img/icon.png" />
     <meta itemprop="name" content="<?= $host_name ?>" />
     <meta itemprop="description" content="<?= $host_name ?> - Annotate and Share Images and Screenshots" />
     <link rel="icon" type="image/png" href="img/icon.png" />

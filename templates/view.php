@@ -7,12 +7,15 @@
     <title><?= $host_name ?> - Annotate and Share Images and Screenshots</title>
     <meta name="description" content="<?= $host_name ?> - Annotate and Share Images and Screenshots" />
     <meta name="viewport" content="width=device-width" />
-    <meta property="og:title" content="<?= $host_name ?>" />
+    <meta property="og:title" content="<?= $host_name ?> - Annotate and Share Images and Screenshots" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="<?= $host_name ?> - Annotate and Share Image and Screenshots" />
     <meta property="og:site_name" content="<?= $host_name ?>" />
     <meta property="fb:admins" content="209372" />
-    <meta property="og:image" content="" />
+    <meta property="og:image" content="<?= $url ?>" />
+    <meta property="twitter:title" content="<?= $host_name ?> - Annotate and Share Images and Screenshots" />
+    <meta property="twitter:site:id" content="@asmorrison" />
+    <meta property="twitter:image:src" content="<?= $url ?>" />
     <meta itemprop="name" content="<?= $host_name ?>" />
     <meta itemprop="description" content="<?= $host_name ?> - Annotate and Share Images and Screenshots" />
     <link rel="icon" type="image/png" href="img/icon.png" />
