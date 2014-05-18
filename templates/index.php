@@ -39,18 +39,18 @@
       <div class="container">
       <div id="color-chooser" <?php if(!$is_ohsnap): ?>data-default='#ff4f00'<?php else: ?>data-default="#ea4483"<?php endif; ?>>
           <!--
-          --!><span class="color" style="background-color: #ff4f00" data-shadow-color="#000"></span><!--
-          --!><span class="color" style="background-color: #000" data-shadow-color="#666"></span><!--
-          --!><span class="color" style="background-color: #fff" data-shadow-color="#000"></span><!--
-          --!><span class="color" style="background-color: #3498DB" data-shadow-color="#000"></span><!--
-          --!><span class="color" style="background-color: #f1c40f" data-shadow-color="#000"></span><!--
-          --!><span class="color" style="background-color: #63bc22" data-shadow-color="#000"></span><!--
-          --!><span class="color" style="background-color: #ea4483" data-shadow-color="#000"></span><!--
+          --><span class="color" style="background-color: #ff4f00" data-shadow-color="#000"></span><!--
+          --><span class="color" style="background-color: #000" data-shadow-color="#666"></span><!--
+          --><span class="color" style="background-color: #fff" data-shadow-color="#000"></span><!--
+          --><span class="color" style="background-color: #3498DB" data-shadow-color="#000"></span><!--
+          --><span class="color" style="background-color: #f1c40f" data-shadow-color="#000"></span><!--
+          --><span class="color" style="background-color: #63bc22" data-shadow-color="#000"></span><!--
+          --><span class="color" style="background-color: #ea4483" data-shadow-color="#000"></span><!--
           -->
         </div>
         <ul id="tools">
           <li>
-            <input type="file" id="tool-image-select" accept="image/*" multiple hidden class="hidden" />
+            <input type="file" id="tool-image-select" accept="image/*" hidden class="hidden" />
             <button id="tool-image">
               <span class="icon icon-image"></span>
               <label>Upload Image</label>

@@ -173,13 +173,13 @@ define([
         // Draw the box around the label
         this._labelShape.graphics
           .beginFill(this.color)
-          .drawRoundRect(0, 0, width, height, RADIUS)
           .moveTo(p.x, p.y)
           .bezierCurveTo(_x(06), _y(01), _x(10), _y(10), _x(10), _y(10))
           .bezierCurveTo(_x(14), _y(19), _x(18), _y(39), _x(19), _y(40))
           .bezierCurveTo(_x(20), _y(41), _x(20), _y(41), _x(21), _y(40))
           .bezierCurveTo(_x(22), _y(39), _x(26), _y(19), _x(30), _y(10))
           .bezierCurveTo(_x(34), _y(01), _x(40), _y(00), _x(40), _y(00))
+          .drawRoundRect(0, 0, width, height, RADIUS)
           .endFill();
 
         this._width = width;
@@ -206,13 +206,14 @@ define([
 
         this._labelShape.graphics
           .beginFill(this.color)
-          .drawRoundRect(0, 0, width, height, RADIUS)
           .moveTo(p.x, p.y)
           .bezierCurveTo(_x(06), _y(01), _x(10), _y(10), _x(10), _y(10))
           .bezierCurveTo(_x(14), _y(19), _x(18), _y(39), _x(19), _y(40))
           .bezierCurveTo(_x(20), _y(41), _x(20), _y(41), _x(21), _y(40))
           .bezierCurveTo(_x(22), _y(39), _x(26), _y(19), _x(30), _y(10))
-          .bezierCurveTo(_x(34), _y(01), _x(40), _y(00), _x(40), _y(00));
+          .bezierCurveTo(_x(34), _y(01), _x(40), _y(00), _x(40), _y(00))
+          .drawRoundRect(0, 0, width, height, RADIUS)
+          .endFill();
 
         this._width = width;
         this._height = p.y + c.h;
@@ -236,13 +237,13 @@ define([
 
         this._labelShape.graphics
           .beginFill(this.color)
-          .drawRoundRect(0, 0, width, height, RADIUS)
           .moveTo(p.x, p.y)
           .bezierCurveTo(_x(00), _y(00), _x(01), _y(06), _x(10), _y(10))
           .bezierCurveTo(_x(19), _y(14), _x(38), _y(17), _x(40), _y(18))
           .bezierCurveTo(_x(42), _y(19), _x(42), _y(21), _x(40), _y(22))
           .bezierCurveTo(_x(38), _y(23), _x(19), _y(26), _x(10), _y(30))
           .bezierCurveTo(_x(01), _y(34), _x(00), _y(40), _x(00), _y(40))
+          .drawRoundRect(0, 0, width, height, RADIUS)
           .endFill();
 
         this._width = p.x + c.w;
@@ -251,7 +252,7 @@ define([
 
       updateWest: function() {
         // curve dimensions
-        var c = { w: 38, h: (this._editableText.lineHeight + (1.4*PADDING)) };
+        var c = { w: 38, h: (this._editableText.lineHeight + (1.3*PADDING)) };
 
         // Width and Height of the label background
         var width = Math.max(this._textWidth + (2*PADDING), c.w + 2*PADDING);
@@ -267,13 +268,13 @@ define([
 
         this._labelShape.graphics
           .beginFill(this.color)
-          .drawRoundRect(0, 0, width, height, RADIUS)
           .moveTo(p.x, p.y)
           .bezierCurveTo(_x(00), _y(00), _x(01), _y(06), _x(10), _y(10))
           .bezierCurveTo(_x(19), _y(14), _x(38), _y(17), _x(40), _y(18))
           .bezierCurveTo(_x(42), _y(19), _x(42), _y(21), _x(40), _y(22))
           .bezierCurveTo(_x(38), _y(23), _x(19), _y(26), _x(10), _y(30))
           .bezierCurveTo(_x(01), _y(34), _x(00), _y(40), _x(00), _y(40))
+          .drawRoundRect(0, 0, width, height, RADIUS)
           .endFill();
 
         this._width = this._textWidth + (2*PADDING);
@@ -296,6 +297,8 @@ define([
 
       this.handles.removeAllChildren();
       this.handles.addChild(new Handles());
+
+      this.snapToPixel = true;
     }
 
     return Label;

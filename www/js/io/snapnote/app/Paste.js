@@ -15,7 +15,15 @@ define([
         ga('send', 'event', 'annotation', 'paste_file', null, null, false);
 
         var clipboardData = event.originalEvent.clipboardData;
+
         var file = clipboardData.items[0].getAsFile();
+
+        // Make sure we have an image on our hands and not
+        // some other kind of clipboard data
+        if (!file) {
+          return;
+        }
+
         var reader = new FileReader();
         reader.onload = (function(file, stage) {
             return function(event) {
