@@ -19,23 +19,23 @@ define([
       headHandle.addEventListener('move', _.bind(function(event) {
         this.target.x += event.delta.x;
         this.target.y += event.delta.y;
-        this.target.dx -= event.delta.x;
-        this.target.dy -= event.delta.y;
+        this.target.dx -= (event.delta.x / this.target.scale);
+        this.target.dy -= (event.delta.y / this.target.scale);
       }, this));
       this.addChild(headHandle);
 
       var tailHandle = new Handle();
       tailHandle.addEventListener('move', _.bind(function(event) {
-        this.target.dx += event.delta.x;
-        this.target.dy += event.delta.y;
+        this.target.dx += (event.delta.x / this.target.scale);
+        this.target.dy += (event.delta.y / this.target.scale);
       }, this));
       this.addChild(tailHandle);
 
       this.addEventListener('tick', _.bind(function(event) {
         headHandle.x = -Math.round(headHandle.width/2);
         headHandle.y = -Math.round(headHandle.height/2);
-        tailHandle.x = this.target.dx - Math.round(tailHandle.width/2);
-        tailHandle.y = this.target.dy - Math.round(tailHandle.height/2);
+        tailHandle.x = (this.target.dx * this.target.scale) - Math.round(tailHandle.width/2);
+        tailHandle.y = (this.target.dy * this.target.scale) - Math.round(tailHandle.height/2);
       }, this));
     }
 

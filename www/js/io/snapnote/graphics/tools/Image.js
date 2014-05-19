@@ -113,6 +113,7 @@ define([
       }, this));
 
       this._bitmap = new Easel.Bitmap(image);
+
       this.content.addChild(this._bitmap);
 
       this.handles.addChild(new Handles());

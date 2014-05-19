@@ -44,6 +44,16 @@ define(['jquery', 'Underscore', 'Easel'],
       },
 
       /**
+       * @property scale
+       * @type Number
+       */
+      getScale: function() { return this.content.scaleX; },
+      setScale: function(scale) {
+        this.scaleX = scale;
+        this.scaleY = Math.abs(scale);
+      },
+
+      /**
        * @property width
        * @type Number
        */
@@ -82,6 +92,21 @@ define(['jquery', 'Underscore', 'Easel'],
       },
 
       /**
+       * The ratio of physical device pixels per canvas pixel. This
+       * is how we account for retina displays.
+       */
+      getDeviceCanvasPixelRatio: function() {
+        return this._deviceCanvasPixelRatio;
+      },
+      setDeviceCanvasPixelRatio: function(deviceCanvasPixelRatio) {
+        this._deviceCanvasPixelRatio = deviceCanvasPixelRatio;
+
+        _.each(this.stageObjects.children, function(stageObject, i) {
+          stageObject.deviceCanvasPixelRatio = deviceCanvasPixelRatio;
+        });
+      },
+
+      /**
        * @property color
        * @type Number
        */
@@ -100,7 +125,6 @@ define(['jquery', 'Underscore', 'Easel'],
         this._toolColor = color;
         this._update();
       },
-
 
       /**
        * @property dataURL
@@ -154,6 +178,12 @@ define(['jquery', 'Underscore', 'Easel'],
           stage: this,
           stageObject: stageObject
         });
+
+        // Set the initial scaling of the new stage
+        // object to account for the ratio of pixels
+        // for the canvas by pixels for the physical
+        // device
+        stageObject.deviceCanvasPixelRatio = this.deviceCanvasPixelRatio;
       },
 
       /**
@@ -230,6 +260,7 @@ define(['jquery', 'Underscore', 'Easel'],
     Stage.prototype.initialize = function(width, height) {
       this._width = 0;
       this._height = 0;
+      this._deviceCanvasPixelRatio = 1.0;
       this._color = '#fff';
 
       // Add a background for clickability
@@ -262,6 +293,10 @@ define(['jquery', 'Underscore', 'Easel'],
       Object.defineProperty(this, 'boundingBox', {
         get: this.getBoundingBox.bind(this)
       });
+      Object.defineProperty(this, 'scale', {
+        get: this.getScale.bind(this),
+        set: this.setScale.bind(this)
+      });
       Object.defineProperty(this, 'width', {
         get: this.getWidth.bind(this),
         set: this.setWidth.bind(this)
@@ -269,6 +304,10 @@ define(['jquery', 'Underscore', 'Easel'],
       Object.defineProperty(this, 'height', {
         get: this.getHeight.bind(this),
         set: this.setHeight.bind(this)
+      });
+      Object.defineProperty(this, 'deviceCanvasPixelRatio', {
+        get: this.getDeviceCanvasPixelRatio.bind(this),
+        set: this.setDeviceCanvasPixelRatio.bind(this)
       });
       Object.defineProperty(this, 'color', {
         get: this.getColor.bind(this),

@@ -31,6 +31,27 @@ define([
       },
 
       /**
+       * The ratio of physical device pixels per canvas pixel. This
+       * is how we account for retina displays.
+       */
+      getDeviceCanvasPixelRatio: function() {
+        return this._deviceCanvasPixelRatio;
+      },
+      setDeviceCanvasPixelRatio: function(deviceCanvasPixelRatio) {
+        // Reset the scale
+        this.scale /= this._deviceCanvasPixelRatio;
+
+        this._deviceCanvasPixelRatio = deviceCanvasPixelRatio;
+
+        // Set the pixel ratio for the handles
+        _.each(this.handles.children, function(handles, i) {
+          handles.deviceCanvasPixelRatio = deviceCanvasPixelRatio;
+        });
+
+        this.scale *= this._deviceCanvasPixelRatio;
+      },
+
+      /**
         * @property boundingBox
         * @type Number
         * Returns the top, right, bottom and left positions
@@ -78,7 +99,9 @@ define([
        * @property scale
        * @type Number
        */
-      getScale: function() { return this.content.scaleX; },
+      getScale: function() {
+        return this.content.scaleX;
+      },
       setScale: function(scale) {
         this.content.scaleX = scale;
         this.content.scaleY = Math.abs(scale);
@@ -186,6 +209,7 @@ define([
       this._color = '#000';
       this._scale = 1.0;
       this._selected = false;
+      this._deviceCanvasPixelRatio = 1.0;
 
       Object.defineProperty(this, 'width', {
         get: this.getWidth.bind(this),
@@ -194,6 +218,10 @@ define([
       Object.defineProperty(this, 'height', {
         get: this.getHeight.bind(this),
         set: this.setHeight.bind(this)
+      });
+      Object.defineProperty(this, 'deviceCanvasPixelRatio', {
+        get: this.getDeviceCanvasPixelRatio.bind(this),
+        set: this.setDeviceCanvasPixelRatio.bind(this)
       });
       Object.defineProperty(this, 'boundingBox', {
         get: this.getBoundingBox.bind(this),

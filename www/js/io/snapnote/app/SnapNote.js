@@ -94,6 +94,12 @@ define([
         Easel.Touch.enable(this._stage);
         window.scrollTo(0, 1);
       }
+
+      // Retina displays need a 2x sized canvas scaled
+      // down to its original size to preserve pasted
+      // image quality.
+      this._adjustPixelDensity();
+
     }
 
     SnapNote.prototype = {
@@ -193,6 +199,59 @@ define([
           ga('send', 'event', 'annotation', 'resize_screen', null, null, false);
           this._loggedResize = true;
         }
+
+        this._adjustPixelDensity();
+      },
+
+      /**
+       * Get the number of screen pixels per canvas pixel.
+       */
+      _deviceCanvasPixelRatio: function() {
+        // Pixel density of the physical screen
+        var devicePixelRatio =
+            window.devicePixelRatio || 1;
+
+        var canvas = this._canvas.get(0);
+        var context = canvas.getContext('2d');
+
+        // Pixel density of the canvas
+        var backingStoreRatio =
+          context.webkitBackingStorePixelRatio ||
+          context.mozBackingStorePixelRatio ||
+          context.msBackingStorePixelRatio ||
+          context.oBackingStorePixelRatio ||
+          context.backingStorePixelRatio || 1;
+
+        // Screen pixels per canvas pixels
+        return (devicePixelRatio / backingStoreRatio);
+      },
+
+      /**
+       * Ajdust the pixel density of the canvas to be
+       * that of the physical screen.
+       */
+      _adjustPixelDensity: function(event) {
+        var ratio = this._deviceCanvasPixelRatio();
+
+        var initialWidth = this.width;
+        var initialHeight = this.height;
+
+        // Adjust the width of the canvas to have the
+        // same number of pixels as the physical screen.
+        this.width = initialWidth * ratio;
+        this.height = initialHeight * ratio;
+
+        var canvas = this._canvas.get(0);
+
+        // Scale the canvas to be the same size as
+        // it was before, but at the new pixel
+        // density
+        canvas.style.width = initialWidth + 'px';
+        canvas.style.height = initialHeight + 'px';
+
+        // Tell the stage to draw with the given
+        // ratio used as a scale on all StageObjects
+        this._stage.deviceCanvasPixelRatio = ratio;
       }
     };
 
