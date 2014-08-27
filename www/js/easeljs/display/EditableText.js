@@ -45,7 +45,7 @@ define([
       // Redraw the background to fit the new text dimensions
       this._background.graphics
         .clear()
-        .beginFill('rgba(255, 255, 255, 0.008)')
+        .beginFill('rgba(255, 255, 255, 0.0079)')
         .drawRect(0, 0, this.width, this.height);
 
       // Force a recalculation of the cursor position
