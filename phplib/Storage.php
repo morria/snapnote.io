@@ -41,9 +41,9 @@ class Storage {
      */
     public function put($id, $blob) {
         // Don't store anything if we don't have data or if its
-        // over 2Mb
+        // over 10Mb
         if(strlen($blob) < 1 ||
-           strlen($blob) > 2097152) {
+           strlen($blob) > 10485760) {
              return [
                'status' => 500,
                'id' => $id,
