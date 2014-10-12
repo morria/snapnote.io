@@ -4,17 +4,17 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-    <title><?= $host_name ?> - Annotate and Share Images and Screenshots</title>
-    <meta name="description" content="<?= $host_name ?> - Annotate and Share Images and Screenshots" />
+    <title><?= $host_name ?> - Annotate and share images and screenshots</title>
+    <meta name="description" content="<?= $host_name ?> - Annotate and share images and screenshots" />
     <meta name="viewport" content="width=device-width" />
     <meta property="og:title" content="<?= $host_name ?>" />
     <meta property="og:type" content="website" />
-    <meta property="og:description" content="<?= $host_name ?> - Annotate and Share Image and Screenshots" />
+    <meta property="og:description" content="<?= $host_name ?> - Annotate and share images and screenshots" />
     <meta property="og:site_name" content="<?= $host_name ?>" />
     <meta property="fb:admins" content="209372" />
     <meta property="og:image" content="/img/icon.png" />
     <meta itemprop="name" content="<?= $host_name ?>" />
-    <meta itemprop="description" content="<?= $host_name ?> - Annotate and Share Images and Screenshots" />
+    <meta itemprop="description" content="<?= $host_name ?> - Annotate and share images and screenshots" />
     <link rel="icon" type="image/png" href="img/icon.png" />
     <link rel="<?= $css['rel'] ?>" type="<?= $css['media'] ?>"
       href="css/style.<?= $css['suffix'] ?>" />
