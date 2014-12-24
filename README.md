@@ -1,7 +1,7 @@
 snapnote.io
 ===========
 
-Snapnote is a web app for annotating and sharing images hosted at http://snapnote.io and covered by the MIT license.
+Snapnote is a web app for annotating and sharing images hosted at http://snapnote.io and covered by [the MIT license](https://github.com/morria/snapnote.io/blob/master/LICENSE).
 
 Tour of Source
 ==============
