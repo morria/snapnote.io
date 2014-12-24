@@ -14,4 +14,4 @@ Coare graphics are handled by [EaselJS](http://www.createjs.com/#!/EaselJS) with
 Building and Deploying
 ======================
 
-Run `[deploy.js](https://github.com/morria/snapnote.io/blob/master/deploy.sh)` to build the project and deploy it to `target`.
+Run ./[deploy.js](https://github.com/morria/snapnote.io/blob/master/deploy.sh) to build the project and deploy it to `target`.
