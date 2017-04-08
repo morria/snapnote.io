@@ -1,6 +1,8 @@
 <?php
 
-require_once 'sdk.class.php';
+require_once 'Bootstrap.php';
+
+use \Aws\S3\S3Client;
 
 class Storage {
     const STATUS_OK = 200;
@@ -8,10 +10,12 @@ class Storage {
 
     private $amazonS3 = null;
 
-
     public function __construct() {
-        $this->amazonS3 = new AmazonS3();
-        $this->amazonS3->disable_ssl_verification(false);
+        $this->amazonS3 = new S3Client([
+            'version' => 'latest',
+            'region'  => 'us-east-1'
+        ]);
+
         header('Content-type: application/json');
     }
 
@@ -53,25 +57,25 @@ class Storage {
 
         $filename = $this->getFilenameForId($id);
 
-        $response =
-            $this->amazonS3->create_object(self::BUCKET_NAME,
-                $filename,
-                array('body' => $blob,
-                      'contentType' => 'image/png'));
+        try {
+            $response =
+                $this->amazonS3->putObject([
+                    'Bucket' => self::BUCKET_NAME,
+                    'Key'    => $filename,
+                    'Body'   => $blob,
+                    'ContentType' => 'image/png',
+                ]);
+        } catch (Aws\S3\Exception\S3Exception $e) {
+          return [
+              'status' => $e->getStatusCode(),
+              'success' => false,
+            ];
+        }
 
-        if($response->status != 200) {
-          return [
-              'status' => $response->status,
-              'id' => $id,
-              'success' => false
-            ];
-        }
-        else {
-          return [
-              'status' => 200,
-              'id' => $id,
-              'success' => true
-            ];
-        }
+        return [
+            'status' => 200,
+            'id' => $id,
+            'success' => true
+        ];
     }
 }

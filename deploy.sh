@@ -3,6 +3,7 @@
 rm -rf staging
 mkdir staging
 
+
 # web
 mkdir -p staging/www
 cp www/.htaccess.live staging/www/.htaccess
@@ -31,6 +32,8 @@ node /usr/lib/node_modules/requirejs/bin/r.js -o build.js name=view out=staging/
 # PHP Libs
 cp -R phplib staging/
 cp -R templates staging/
+composer install
+cp -R vendor staging/
 
 # Configs
 cd staging

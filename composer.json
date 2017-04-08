@@ -1,0 +1,21 @@
+{
+    "name": "morria/snapnote",
+    "description": "http://snapnote.io",
+    "keywords": ["image annotation"],
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew S. Morrison"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": "~5.6",
+        "aws/aws-sdk-php": "^3.25"
+    },
+    "require-dev": {
+    }
+}
