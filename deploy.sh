@@ -3,7 +3,6 @@
 rm -rf staging
 mkdir staging
 
-
 # web
 mkdir -p staging/www
 cp www/.htaccess.live staging/www/.htaccess

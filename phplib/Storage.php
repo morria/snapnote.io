@@ -2,26 +2,31 @@
 
 require_once 'Bootstrap.php';
 
-use \Aws\S3\S3Client;
+use Google\Cloud\Storage\Bucket;
+use Google\Cloud\Storage\StorageClient;
+use Google\Cloud\Storage\StorageObject;
+use Google\Cloud\Core\Exception\ServiceException;
 
 class Storage {
     const STATUS_OK = 200;
 
-    // An Amazon S3 client
-    private $amazonS3 = null;
-
     // The name of the bucket to write images to
-    private $bucket_name = null;
+    private $bucket = null;
 
     public function __construct() {
-        $this->amazonS3 = new S3Client([
-            'version' => 'latest',
-            'region'  => 'us-east-1'
-        ]);
 
-        $this->bucket_name = getenv("AWS_BUCKET_NAME");
+        $project_id = getenv("PROJECT_ID");
+        $bucket_name = getenv("BUCKET_NAME");
 
-        header('Content-type: application/json');
+        $options = ['projectId' => $project_id];
+
+        if (getenv('KEY_FILE')) {
+            $options['keyFile'] = json_decode(getenv('KEY_FILE'), true);
+        }
+
+        $storage = new StorageClient($options);
+
+        $this->bucket = $storage->bucket($bucket_name);
     }
 
     private function getFilenameForId($id) {
@@ -42,6 +47,8 @@ class Storage {
           strlen('data:image/png;base64,')));
 
       $hash = '0'.substr(preg_replace('/[^a-zA-Z0-9]/', '', base64_encode(md5($blob, true))), 0, 5);
+
+      header('Content-type: application/json');
       return $this->put($hash, $blob);
     }
 
@@ -63,20 +70,22 @@ class Storage {
         $filename = $this->getFilenameForId($id);
 
         try {
-            $response =
-                $this->amazonS3->putObject([
-                    'Bucket' => $this->bucket_name,
-                    'Key'    => $filename,
-                    'Body'   => $blob,
-                    'ContentType' => 'image/png',
-                ]);
-        } catch (Aws\S3\Exception\S3Exception $e) {
+            $object =
+                $this->bucket->upload(
+                    $blob, [
+                        'name' => $filename
+                    ]
+                );
+        } catch (ServiceException $e) {
+          header('Content-type: application/json');
           return [
-              'status' => $e->getStatusCode(),
+              'status' => 500,
               'success' => false,
+              'exception' => (string)$e,
             ];
         }
 
+        header('Content-type: application/json');
         return [
             'status' => 200,
             'id' => $id,
