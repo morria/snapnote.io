@@ -15,4 +15,12 @@ Saved annotated images are stored as a PNG in an S3 bucket via [Storage::post()]
 Building and Deploying
 ======================
 
-Run ./[deploy.js](https://github.com/morria/snapnote.io/blob/master/deploy.sh) to build the project and deploy it to `target`.
+Run ./[deploy.sh](https://github.com/morria/snapnote.io/blob/master/deploy.sh) to build the project and deploy it to `target`.
+
+Once built, you can create a docker image and run it via `docker build -t snapnote .`
+
+Once the container is built, you can run it via the following.
+
+```
+docker run -it -p80:80 -e "AWS_ACCESS_KEY_ID=..." -e "AWS_SECRET_ACCESS_KEY=..." -e "AWS_BUCKET_NAME=..." --rm snapnote
+```

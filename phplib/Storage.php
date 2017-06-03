@@ -6,15 +6,20 @@ use \Aws\S3\S3Client;
 
 class Storage {
     const STATUS_OK = 200;
-    const BUCKET_NAME = 'images.snapnote.io';
 
+    // An Amazon S3 client
     private $amazonS3 = null;
+
+    // The name of the bucket to write images to
+    private $bucket_name = null;
 
     public function __construct() {
         $this->amazonS3 = new S3Client([
             'version' => 'latest',
             'region'  => 'us-east-1'
         ]);
+
+        $this->bucket_name = getenv("AWS_BUCKET_NAME");
 
         header('Content-type: application/json');
     }
@@ -60,7 +65,7 @@ class Storage {
         try {
             $response =
                 $this->amazonS3->putObject([
-                    'Bucket' => self::BUCKET_NAME,
+                    'Bucket' => $this->bucket_name,
                     'Key'    => $filename,
                     'Body'   => $blob,
                     'ContentType' => 'image/png',
