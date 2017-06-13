@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: snapnote
+spec:
+  replicas: 1
+  selector:
+    app: snapnote
+  template:
+    metadata:
+      name: snapnote
+      labels:
+        app: snapnote
+    spec:
+      containers:
+      - name: snapnote
+        image: morria/snapnote
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: BUCKET_NAME
+          value: images.snapnote.io
+        - name: PROJECT_ID
+          value: snapnote-169614
